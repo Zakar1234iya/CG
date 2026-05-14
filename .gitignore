@@ -1,22 +1,29 @@
 ```
-# CMake build directories
-build_test/
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-
-# Compiled object files
+# Build artifacts
+build/
+dist/
 *.o
 *.obj
 *.a
 *.lib
-*.so
 *.dll
+*.so
 *.dylib
 *.exe
+*.out
 
-# IDE specific files
+# Dependencies
+node_modules/
+vendor/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*_autogen/
+
+# IDE
 .vscode/
 .idea/
 *.swp
@@ -25,58 +32,19 @@ Makefile
 # Logs
 *.log
 
-# Temporary files
-*.tmp
-*~
-
-# Coverage reports
-coverage/
-htmlcov/
-
-# Environment files
+# Environment
 .env
 .env.local
 *.env.*
 
-# Python specific
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
+# Coverage
+coverage/
+htmlcov/
+.coverage
 
-# Build artifacts
-dist/
-build/
-*.egg-info/
-*.egg
-
-# Compression archives
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-
-# OS generated files
+# Temporary files
+*.tmp
+*~
 .DS_Store
 Thumbs.db
 ```
