@@ -3,13 +3,21 @@ cmake_minimum_required(VERSION 3.28)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Safe Floating Point Defaults (Critical for Lockstep Simulation)
+# Do NOT use /fp:fast or -ffast-math globally.
+# Renderer can override locally if needed, but GameEngine must be precise.
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:precise")
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-fast-math")
+endif()
+
 # Cross-platform compiler settings
 if(MSVC)
   add_compile_options(
     /W3
+    /arch:SSE2
     /MP
-    /arch:AVX2
-    /fp:fast
     /Zc:preprocessor
     /Zc:__cplusplus
     /Zc:twoPhase-
@@ -17,7 +25,7 @@ if(MSVC)
     /Zc:strictStrings-
     /utf-8
   )
-
+  
   add_compile_definitions(
     WIN32_LEAN_AND_MEAN
     NOMINMAX
@@ -32,12 +40,12 @@ if(MSVC)
 else()
   # GCC/Clang settings for Linux/macOS
   add_compile_options(
+    -fstrict-aliasing
     -Wall
     -Wextra
     -Wno-unused-parameter
     -Wno-missing-field-initializers
-    -march=native
-    -ffast-math
+    -march=x86-64-v2
   )
   
   add_compile_definitions(

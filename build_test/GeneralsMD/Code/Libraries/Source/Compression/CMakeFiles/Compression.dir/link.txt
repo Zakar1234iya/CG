@@ -1,0 +1,2 @@
+/usr/bin/ar qc libCompression.a CMakeFiles/Compression.dir/CompressionManager.cpp.o
+/usr/bin/ranlib libCompression.a

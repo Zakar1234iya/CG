@@ -64,7 +64,7 @@
 #include "missingtexture.h"
 #include "thread.h"
 #include <stdio.h>
-#include <D3dx8core.h>
+#include "crossplatform.h"
 #include "pot.h"
 #include "wwprofile.h"
 #include "ffactory.h"
@@ -176,34 +176,48 @@ DX8_Stats	 DX8Wrapper::stats;
 **
 ***********************************************************************************/
 
+// Portable D3DXGetErrorStringA replacement
+const char* GetDX8ErrorString(HRESULT hr) {
+    switch(hr) {
+        case 0x00000000: return "D3D_OK - No error";
+        case 0x88760154: return "D3DERR_BADDEVICE - Device not valid";
+        case 0x8876015A: return "D3DERR_DEVICELOST - Device lost";
+        case 0x8876015B: return "D3DERR_DEVICENOTRESET - Device needs reset";
+        case 0x8876015C: return "D3DERR_DRIVERINTERNALERROR - Driver internal error";
+        case 0x88760162: return "D3DERR_INVALIDCALL - Invalid call";
+        case 0x88760163: return "D3DERR_NOTFOUND - Not found";
+        case 0x88760164: return "D3DERR_OUTOFVIDEOMEMORY - Out of video memory";
+        case 0x88760165: return "D3DERR_TOOMANYOPERATIONS - Too many operations";
+        case 0x88760166: return "D3DERR_UNSUPPORTEDALPHAOPERATION - Unsupported alpha operation";
+        case 0x88760167: return "D3DERR_UNSUPPORTEDALPHAARG - Unsupported alpha argument";
+        case 0x88760168: return "D3DERR_UNSUPPORTEDTEXTUREFILTER - Unsupported texture filter";
+        case 0x88760169: return "D3DERR_UNSUPPORTEDFACTORVALUE - Unsupported factor value";
+        case 0x8876016A: return "D3DERR_CONFLICTINGRENDERSTATE - Conflicting render state";
+        case 0x8876016B: return "D3DERR_CONFLICTINGTEXTUREPALETTE - Conflicting texture palette";
+        default: return "Unknown DirectX Error";
+    }
+}
+
 void Log_DX8_ErrorCode(unsigned res)
 {
 	char tmp[256]="";
-
-	HRESULT new_res=D3DXGetErrorStringA(
-		res,
-		tmp,
-		sizeof(tmp));
-
-	if (new_res==D3D_OK) {
-		WWDEBUG_SAY((tmp));
-	}
-
+	
+	const char* errorStr = GetDX8ErrorString(res);
+	snprintf(tmp, sizeof(tmp), "%s", errorStr);
+	
+	WWDEBUG_SAY((tmp));
+	
 	WWASSERT(0);
 }
 
 void Non_Fatal_Log_DX8_ErrorCode(unsigned res,const char * file,int line)
 {
 	char tmp[256]="";
-
-	HRESULT new_res=D3DXGetErrorStringA(
-		res,
-		tmp,
-		sizeof(tmp));
-
-	if (new_res==D3D_OK) {
-		WWDEBUG_SAY(("DX8 Error: %s, File: %s, Line: %d\n",tmp,file,line));
-	}
+	
+	const char* errorStr = GetDX8ErrorString(res);
+	snprintf(tmp, sizeof(tmp), "DX8 Error: %s, File: %s, Line: %d", errorStr, file, line);
+	
+	WWDEBUG_SAY((tmp));
 }
 
 
@@ -1980,8 +1994,8 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	// Render target may return NOTAVAILABLE, in
 	// which case we return NULL.
 	if (rendertarget) {
-		unsigned ret=D3DXCreateTexture(
-			DX8Wrapper::_Get_D3D_Device8(), 
+		// Use native D3D8 CreateTexture instead of D3DX
+unsigned ret = DX8Wrapper::_Get_D3D_Device8()->CreateTexture(
 			width, 
 			height,
 			mip_level_count,
