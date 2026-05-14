@@ -45,7 +45,13 @@
 
 #include "always.h"
 #include "wwdebug.h"
-#include <windows.h>
+#include "CrossPlatform.h"
+
+#ifdef PLATFORM_WINDOWS
+    #include <windows.h>
+#else
+    #include <pthread.h>
+#endif
 
 class CriticalSectionClass
 {
