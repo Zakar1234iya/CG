@@ -1,0 +1,102 @@
+```
+# Build directories and artifacts
+build_test/
+build/
+dist/
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CMakeLists.txt.user
+
+# Visual Studio files
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.slnx
+*.sdf
+*.opensdf
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Object and binary files
+*.obj
+*.lib
+*.pdb
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+
+# Debug and Release directories
+Debug/
+Release/
+x64/
+Win32/
+
+# IDE specific
+.vs/
+.idea/
+*.swp
+*.swo
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.recipe
+*.lastbuildstate
+*.tlog/
+*.d.json
+
+# Module files
+*.module.json
+
+# Generated files
+generate.stamp
+generate.stamp.depend
+generate.stamp.list
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+*.so
+
+# Node.js specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+```

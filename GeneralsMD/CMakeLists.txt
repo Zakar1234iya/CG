@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.28)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Cross-platform compiler settings
 if(MSVC)
   add_compile_options(
     /W3
@@ -28,6 +29,25 @@ if(MSVC)
     _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS
     _SILENCED_PLACEMENT_NEW_CONFLICT=1
   )
+else()
+  # GCC/Clang settings for Linux/macOS
+  add_compile_options(
+    -Wall
+    -Wextra
+    -Wno-unused-parameter
+    -Wno-missing-field-initializers
+    -march=native
+    -ffast-math
+  )
+  
+  add_compile_definitions(
+    _CRT_SECURE_NO_WARNINGS
+    _CRT_NONSTDC_NO_DEPRECATE
+    NOMINMAX
+  )
+  
+  # Link pthread on Unix-like systems
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
 endif()
 
 include_directories(
@@ -46,11 +66,10 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/Code/Libraries/Source/WWVegas/WWAudio
   ${CMAKE_CURRENT_SOURCE_DIR}/Code/Libraries/Source/WWVegas/WWDownload
   ${CMAKE_CURRENT_SOURCE_DIR}/Code/Libraries/Source/Compression
-  ${CMAKE_CURRENT_SOURCE_DIR}/Code/Libraries/Source/GameSpy
   ${CMAKE_CURRENT_SOURCE_DIR}/Code/Main
 )
 
-# Build libraries
+# Build libraries (GameSpy removed - service shut down in 2014)
 add_subdirectory(Code/Libraries/Source/WWVegas/WWLib)
 add_subdirectory(Code/Libraries/Source/WWVegas/WWMath)
 add_subdirectory(Code/Libraries/Source/WWVegas/WWDebug)
@@ -61,7 +80,7 @@ add_subdirectory(Code/Libraries/Source/WWVegas/WW3D2)
 add_subdirectory(Code/Libraries/Source/WWVegas/WWAudio)
 add_subdirectory(Code/Libraries/Source/WWVegas/WWDownload)
 add_subdirectory(Code/Libraries/Source/Compression)
-add_subdirectory(Code/Libraries/Source/GameSpy)
+# GameSpy removed - see Code/Libraries/Source/GameSpy/CMakeLists.txt for stub
 add_subdirectory(Code/GameEngine)
 add_subdirectory(Code/GameEngineDevice)
 add_subdirectory(Code/Main)
