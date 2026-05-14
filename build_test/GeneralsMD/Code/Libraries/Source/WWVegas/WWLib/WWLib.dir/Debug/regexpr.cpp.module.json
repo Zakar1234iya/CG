@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "WWLib.dir\\Debug\\regexpr.obj",
+            "outputs": [
+                "D:\\generalzh\\build_test\\GeneralsMD\\Code\\Libraries\\Source\\WWVegas\\WWLib\\Debug\\WWLib.pdb",
+                "WWLib.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

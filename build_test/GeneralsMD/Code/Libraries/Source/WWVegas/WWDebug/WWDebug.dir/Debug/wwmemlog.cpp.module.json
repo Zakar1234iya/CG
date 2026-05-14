@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "WWDebug.dir\\Debug\\wwmemlog.obj",
+            "outputs": [
+                "D:\\generalzh\\build_test\\GeneralsMD\\Code\\Libraries\\Source\\WWVegas\\WWDebug\\Debug\\WWDebug.pdb",
+                "WWDebug.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

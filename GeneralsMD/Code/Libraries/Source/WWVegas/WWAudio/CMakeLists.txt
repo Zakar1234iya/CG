@@ -1,0 +1,3 @@
+file(GLOB WWAUDIO_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_library(WWAudio STATIC ${WWAUDIO_SOURCES})
+target_include_directories(WWAudio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

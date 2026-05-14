@@ -1,0 +1,23 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/generalzh/build_test/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWDebug/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWSaveLoad/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/wwshade/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/Wwutil/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WW3D2/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWAudio/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWDownload/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/Compression/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/GameSpy/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/GameEngine/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/GameEngineDevice/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Code/Main/cmake_install.cmake",
+		"D:/generalzh/build_test/GeneralsMD/Test/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

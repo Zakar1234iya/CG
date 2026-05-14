@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "profile.dir\\Debug\\profile_result.obj",
+            "outputs": [
+                "D:\\generalzh\\build_test\\GeneralsMD\\Code\\Libraries\\Source\\profile\\Debug\\profile.pdb",
+                "profile.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

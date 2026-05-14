@@ -1,0 +1,3 @@
+file(GLOB WWSHADE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_library(WWShade STATIC ${WWSHADE_SOURCES})
+target_include_directories(WWShade PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

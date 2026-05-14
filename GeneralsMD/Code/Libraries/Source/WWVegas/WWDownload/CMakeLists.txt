@@ -1,0 +1,3 @@
+file(GLOB WWDOWNLOAD_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_library(WWDownload STATIC ${WWDOWNLOAD_SOURCES})
+target_include_directories(WWDownload PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -1,0 +1,15 @@
+D:/generalzh/build_test/CMakeFiles/ALL_BUILD.dir
+D:/generalzh/build_test/CMakeFiles/ZERO_CHECK.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/CMakeFiles/WWLib.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/CMakeFiles/WWMath.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWDebug/CMakeFiles/WWDebug.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWSaveLoad/CMakeFiles/WWSaveLoad.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/wwshade/CMakeFiles/WWShade.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/Wwutil/CMakeFiles/WWUtil.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WW3D2/CMakeFiles/WW3D2.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWAudio/CMakeFiles/WWAudio.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/WWVegas/WWDownload/CMakeFiles/WWDownload.dir
+D:/generalzh/build_test/GeneralsMD/Code/Libraries/Source/Compression/CMakeFiles/Compression.dir
+D:/generalzh/build_test/GeneralsMD/Code/GameEngine/CMakeFiles/GameEngine.dir
+D:/generalzh/build_test/GeneralsMD/Code/GameEngineDevice/CMakeFiles/GameEngineDevice.dir
+D:/generalzh/build_test/GeneralsMD/Code/Main/CMakeFiles/ZeroHour.dir

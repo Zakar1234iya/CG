@@ -1,0 +1,3 @@
+file(GLOB WWDEBUG_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_library(WWDebug STATIC ${WWDEBUG_SOURCES})
+target_include_directories(WWDebug PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "WWShade.dir\\Debug\\shdforcelinks.obj",
+            "outputs": [
+                "D:\\generalzh\\build_test\\GeneralsMD\\Code\\Libraries\\Source\\WWVegas\\wwshade\\Debug\\WWShade.pdb",
+                "WWShade.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

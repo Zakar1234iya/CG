@@ -1,0 +1,10 @@
+^D:\GENERALZH\BUILD_TEST\CMAKEFILES\88AE476139CE55AC72F550D4335FA995\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/generalzh -BD:/generalzh/build_test --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/generalzh/build_test/CommandConquerGeneralsZeroHour.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

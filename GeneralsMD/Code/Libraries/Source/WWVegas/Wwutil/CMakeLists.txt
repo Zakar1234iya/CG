@@ -1,0 +1,3 @@
+file(GLOB WWUTIL_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_library(WWUtil STATIC ${WWUTIL_SOURCES})
+target_include_directories(WWUtil PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

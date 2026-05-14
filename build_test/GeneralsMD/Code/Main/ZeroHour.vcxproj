@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E2EFC76B-7739-3A46-A71D-2E9C6D76AEEF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ZeroHour</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\generalzh\Run\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ZeroHour.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ZeroHour</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\generalzh\Run\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ZeroHour.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ZeroHour</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\generalzh\Run\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ZeroHour.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ZeroHour</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\generalzh\Run\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ZeroHour.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ZeroHour</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zc:__cplusplus /Zc:twoPhase- /Zc:strictStrings- /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\GameEngine\Debug\GameEngine.lib;..\GameEngineDevice\Debug\GameEngineDevice.lib;..\Libraries\Source\WWVegas\WW3D2\Debug\WW3D2.lib;..\Libraries\Source\WWVegas\WWLib\Debug\WWLib.lib;..\Libraries\Source\WWVegas\WWMath\Debug\WWMath.lib;..\Libraries\Source\WWVegas\WWDebug\Debug\WWDebug.lib;..\Libraries\Source\WWVegas\Wwutil\Debug\WWUtil.lib;..\Libraries\Source\WWVegas\WWSaveLoad\Debug\WWSaveLoad.lib;..\Libraries\Source\WWVegas\wwshade\Debug\WWShade.lib;..\Libraries\Source\WWVegas\WWAudio\Debug\WWAudio.lib;..\Libraries\Source\WWVegas\WWDownload\Debug\WWDownload.lib;..\Libraries\Source\Compression\Debug\Compression.lib;profile.lib;..\GameEngine\Debug\GameEngine.lib;..\Libraries\Source\Compression\Debug\Compression.lib;..\Libraries\Source\WWVegas\WWLib\Debug\WWLib.lib;dbghelp.lib;..\Libraries\Source\WWVegas\WWMath\Debug\WWMath.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/generalzh/build_test/GeneralsMD/Code/Main/Debug/ZeroHour.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/generalzh/Run/Debug/ZeroHour.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zc:__cplusplus /Zc:twoPhase- /Zc:strictStrings- /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\GameEngine\Release\GameEngine.lib;..\GameEngineDevice\Release\GameEngineDevice.lib;..\Libraries\Source\WWVegas\WW3D2\Release\WW3D2.lib;..\Libraries\Source\WWVegas\WWLib\Release\WWLib.lib;..\Libraries\Source\WWVegas\WWMath\Release\WWMath.lib;..\Libraries\Source\WWVegas\WWDebug\Release\WWDebug.lib;..\Libraries\Source\WWVegas\Wwutil\Release\WWUtil.lib;..\Libraries\Source\WWVegas\WWSaveLoad\Release\WWSaveLoad.lib;..\Libraries\Source\WWVegas\wwshade\Release\WWShade.lib;..\Libraries\Source\WWVegas\WWAudio\Release\WWAudio.lib;..\Libraries\Source\WWVegas\WWDownload\Release\WWDownload.lib;..\Libraries\Source\Compression\Release\Compression.lib;..\GameEngine\Release\GameEngine.lib;..\Libraries\Source\Compression\Release\Compression.lib;..\Libraries\Source\WWVegas\WWLib\Release\WWLib.lib;dbghelp.lib;..\Libraries\Source\WWVegas\WWMath\Release\WWMath.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/generalzh/build_test/GeneralsMD/Code/Main/Release/ZeroHour.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/generalzh/Run/Release/ZeroHour.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zc:__cplusplus /Zc:twoPhase- /Zc:strictStrings- /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\GameEngine\MinSizeRel\GameEngine.lib;..\GameEngineDevice\MinSizeRel\GameEngineDevice.lib;..\Libraries\Source\WWVegas\WW3D2\MinSizeRel\WW3D2.lib;..\Libraries\Source\WWVegas\WWLib\MinSizeRel\WWLib.lib;..\Libraries\Source\WWVegas\WWMath\MinSizeRel\WWMath.lib;..\Libraries\Source\WWVegas\WWDebug\MinSizeRel\WWDebug.lib;..\Libraries\Source\WWVegas\Wwutil\MinSizeRel\WWUtil.lib;..\Libraries\Source\WWVegas\WWSaveLoad\MinSizeRel\WWSaveLoad.lib;..\Libraries\Source\WWVegas\wwshade\MinSizeRel\WWShade.lib;..\Libraries\Source\WWVegas\WWAudio\MinSizeRel\WWAudio.lib;..\Libraries\Source\WWVegas\WWDownload\MinSizeRel\WWDownload.lib;..\Libraries\Source\Compression\MinSizeRel\Compression.lib;..\GameEngine\MinSizeRel\GameEngine.lib;..\Libraries\Source\Compression\MinSizeRel\Compression.lib;..\Libraries\Source\WWVegas\WWLib\MinSizeRel\WWLib.lib;dbghelp.lib;..\Libraries\Source\WWVegas\WWMath\MinSizeRel\WWMath.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/generalzh/build_test/GeneralsMD/Code/Main/MinSizeRel/ZeroHour.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/generalzh/Run/MinSizeRel/ZeroHour.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zc:__cplusplus /Zc:twoPhase- /Zc:strictStrings- /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING;_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS;_SILENCED_PLACEMENT_NEW_CONFLICT=1;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\generalzh\GeneralsMD\Code\Libraries\Include;D:\generalzh\GeneralsMD\Code\GameEngine\Include;D:\generalzh\GeneralsMD\Code\GameEngineDevice\Include;D:\generalzh\GeneralsMD\Code\GameNetwork\Include;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio;D:\generalzh\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload;D:\generalzh\GeneralsMD\Code\Libraries\Source\Compression;D:\generalzh\GeneralsMD\Code\Libraries\Source\GameSpy;D:\generalzh\GeneralsMD\Code\Main;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Common;D:\generalzh\GeneralsMD\Code\GameEngine\Include\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\GameEngine\RelWithDebInfo\GameEngine.lib;..\GameEngineDevice\RelWithDebInfo\GameEngineDevice.lib;..\Libraries\Source\WWVegas\WW3D2\RelWithDebInfo\WW3D2.lib;..\Libraries\Source\WWVegas\WWLib\RelWithDebInfo\WWLib.lib;..\Libraries\Source\WWVegas\WWMath\RelWithDebInfo\WWMath.lib;..\Libraries\Source\WWVegas\WWDebug\RelWithDebInfo\WWDebug.lib;..\Libraries\Source\WWVegas\Wwutil\RelWithDebInfo\WWUtil.lib;..\Libraries\Source\WWVegas\WWSaveLoad\RelWithDebInfo\WWSaveLoad.lib;..\Libraries\Source\WWVegas\wwshade\RelWithDebInfo\WWShade.lib;..\Libraries\Source\WWVegas\WWAudio\RelWithDebInfo\WWAudio.lib;..\Libraries\Source\WWVegas\WWDownload\RelWithDebInfo\WWDownload.lib;..\Libraries\Source\Compression\RelWithDebInfo\Compression.lib;..\GameEngine\RelWithDebInfo\GameEngine.lib;..\Libraries\Source\Compression\RelWithDebInfo\Compression.lib;..\Libraries\Source\WWVegas\WWLib\RelWithDebInfo\WWLib.lib;dbghelp.lib;..\Libraries\Source\WWVegas\WWMath\RelWithDebInfo\WWMath.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/generalzh/build_test/GeneralsMD/Code/Main/RelWithDebInfo/ZeroHour.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/generalzh/Run/RelWithDebInfo/ZeroHour.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\generalzh\GeneralsMD\Code\Main\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/generalzh/GeneralsMD/Code/Main/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/generalzh -BD:/generalzh/build_test --check-stamp-file D:/generalzh/build_test/GeneralsMD/Code/Main/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\generalzh\build_test\GeneralsMD\Code\Main\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/generalzh/GeneralsMD/Code/Main/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/generalzh -BD:/generalzh/build_test --check-stamp-file D:/generalzh/build_test/GeneralsMD/Code/Main/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\generalzh\build_test\GeneralsMD\Code\Main\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/generalzh/GeneralsMD/Code/Main/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/generalzh -BD:/generalzh/build_test --check-stamp-file D:/generalzh/build_test/GeneralsMD/Code/Main/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\generalzh\build_test\GeneralsMD\Code\Main\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/generalzh/GeneralsMD/Code/Main/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/generalzh -BD:/generalzh/build_test --check-stamp-file D:/generalzh/build_test/GeneralsMD/Code/Main/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\generalzh\build_test\GeneralsMD\Code\Main\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\generalzh\GeneralsMD\Code\Main\WinMain.cpp" />
+    <ClInclude Include="D:\generalzh\GeneralsMD\Code\Main\WinMain.h" />
+    <ClInclude Include="D:\generalzh\GeneralsMD\Code\Main\resource.h" />
+    <ResourceCompile Include="D:\generalzh\GeneralsMD\Code\Main\RTS.RC">
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ScanSourceForModuleDependencies>
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ScanSourceForModuleDependencies>
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</ScanSourceForModuleDependencies>
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</ScanSourceForModuleDependencies>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\generalzh\build_test\ZERO_CHECK.vcxproj">
+      <Project>{CE484F27-3BF3-37C1-A2C4-4B37E2D1A5BC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\Compression\Compression.vcxproj">
+      <Project>{185A0DB5-A306-3EF1-A98C-29E323308B95}</Project>
+      <Name>Compression</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\GameEngine\GameEngine.vcxproj">
+      <Project>{63DA2B1F-44F6-31F2-9C8A-670C558C19CE}</Project>
+      <Name>GameEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\GameEngineDevice\GameEngineDevice.vcxproj">
+      <Project>{AFC42612-C272-3E20-B52C-154B27BA71F2}</Project>
+      <Name>GameEngineDevice</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\WW3D2\WW3D2.vcxproj">
+      <Project>{8A5B8BD0-46D6-3054-819E-649D526CF69C}</Project>
+      <Name>WW3D2</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\WWAudio\WWAudio.vcxproj">
+      <Project>{C0E5BF4C-DC92-3666-9A17-63D9B8BF41D4}</Project>
+      <Name>WWAudio</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\WWDebug\WWDebug.vcxproj">
+      <Project>{31743491-4CFF-3BB1-AB7D-8B627EB31857}</Project>
+      <Name>WWDebug</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\WWDownload\WWDownload.vcxproj">
+      <Project>{8DAC5487-2719-3367-AB9B-9C46920E2252}</Project>
+      <Name>WWDownload</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\WWLib\WWLib.vcxproj">
+      <Project>{AE27D8B0-B4AE-33A9-9608-D987B06BE1BA}</Project>
+      <Name>WWLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\WWMath\WWMath.vcxproj">
+      <Project>{112283E5-EB4A-315F-8323-A43A5D6BED8A}</Project>
+      <Name>WWMath</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\WWSaveLoad\WWSaveLoad.vcxproj">
+      <Project>{2EDA81BD-46DE-3E7B-988A-54A0E3EE5FA1}</Project>
+      <Name>WWSaveLoad</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\wwshade\WWShade.vcxproj">
+      <Project>{2F736F38-D7F2-3A88-8481-6F5598AD7CA4}</Project>
+      <Name>WWShade</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\generalzh\build_test\GeneralsMD\Code\Libraries\Source\WWVegas\Wwutil\WWUtil.vcxproj">
+      <Project>{ED972A2A-4604-376E-AADC-FD2EB4BD3B69}</Project>
+      <Name>WWUtil</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

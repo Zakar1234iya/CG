@@ -1,0 +1,43 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\compressionmanager.cpp",
+        "ProvidedModule": "",
+        "Includes": [
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\compression.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\include\\lib\\basetype.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\math.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_math.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\vcruntime.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\sal.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\concurrencysal.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\vadefs.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\string.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_memory.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_memcpy_s.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\errno.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\vcruntime_string.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_wstring.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\xmmintrin.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\mmintrin.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\malloc.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_malloc.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\include\\lib\\trig.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\lzhcompress\\noxcompress.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\zlib\\zlib.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\eac\\codex.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\eac\\gimex.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\stdlib.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_search.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\stddef.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_wstdlib.h",
+            "c:\\program files (x86)\\microsoft visual studio\\18\\buildtools\\vc\\tools\\msvc\\14.50.35717\\include\\limits.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\eac\\btreecodex.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\eac\\huffcodex.h",
+            "d:\\generalzh\\generalsmd\\code\\libraries\\source\\compression\\eac\\refcodex.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

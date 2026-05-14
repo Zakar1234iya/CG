@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "WWUtil.dir\\Debug\\miscutil.obj",
+            "outputs": [
+                "D:\\generalzh\\build_test\\GeneralsMD\\Code\\Libraries\\Source\\WWVegas\\Wwutil\\Debug\\WWUtil.pdb",
+                "WWUtil.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

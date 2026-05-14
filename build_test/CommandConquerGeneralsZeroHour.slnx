@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="GeneralsMD/Code/Libraries/Source/Compression/Compression.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="185a0db5-a306-3ef1-a98c-29e323308b95">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/GameEngine/GameEngine.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="63da2b1f-44f6-31f2-9c8a-670c558c19ce">
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/Compression/Compression.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/WWLib.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/WWMath.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/GameEngineDevice/GameEngineDevice.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="afc42612-c272-3e20-b52c-154b27ba71f2">
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/Compression/Compression.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/GameEngine/GameEngine.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WW3D2/WW3D2.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/WWLib.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/WWMath.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/WW3D2/WW3D2.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8a5b8bd0-46d6-3054-819e-649d526cf69c">
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/WWLib.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/WWMath.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/WWAudio/WWAudio.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c0e5bf4c-dc92-3666-9a17-63d9b8bf41d4">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/WWDebug/WWDebug.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="31743491-4cff-3bb1-ab7d-8b627eb31857">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/WWDownload/WWDownload.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8dac5487-2719-3367-ab9b-9c46920e2252">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/WWLib.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ae27d8b0-b4ae-33a9-9608-d987b06be1ba">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/WWMath.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="112283e5-eb4a-315f-8323-a43a5d6bed8a">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/WWSaveLoad/WWSaveLoad.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2eda81bd-46de-3e7b-988a-54a0e3ee5fa1">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/wwshade/WWShade.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2f736f38-d7f2-3a88-8481-6f5598ad7ca4">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Libraries/Source/WWVegas/Wwutil/WWUtil.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ed972a2a-4604-376e-aadc-fd2eb4bd3b69">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="GeneralsMD/Code/Main/ZeroHour.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e2efc76b-7739-3a46-a71d-2e9c6d76aeef">
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/Compression/Compression.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/GameEngine/GameEngine.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/GameEngineDevice/GameEngineDevice.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WW3D2/WW3D2.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWAudio/WWAudio.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWDebug/WWDebug.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWDownload/WWDownload.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/WWLib.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/WWMath.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWSaveLoad/WWSaveLoad.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/wwshade/WWShade.vcxproj"/>
+		<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/Wwutil/WWUtil.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Folder Name="/CMakePredefinedTargets/">
+		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="23c2ac1f-5d9d-3974-a5b7-e754b27d0ed3" DefaultStartup="true">
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/Compression/Compression.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/GameEngine/GameEngine.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/GameEngineDevice/GameEngineDevice.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WW3D2/WW3D2.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWAudio/WWAudio.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWDebug/WWDebug.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWDownload/WWDownload.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWLib/WWLib.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWMath/WWMath.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/WWSaveLoad/WWSaveLoad.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/wwshade/WWShade.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Libraries/Source/WWVegas/Wwutil/WWUtil.vcxproj"/>
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<BuildDependency Project="GeneralsMD/Code/Main/ZeroHour.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ce484f27-3bf3-37c1-a2c4-4b37e2d1a5bc"/>
+	</Folder>
+</Solution>

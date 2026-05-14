@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "debug.dir\\Debug\\debug_except.obj",
+            "outputs": [
+                "D:\\generalzh\\build_test\\GeneralsMD\\Code\\Libraries\\Source\\debug\\Debug\\debug.pdb",
+                "debug.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

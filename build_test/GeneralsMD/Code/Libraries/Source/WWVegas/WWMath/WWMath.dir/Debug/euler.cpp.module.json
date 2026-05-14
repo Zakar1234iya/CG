@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "WWMath.dir\\Debug\\euler.obj",
+            "outputs": [
+                "D:\\generalzh\\build_test\\GeneralsMD\\Code\\Libraries\\Source\\WWVegas\\WWMath\\Debug\\WWMath.pdb",
+                "WWMath.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

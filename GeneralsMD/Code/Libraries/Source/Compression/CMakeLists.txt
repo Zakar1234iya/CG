@@ -1,0 +1,5 @@
+file(GLOB_RECURSE COMPRESSION_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+list(FILTER COMPRESSION_SOURCES EXCLUDE REGEX ".*/(NoxCompress|EAC|ZLib|CompLib).*")
+add_library(Compression STATIC ${COMPRESSION_SOURCES})
+target_include_directories(Compression PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_options(Compression PRIVATE /wd4267 /wd4244)

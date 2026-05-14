@@ -1,0 +1,3 @@
+file(GLOB WWMATH_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_library(WWMath STATIC ${WWMATH_SOURCES})
+target_include_directories(WWMath PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
