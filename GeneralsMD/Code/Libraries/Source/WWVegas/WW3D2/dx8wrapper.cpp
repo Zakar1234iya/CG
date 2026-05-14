@@ -71,7 +71,7 @@
 #include "missingtexture.h"
 #include "thread.h"
 #include <stdio.h>
-#include <D3dx8core.h>
+// #include <D3dx8core.h> // Removed - D3DX deprecated
 #include "pot.h"
 #include "wwprofile.h"
 #include "ffactory.h"
@@ -212,34 +212,31 @@ DX8_Stats	 DX8Wrapper::stats;
 **
 ***********************************************************************************/
 
+// Custom DX8 error string function - replaces deprecated D3DXGetErrorStringA
+static const char* GetDX8ErrorString(HRESULT hr) {
+    switch(hr) {
+        case 0: return "D3D_OK";
+        case 0x8876086A: return "D3DERR_INVALIDCALL";
+        case 0x88760868: return "D3DERR_DEVICELOST";
+        case 0x88760869: return "D3DERR_DEVICENOTRESET";
+        case 0x8876086B: return "D3DERR_NOTAVAILABLE";
+        case 0x8876086C: return "D3DERR_OUTOFVIDEOMEMORY";
+        case 0x88760870: return "D3DERR_DEVICEHUNG";
+        default: return "Unknown DX8 Error";
+    }
+}
+
 void Log_DX8_ErrorCode(unsigned res)
 {
-	char tmp[256]="";
-
-	HRESULT new_res=D3DXGetErrorStringA(
-		res,
-		tmp,
-		sizeof(tmp));
-
-	if (new_res==D3D_OK) {
-		WWDEBUG_SAY((tmp));
-	}
-
-	WWASSERT(0);
+        const char* errorMsg = GetDX8ErrorString(res);
+        WWDEBUG_SAY(("%s (0x%08X)", errorMsg, res));
+        WWASSERT(0);
 }
 
 void Non_Fatal_Log_DX8_ErrorCode(unsigned res,const char * file,int line)
 {
-	char tmp[256]="";
-
-	HRESULT new_res=D3DXGetErrorStringA(
-		res,
-		tmp,
-		sizeof(tmp));
-
-	if (new_res==D3D_OK) {
-		WWDEBUG_SAY(("DX8 Error: %s, File: %s, Line: %d\n",tmp,file,line));
-	}
+        const char* errorMsg = GetDX8ErrorString(res);
+        WWDEBUG_SAY(("DX8 Error: %s (0x%08X), File: %s, Line: %d\n", errorMsg, res, file, line));
 }
 
 
@@ -248,14 +245,17 @@ bool DX8Wrapper::Init(void * hwnd, bool lite)
 {
 	WWASSERT(!IsInitted);
 
-	// zero memory
+	// zero memory - FIXED: use constructor for non-trivial types, memset only for POD arrays
 	memset(Textures,0,sizeof(IDirect3DBaseTexture8*)*MAX_TEXTURE_STAGES);
 	memset(RenderStates,0,sizeof(unsigned)*256);
 	memset(TextureStageStates,0,sizeof(unsigned)*32*MAX_TEXTURE_STAGES);
 	memset(Vertex_Shader_Constants,0,sizeof(Vector4)*MAX_VERTEX_SHADER_CONSTANTS);
 	memset(Pixel_Shader_Constants,0,sizeof(Vector4)*MAX_PIXEL_SHADER_CONSTANTS);
-	memset(&render_state,0,sizeof(RenderStateStruct));
 	memset(Shadow_Map,0,sizeof(ZTextureClass*)*MAX_SHADOW_MAPS);
+	
+	// Fixed: Use proper initialization instead of memset on non-trivial type
+	// RenderStateStruct has constructor that properly initializes all members
+	render_state = RenderStateStruct();  // Use assignment operator to reset
 
 	/*
 	** Initialize all variables!
@@ -390,7 +390,13 @@ void DX8Wrapper::Do_Onetime_Device_Dependent_Inits(void)
 	Set_Default_Global_Render_States();
 }
 
-inline DWORD F2DW(float f) { return *((unsigned*)&f); }
+// Fixed: F2DW type-punning using memcpy to avoid strict aliasing violation
+// Original code: return *((unsigned*)&f); - undefined behavior with -O2/-O3
+inline DWORD F2DW(float f) { 
+    DWORD out; 
+    memcpy(&out, &f, sizeof(out)); 
+    return out; 
+}
 void DX8Wrapper::Set_Default_Global_Render_States(void)
 {
 	DX8_THREAD_ASSERT();

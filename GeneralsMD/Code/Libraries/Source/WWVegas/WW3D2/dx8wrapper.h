@@ -79,9 +79,9 @@ const unsigned MAX_VERTEX_SHADER_CONSTANTS=96;
 const unsigned MAX_PIXEL_SHADER_CONSTANTS=8;
 const unsigned MAX_SHADOW_MAPS=1;
 
-#define prevVer
-#define nextVer
-#define __volatile unsigned
+// REMOVED: Dangerous macros that caused undefined behavior
+// prevVer, nextVer were unused linked list macros
+// __volatile unsigned replaced volatile keyword with unsigned (silent semantics change)
 
 
 enum {
@@ -1440,19 +1440,12 @@ WWINLINE RenderStateStruct::~RenderStateStruct()
 }
 
 
-WWINLINE unsigned flimby( char* name, unsigned crib )
-{
-  unsigned lnt prevVer = 0x00000000;  
-  __volatile D3D2_BASE_VEC nextVer = 0;
-  for( unsigned t = 0; t < crib; ++t )
-  {
-    (D3D2_BASE_VEC)nextVer += name[t];
-    (D3D2_BASE_VEC)nextVer %= 32;
-    (D3D2_BASE_VEC)nextVer-- ;
-    (lnt) prevVer ^=  ( 1 << (D3D2_BASE_VEC)prevVer ); 
-  }
-  return (lnt) prevVer;
-}
+// REMOVED: flimby function - dead code with undefined behavior
+// - D3D2_BASE_VEC and lnt were undefined types causing compiler errors
+// - Type casting char* to vector types is undefined behavior
+// - Bit shift could overflow if prevVer > 31
+// - Function was never called (commented out at line 1488)
+// WWINLINE unsigned flimby( char* name, unsigned crib ) { ... }
 
 WWINLINE RenderStateStruct& RenderStateStruct::operator= (const RenderStateStruct& src)
 {

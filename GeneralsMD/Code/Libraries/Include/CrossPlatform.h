@@ -105,8 +105,27 @@
         #endif
     #endif
 
-    // Win32 API stubs - these need proper implementations
-    #define Sleep(ms) usleep((ms) * 1000)
+    // Win32 API stubs - replaced with inline functions for safety and correctness
+    
+    // Fixed: Use nanosleep instead of deprecated usleep, include proper headers
+    // Function name is PlatformSleep to avoid conflict with Windows.h Sleep()
+    static inline void PlatformSleep(uint32_t ms) {
+        #if defined(PLATFORM_WINDOWS)
+            // This branch won't compile on Windows (guarded by #ifndef PLATFORM_WINDOWS)
+            // but kept for completeness
+            (void)ms;
+        #else
+            #include <time.h>
+            struct timespec ts;
+            ts.tv_sec = ms / 1000;
+            ts.tv_nsec = (ms % 1000) * 1000000L;
+            nanosleep(&ts, NULL);
+        #endif
+    }
+    
+    // Legacy macro for backward compatibility (deprecated, use PlatformSleep)
+    #define Sleep(ms) PlatformSleep(ms)
+    
     #define MessageBoxA(hwnd, text, caption, type) printf("%s: %s\n", caption, text)
     #define MessageBoxW(hwnd, text, caption, type) printf("MessageBoxW called\n")
     
@@ -164,21 +183,56 @@
     #define _CRT_SECURE_NO_WARNINGS
     #define _CRT_NONSTDC_NO_DEPRECATE
     
-    // Safe string functions
+    // Safe string functions - FIXED: proper bounds checking
     #ifndef strcpy_s
-        #define strcpy_s(dest, size, src) strncpy(dest, src, size)
+        static inline int strcpy_s(char* dest, size_t size, const char* src) {
+            if (!dest || !src || size == 0) return 22; // EINVAL
+            size_t srclen = strlen(src);
+            if (srclen >= size) {
+                dest[0] = '\0';
+                return 34; // ERANGE
+            }
+            memcpy(dest, src, srclen + 1);
+            return 0;
+        }
     #endif
+    
     #ifndef strcat_s
-        #define strcat_s(dest, size, src) strncat(dest, src, size - strlen(dest) - 1)
+        static inline int strcat_s(char* dest, size_t size, const char* src) {
+            if (!dest || !src || size == 0) return 22; // EINVAL
+            size_t destlen = strlen(dest);
+            size_t srclen = strlen(src);
+            if (destlen + srclen >= size) {
+                dest[0] = '\0';
+                return 34; // ERANGE
+            }
+            memcpy(dest + destlen, src, srclen + 1);
+            return 0;
+        }
     #endif
+    
     #ifndef sprintf_s
         #define sprintf_s(buf, size, fmt, ...) snprintf(buf, size, fmt, ##__VA_ARGS__)
     #endif
+    
     #ifndef memcpy_s
-        #define memcpy_s(dest, destSize, src, count) memcpy(dest, src, count)
+        static inline int memcpy_s(void* dest, size_t destSize, const void* src, size_t count) {
+            if (!dest || !src) return 22; // EINVAL
+            if (count > destSize) {
+                memset(dest, 0, destSize);
+                return 34; // ERANGE
+            }
+            memcpy(dest, src, count);
+            return 0;
+        }
     #endif
+    
     #ifndef fopen_s
-        #define fopen_s(pFile, filename, mode) (*(pFile) = fopen(filename, mode)) == NULL ? errno : 0
+        static inline int fopen_s(FILE** pFile, const char* filename, const char* mode) {
+            if (!pFile || !filename || !mode) return 22; // EINVAL
+            *pFile = fopen(filename, mode);
+            return (*pFile == NULL) ? errno : 0;
+        }
     #endif
 #endif
 
@@ -188,19 +242,44 @@
 #endif
 
 // Interlocked operations (atomic operations)
+// These must match Windows semantics exactly:
+// - InterlockedCompareExchange takes comparand BY VALUE (not by reference)
+// - Returns the PREVIOUS value (not a bool like C11 atomics)
 #ifndef _MSC_VER
     #include <stdatomic.h>
+    #include <stdbool.h>
     
-    #define InterlockedIncrement(ptr) atomic_fetch_add_explicit((atomic_int*)(ptr), 1, memory_order_seq_cst) + 1
-    #define InterlockedDecrement(ptr) atomic_fetch_sub_explicit((atomic_int*)(ptr), 1, memory_order_seq_cst) - 1
-    #define InterlockedExchange(ptr, val) atomic_exchange_explicit((atomic_int*)(ptr), (int)(val), memory_order_seq_cst)
-    #define InterlockedCompareExchange(ptr, exchange, comparand) atomic_compare_exchange_strong_explicit((atomic_int*)(ptr), &(comparand), (exchange), memory_order_seq_cst, memory_order_seq_cst)
+    #define InterlockedIncrement(ptr) (atomic_fetch_add_explicit((atomic_long*)(ptr), 1L, memory_order_seq_cst) + 1L)
+    #define InterlockedDecrement(ptr) (atomic_fetch_sub_explicit((atomic_long*)(ptr), 1L, memory_order_seq_cst) - 1L)
+    #define InterlockedExchange(ptr, val) atomic_exchange_explicit((atomic_long*)(ptr), (long)(val), memory_order_seq_cst)
+    
+    // Fixed: comparand passed by value, returns previous value (Windows semantics)
+    static inline long InterlockedCompareExchange(volatile long* ptr, long exchange, long comparand) {
+        long expected = comparand;
+        atomic_compare_exchange_strong_explicit(
+            (atomic_long*)ptr,
+            &expected,
+            exchange,
+            memory_order_seq_cst,
+            memory_order_seq_cst
+        );
+        return expected;  // Returns the original value at *ptr (Windows semantics)
+    }
 #endif
 
-// TLS (Thread Local Storage)
+// TLS (Thread Local Storage) and DLL export macros
+// REMOVED: blanket __declspec(x) -> __attribute__((x)) mapping (incorrect for most uses)
+// Use specific migration macros instead:
 #ifndef _MSC_VER
-    #define __declspec(x) __attribute__((x))
+    #define DLL_EXPORT __attribute__((visibility("default")))
+    #define DLL_IMPORT __attribute__((visibility("default")))
+    #define THREAD_LOCAL __thread
     #define thread_local _Thread_local
+#else
+    #define DLL_EXPORT __declspec(dllexport)
+    #define DLL_IMPORT __declspec(dllimport)
+    #define THREAD_LOCAL __declspec(thread)
+    #define thread_local __declspec(thread)
 #endif
 
 // Force inline
