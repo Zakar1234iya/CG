@@ -534,7 +534,7 @@ bool DX8Wrapper::Create_Device(void)
 			D3DInterface->GetAdapterIdentifier
 			(
 				CurRenderDevice,
-				D3DENUM_NO_WHQL_LEVEL,
+				0,
 				&CurrentAdapterIdentifier
 			)
 			)	
@@ -723,7 +723,7 @@ void DX8Wrapper::Enumerate_Devices()
 
 		D3DADAPTER_IDENTIFIER8 id;
 		::ZeroMemory(&id, sizeof(D3DADAPTER_IDENTIFIER8));
-		HRESULT res = D3DInterface->GetAdapterIdentifier(adapter_index,D3DENUM_NO_WHQL_LEVEL,&id);
+		HRESULT res = D3DInterface->GetAdapterIdentifier(adapter_index, 0, &id);
 
 		if (res == D3D_OK) {
 
@@ -745,7 +745,7 @@ void DX8Wrapper::Enumerate_Devices()
 			desc.set_driver_version(buf);
 
 			D3DInterface->GetDeviceCaps(adapter_index,WW3D_DEVTYPE,&desc.Caps);
-			D3DInterface->GetAdapterIdentifier(adapter_index,D3DENUM_NO_WHQL_LEVEL,&desc.AdapterIdentifier);
+			D3DInterface->GetAdapterIdentifier(adapter_index, 0, &desc.AdapterIdentifier);
 
 			DX8Caps dx8caps(D3DInterface,desc.Caps,WW3D_FORMAT_UNKNOWN,desc.AdapterIdentifier);
 
