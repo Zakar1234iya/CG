@@ -3,11 +3,12 @@ cbuffer PerFrame : register(b0) {
     float3   CameraPos;
     float    Time;
     float3   SunDirection;
-    float    Padding0;
+    float    _Padding0; // Alignment padding
 };
 
 cbuffer PerObject : register(b1) {
     float4x4 World;
+    float4x4 WorldInverseTranspose;
     float4   TintColor;
 };
 

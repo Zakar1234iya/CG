@@ -4,7 +4,7 @@
 > **Repository:** [electronicarts/CnC_Generals_Zero_Hour](https://github.com/electronicarts/CnC_Generals_Zero_Hour)
 > **Build target:** MSVC 2022, C++20, CMake, Windows 10 22H2+
 > **Architecture:** `GeneralsMD/` is the immutable baseline. All changes live in `ModernizedSrc/`.
-
+>cross paltform project , ARM 32 and 64 also X86 and 64 
 ---
 
 ## Table of Contents

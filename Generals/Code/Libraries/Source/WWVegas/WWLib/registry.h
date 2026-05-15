@@ -1,19 +1,19 @@
 /*
-**	Command & Conquer Generals(tm)
-**	Copyright 2025 Electronic Arts Inc.
+**      Command & Conquer Generals(tm)
+**      Copyright 2025 Electronic Arts Inc.
 **
-**	This program is free software: you can redistribute it and/or modify
-**	it under the terms of the GNU General Public License as published by
-**	the Free Software Foundation, either version 3 of the License, or
-**	(at your option) any later version.
+**      This program is free software: you can redistribute it and/or modify
+**      it under the terms of the GNU General Public License as published by
+**      the Free Software Foundation, either version 3 of the License, or
+**      (at your option) any later version.
 **
-**	This program is distributed in the hope that it will be useful,
-**	but WITHOUT ANY WARRANTY; without even the implied warranty of
-**	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**	GNU General Public License for more details.
+**      This program is distributed in the hope that it will be useful,
+**      but WITHOUT ANY WARRANTY; without even the implied warranty of
+**      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**      GNU General Public License for more details.
 **
-**	You should have received a copy of the GNU General Public License
-**	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**      You should have received a copy of the GNU General Public License
+**      along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /***********************************************************************************************
@@ -51,51 +51,51 @@
 /*
 **
 */
-class	RegistryClass {
+class   RegistryClass {
 public:
-	// Constructor & Destructor
-	RegistryClass( const char * sub_key );
-	~RegistryClass( void );
+        // Constructor & Destructor
+        RegistryClass( const char * sub_key );
+        ~RegistryClass( void );
 
-	bool	Is_Valid( void )		{ return IsValid; }
+        bool    Is_Valid( void )                { return IsValid; }
 
-	// Int data type access
-	int	Get_Int( const char * name, int def_value = 0 );
-	void	Set_Int( const char * name, int value );
+        // Int data type access
+        int     Get_Int( const char * name, int def_value = 0 );
+        void    Set_Int( const char * name, int value );
 
-	// Bool data type access
-	bool	Get_Bool( const char * name, bool def_value = false );
-	void	Set_Bool( const char * name, bool value );
+        // Bool data type access
+        bool    Get_Bool( const char * name, bool def_value = false );
+        void    Set_Bool( const char * name, bool value );
 
-	// Float data type access
-	float	Get_Float( const char * name, float def_value = 0.0f );
-	void	Set_Float( const char * name, float value );
+        // Float data type access
+        float   Get_Float( const char * name, float def_value = 0.0f );
+        void    Set_Float( const char * name, float value );
 
-	// String data type access
-	char *Get_String( const char * name, char *value, int value_size,
+        // String data type access
+        char *Get_String( const char * name, char *value, int value_size,
       const char * default_string = NULL );
-	void	Get_String( const char * name, StringClass &string, const char *default_string = NULL);
-	void	Set_String( const char * name, const char *value );
+        void    Get_String( const char * name, StringClass &string, const char *default_string = NULL);
+        void    Set_String( const char * name, const char *value );
 
-	// Wide string data type access
-	void	Get_String( const WCHAR * name, WideStringClass &string, const WCHAR *default_string = NULL);
-	void	Set_String( const WCHAR * name, const WCHAR *value );
+        // Wide string data type access
+        void    Get_String( const WCHAR * name, WideStringClass &string, const WCHAR *default_string = NULL);
+        void    Set_String( const WCHAR * name, const WCHAR *value );
 
-	// Binary data type access
-	void	Get_Bin( const char * name, void *buffer, int buffer_size );
-	int	Get_Bin_Size( const char * name );
-	void	Set_Bin( const char * name, const void *buffer, int buffer_size );
+        // Binary data type access
+        void    Get_Bin( const char * name, void *buffer, int buffer_size );
+        int     Get_Bin_Size( const char * name );
+        void    Set_Bin( const char * name, const void *buffer, int buffer_size );
 
-	// Value enumeration support
-	void	Get_Value_List( DynamicVectorClass<StringClass> &list );
+        // Value enumeration support
+        void    Get_Value_List( DynamicVectorClass<StringClass> &list );
 
-	// Delete support
-	void	Delete_Value( const char * name);
-	void	Deleta_All_Values( void );
+        // Delete support
+        void    Delete_Value( const char * name);
+        void    Delete_All_Values( void );
 
 private:
-	int	Key;
-	bool	IsValid;
+        int     Key;
+        bool    IsValid;
 };
 
 #endif // REGISTRY_H

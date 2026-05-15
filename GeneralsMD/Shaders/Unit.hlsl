@@ -4,7 +4,7 @@ PSInput VSMain(VSInput input) {
     PSInput output;
     float4 worldPos = mul(float4(input.Position, 1.0f), World);
     output.Position = mul(worldPos, ViewProj);
-    output.Normal = mul(input.Normal, (float3x3)World);
+    output.Normal = normalize(mul(input.Normal, (float3x3)WorldInverseTranspose));
     output.TexCoord = input.TexCoord;
     output.WorldPos = worldPos.xyz;
     return output;
