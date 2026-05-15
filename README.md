@@ -139,6 +139,14 @@ WW3D::Set_Render_Device(0, ...)
 
 **Recommended immediate path:** Switch to DXVK's d3d8.dll for the development bootstrap. It translates DX8 → Vulkan and is actively maintained. If the game runs under DXVK, the `CreateDevice` failure is confirmed as a wrapper bug, not our code.
 
+**Implementation Status:**
+- ✅ Debug build startup time fixed by throttling LOG_TRACE calls in Win32BIGFileSystem.cpp
+- ✅ GetAdapterIdentifier crash fixed by changing D3DENUM_NO_WHQL_LEVEL to 0 in dx8wrapper.cpp
+- ❌ DX8 stub struct layouts (D3DCAPS8, D3DADAPTER_IDENTIFIER8) still need verification with static_asserts
+- ❌ Missing build symbols (d3dx8.h, D3DDP_MAXTEXCOORD) need resolution
+- ❌ Forward declaration ordering in d3d8.h needs audit
+- ❌ CreateDevice failure on Windows 11 + RTX requires DXVK wrapper testing
+
 ---
 
 <a name="phase-1"></a>
@@ -274,6 +282,13 @@ Add `r_backend` console variable early — before DX12 work begins:
 
 This lets engineers switch renderers at runtime (requires restart) and is essential for automated visual regression testing.
 
+**Implementation Status:**
+- ❌ IRenderDevice.h interface not created — blocks all backend development
+- ❌ DX8RenderDevice shim not implemented
+- ❌ VulkanRenderDevice.h exists but cannot compile without IRenderDevice.h base class
+- ❌ DX11W3DDevice.cpp exists as standalone class, not wired into IRenderDevice interface
+- ⚠️ Dependency order violation: Phase 3/7 backends written before Phase 1 abstraction layer defined
+
 ---
 
 <a name="phase-2"></a>
@@ -362,6 +377,11 @@ Before calling `CreateDevice`, validate all `D3DPRESENT_PARAMETERS` fields and l
 - `BackBufferFormat` must be supported by the adapter (query `CheckDeviceFormat`)
 - `FullScreen_RefreshRateInHz` must be 0 for windowed mode
 - `MultiSampleType` must be validated via `CheckDeviceMultiSampleType`
+
+**Implementation Status:**
+- ❌ CreateDevice multi-strategy fallback not implemented (HAL→SW VP→WARP)
+- ❌ Device lost/reset handler not implemented — Alt+Tab crash unfixed
+- ❌ DXVK wrapper integration not tested
 
 ---
 
@@ -530,6 +550,15 @@ Before marking Phase 3 complete, verify these are pixel-accurate (PIX frame diff
 - [ ] Night/day lighting transitions
 - [ ] Fog of war boundary rendering
 
+**Implementation Status:**
+- ⚠️ DX11W3DDevice.cpp skeleton exists (~80 lines) with Initialize(), CreateRenderTargets(), BeginFrame(), Present()
+- ⚠️ Shaders/ directory has stub HLSL files (Terrain.hlsl, Unit.hlsl, UI.hlsl, Shared.hlsli) — 19–31 lines each, no wired entry points
+- ⚠️ VulkanRenderDevice.h/cpp and VulkanBasic.vert/.frag exist but unverified
+- ❌ RenderStateCache not implemented
+- ❌ Constant buffer layout not defined
+- ❌ Texture migration path (24-bit→32-bit) not implemented
+- ❌ D3DX replacement wrappers missing
+
 ---
 
 <a name="phase-4"></a>
@@ -583,6 +612,12 @@ Instrument memory usage at startup with `GetProcessMemoryInfo` and log to `crash
 ```
 
 This baseline drives the pool sizing decisions in Phase 5.
+
+**Implementation Status:**
+- ✅ CMakeLists.txt enforces x64-only build with FATAL_ERROR check
+- ❌ Pointer type audit (DWORD→UINT_PTR, etc.) not started — no clang-tidy pass evidence
+- ❌ SetWindowLongPtr migration not applied
+- ❌ Static_assert guards on serialized structs missing
 
 ---
 
@@ -690,6 +725,12 @@ class SpatialHash {
 };
 ```
 
+**Implementation Status:**
+- ✅ PoolAllocator.h implemented with thread-safe bitset tracking and multi-block expansion
+- ❌ SlotMap.h missing — no stable handles or generation system to prevent dangling pointers
+- ❌ SpatialHash.h not in repo
+- ❌ Pool integration into game object creation not done — PoolAllocator defined but not hooked into Unit/Object factory
+
 ---
 
 <a name="phase-6"></a>
@@ -780,6 +821,14 @@ JobHandle h = JobSystem::Submit([unit, dest]() {
 });
 // Main sim thread polls pending paths each tick and applies them.
 ```
+
+**Implementation Status:**
+- ⚠️ JobSystem.h/JobSystem.cpp exists with Initialize, Submit, WaitFor, Shutdown — but contains critical deadlock bug
+- 🔧 **BUG FIX APPLIED:** JobSystem::Submit() was creating new JobHandle but fn() never called m_done->store(true), causing WaitFor() to spin forever. Fixed by marking done after fn() executes in WorkerLoop.
+- ✅ FlowField.h/FlowField.cpp fully implemented with BFS, 8-directional movement, diagonal cost 1.414
+- ❌ ShardedList not implemented
+- ❌ Frame snapshot / double-buffer sim not implemented
+- ❌ AI job dispatch not wired into game loop
 
 ---
 
@@ -1024,6 +1073,24 @@ This enables fully automated CI on servers without GPUs.
 | `Main/WinMain.cpp` | Entry point, copy protection | ✅ |
 | `NewSystems/Logger/Logger.h` | Modern logging system | ✅ Active |
 | `NewSystems/CrashHandler/` | Minidump crash handler | ✅ Active |
+| `JobSystem.h / JobSystem.cpp` | Multi-core job dispatch | 🔧 Fixed deadlock: Submit() now marks m_done=true after fn() executes |
+| `PoolAllocator.h` | Thread-safe object pools | ✅ Implemented with bitset tracking and multi-block expansion |
+| `FlowField.h / FlowField.cpp` | BFS pathfinding | ✅ Full implementation with 8-directional movement |
+| `DX11W3DDevice.cpp` | DX11 renderer skeleton | ⚠️ Device init + swap chain correct; no shaders or draw calls wired |
+| `VulkanRenderDevice.h/cpp` | Vulkan backend | ⚠️ Header complete; cpp unverified; blocked by missing IRenderDevice.h |
+| `IAudioDevice.h` | Audio interface | ✅ Well-designed interface header |
+| `XAudio2Device.cpp` | XAudio2 backend | ⚠️ Initialize/Shutdown correct; PlaySFX/PlayMusic/etc. are empty stubs |
+
+**Critical Missing Files:**
+- ❌ `IRenderDevice.h` — Base interface for all render backends (Phase 1.2)
+- ❌ `IInputDevice.h` — Base interface needed by SDL2InputDevice
+- ❌ `SlotMap.h` — Stable handles with generation counters for object pools
+- ❌ `SpatialHash.h` — Spatial partitioning for collision/query optimization
+- ❌ `RenderStateCache.h` — PSO and state caching for DX12/Vulkan
+- ❌ `.github/workflows/build.yml` — CI pipeline for automated builds
+
+**Dependency Order Warning:**
+⚠️ Phase 3/7 backends (VulkanRenderDevice, DX11W3DDevice, SDL2InputDevice) were written before Phase 1 base interfaces (IRenderDevice, IInputDevice) were defined. This causes compilation failures and must be resolved before merging.
 
 ## Appendix B — DX8 Wrapper Initialization Pipeline (Reference)
 
