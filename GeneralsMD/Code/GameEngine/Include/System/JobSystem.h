@@ -29,8 +29,8 @@ public:
 private:
     struct Job {
         std::function<void()> fn;
-        std::shared_ptr<std::atomic<bool>> dependencyDone;
-        std::shared_ptr<std::atomic<bool>> done;  // Track completion status for this job
+        std::shared_ptr<std::atomic<bool>> dependencyDone;  // must be true before this job runs
+        std::shared_ptr<std::atomic<bool>> completionFlag;  // set to true after this job runs (unblocks WaitFor)
     };
 
     static std::vector<std::thread> s_workers;

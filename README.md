@@ -36,20 +36,20 @@
 
 **Root cause:** `Win32BIGFileSystem::openArchiveFile()` had two `LOG_TRACE` calls inside the per-file-entry `for` loop. With 50,000+ files across 17 `.big` archives, this generated 100,000+ synchronous disk writes during startup — causing 45–60 minute init times in Debug builds.
 
-**File:** `ModernizedSrc/GameEngineDevice/Source/Win32Device/Common/Win32BIGFileSystem.cpp`
+**File:** `GameEngineDevice/Source/Win32Device/Common/Win32BIGFileSystem.cpp`
 
 **Fix applied:**
 - Removed both per-entry `LOG_TRACE` calls from the hot loop
-- Replaced with `LOG_DEBUG` every 5,000 entries
-- Demoted per-archive header traces from `LOG_TRACE` → `LOG_DEBUG`
+- Replaced with `DEBUG_LOG` every 5,000 entries (`if ((i % 5000) == 0)`)
+- Applied to both `GeneralsMD/` and `Generals/` copies
 
 **Result:** Debug startup time expected to drop to < 2 minutes.
 
 ---
 
-### 0.2 — D3DERR_INVALIDCALL on GetAdapterIdentifier ✅ FIXED (verify)
+### 0.2 — D3DERR_INVALIDCALL on GetAdapterIdentifier ✅ FIXED
 
-**File:** `ModernizedSrc/Libraries/Source/WWVegas/WW3D2/dx8wrapper.cpp`
+**Files:** `WW3D2/dx8wrapper.cpp` (GeneralsMD + Generals), `W3DShaderManager.cpp` (GeneralsMD + Generals)
 
 **Root cause:** `GetAdapterIdentifier(0, D3DENUM_NO_WHQL_LEVEL, ...)` returns `D3DERR_INVALIDCALL` on modern drivers — `D3DENUM_NO_WHQL_LEVEL` is a DX9 flag that is not valid through the DX8 ABI even when using a compatibility wrapper.
 
@@ -61,7 +61,11 @@ hr = d3d->GetAdapterIdentifier(0, D3DENUM_NO_WHQL_LEVEL, &adapterInfo);
 hr = d3d->GetAdapterIdentifier(0, 0, &adapterInfo);
 ```
 
-**Action:** Verify this is committed in `dx8wrapper.cpp`. Add an `ASSERT(hr == D3D_OK)` with a descriptive message after the call so future regressions are caught immediately.
+**Action:** ✅ Committed. All 6 call sites across 4 files now use `flags=0` instead of `D3DENUM_NO_WHQL_LEVEL`:
+- `GeneralsMD/WW3D2/dx8wrapper.cpp` — 3 call sites (Create_Device, Enumerate_Devices x2)
+- `Generals/WW3D2/dx8wrapper.cpp` — 2 call sites (Create_Device, Enumerate_Devices)
+- `GeneralsMD/W3DShaderManager.cpp` — 1 call site (DetectChipset)
+- `Generals/W3DShaderManager.cpp` — 1 call site (DetectChipset)
 
 ---
 
@@ -1012,15 +1016,18 @@ This enables fully automated CI on servers without GPUs.
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `Win32Device/Common/Win32BIGFileSystem.cpp` | BIG archive loading | ✅ Per-5000 trace (was per-file — 45 min startup fixed) |
-| `WW3D2/dx8wrapper.cpp` | DX8 wrapper — device creation | ✅ Scope fixes; DX9 fallback; GetAdapterIdentifier flags=0 |
+| `Win32Device/Common/Win32BIGFileSystem.cpp` | BIG archive loading | ✅ Per-5000 `DEBUG_LOG` throttle (was per-file — 45 min startup fixed) |
+| `WW3D2/dx8wrapper.cpp` | DX8 wrapper — device creation | ✅ Scope fixes; DX9 fallback; GetAdapterIdentifier `flags=0` (committed) |
 | `WW3D2/dx8wrapper.h` | DX8 interface declarations | ✅ D3DXVECTOR4 overloads for MSVC 2022 |
+| `W3DDevice/GameClient/W3DShaderManager.cpp` | GPU chipset detection | ✅ GetAdapterIdentifier `flags=0` (committed) |
 | `Stubs/DX8Stubs/d3d8.h` | Compile-time DX8 stubs | ❌ Ordering issues; missing D3DDP_MAXTEXCOORD; d3dx8.h missing |
 | `W3DDevice/GameClient/W3DDisplay.cpp` | Display creation + WW3D init | ✅ Logging added |
 | `GameEngine/Source/Common/GameEngine.cpp` | Engine init, BIG load, INI | ✅ |
 | `GameEngine/Source/GameClient/GameClient.cpp` | Subsystem init order | ✅ |
 | `GameEngine/Source/GameLogic/Object/Weapon.cpp` | Weapon sound validation | ✅ Assert → warning |
 | `GameEngine/Source/Common/Thing/ThingTemplate.cpp` | Object audio validation | ✅ Assert → warning |
+| `GameEngine/Include/System/JobSystem.h` | Job system header | ✅ Fixed: added `completionFlag` to `Job` struct |
+| `GameEngine/Source/System/JobSystem.cpp` | Job system implementation | ✅ Fixed: `WorkerLoop` now sets `completionFlag` after execution — `WaitFor()` no longer deadlocks |
 | `Main/WinMain.cpp` | Entry point, copy protection | ✅ |
 | `NewSystems/Logger/Logger.h` | Modern logging system | ✅ Active |
 | `NewSystems/CrashHandler/` | Minidump crash handler | ✅ Active |
