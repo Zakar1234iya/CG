@@ -291,10 +291,10 @@ StringParameterClass::Copy_Value (const ParameterClass &src)
 //	Get_String
 //
 /////////////////////////////////////////////////////////////////////
-const char *
+const TCHAR *
 StringParameterClass::Get_String (void) const
 {
-	const char * string = NULL;
+	const TCHAR * string = NULL;
 	if (m_String != NULL) {
 		string = (*m_String);
 	}
@@ -308,7 +308,7 @@ StringParameterClass::Get_String (void) const
 //
 /////////////////////////////////////////////////////////////////////
 void
-StringParameterClass::Set_String (const char * string)
+StringParameterClass::Set_String (const TCHAR * string)
 {
 	if (m_String != NULL) {
 		Set_Modified ();

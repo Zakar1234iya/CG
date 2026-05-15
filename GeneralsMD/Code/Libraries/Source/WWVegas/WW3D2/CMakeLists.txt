@@ -1,7 +1,6 @@
 # WW3D2 Core Library (Phase 1-4 Refactored)
 file(GLOB WW3D2_CORE_SOURCES 
     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/VulkanBackend/*.cpp
 )
 
 # Exclude DX8-specific files from core if needed

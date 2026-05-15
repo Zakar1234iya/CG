@@ -8,21 +8,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Cross-platform compiler settings
 if(MSVC)
   add_compile_options(
-    /W3
-    /arch:SSE2
     /MP
     /Zc:preprocessor
     /Zc:__cplusplus
-    /Zc:twoPhase-
-    /Zc:forScope-
-    /Zc:strictStrings-
     /utf-8
   )
   
   add_compile_definitions(
     WIN32_LEAN_AND_MEAN
     NOMINMAX
-    _CRT_SECURE_NO_WARNINGS
     _CRT_NONSTDC_NO_DEPRECATE
     _SILENCE_CXX17_OLD_ALLOCATOR_FUNCTIONS_DEFINED
     _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING
@@ -33,18 +27,11 @@ if(MSVC)
 else()
   # GCC/Clang settings for Linux/macOS
   add_compile_options(
-    -fstrict-aliasing
-    -Wall
-    -Wextra
-    -Wno-unused-parameter
     -Wno-missing-field-initializers
-    -march=x86-64-v2
   )
   
   add_compile_definitions(
-    _CRT_SECURE_NO_WARNINGS
     _CRT_NONSTDC_NO_DEPRECATE
-    NOMINMAX
   )
   
   # Link pthread on Unix-like systems

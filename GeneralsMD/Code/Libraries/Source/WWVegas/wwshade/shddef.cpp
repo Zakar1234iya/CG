@@ -99,12 +99,12 @@ ShdDefClass::~ShdDefClass(void)
 {
 }
 
-const char * ShdDefClass::Get_Name (void) const
+const TCHAR * ShdDefClass::Get_Name (void) const
 {
 	return Name;
 }
 
-void ShdDefClass::Set_Name (const char *new_name)
+void ShdDefClass::Set_Name (const TCHAR *new_name)
 {
 	Name = new_name;
 }

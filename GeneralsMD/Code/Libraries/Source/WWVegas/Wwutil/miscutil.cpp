@@ -47,9 +47,12 @@ LPCSTR cMiscUtil::Get_Text_Time(void)
    // Note: BoundsChecker reports 2 memory leaks in ctime here.
 	//
 
-	long time_now = ::time(NULL);
+	time_t time_now = ::time(NULL);
    char * time_str = ::ctime(&time_now);
-   time_str[::strlen(time_str) - 1] = 0; // remove \n
+   if (time_str) {
+      size_t len = ::strlen(time_str);
+      if (len > 0) time_str[len - 1] = '\0';
+   }
    return time_str; 
 }
 
@@ -119,7 +122,7 @@ bool cMiscUtil::File_Is_Read_Only(LPCSTR filename)
 {
    WWASSERT(filename != NULL);
 
-	DWORD attributes = ::GetFileAttributes(filename);
+	DWORD attributes = ::GetFileAttributesA(filename);
 	return ((attributes != 0xFFFFFFFF) && (attributes & FILE_ATTRIBUTE_READONLY));
 }
 
@@ -210,7 +213,7 @@ void cMiscUtil::Get_File_Id_String(LPCSTR filename, StringClass & str)
 	//
 	// Put all this data into a string
 	//
-	str.Format("%s %d %d", working_filename, filesize, time_date_stamp);
+	str.Format(TEXT("%s %d %d"), working_filename, filesize, time_date_stamp);
 
 	//WWDEBUG_SAY(("File id string: %s\n", str));
 }
@@ -220,7 +223,7 @@ void cMiscUtil::Remove_File(LPCSTR filename)
 {
    WWASSERT(filename != NULL);
 
-	::DeleteFile(filename);
+	::DeleteFileA(filename);
 }
 
 

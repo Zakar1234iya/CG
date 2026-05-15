@@ -44,6 +44,7 @@
 #define HASH_H
 
 #include "always.h"
+#include <tchar.h>
 
 class HashTableIteratorClass;
 
@@ -57,7 +58,7 @@ public:
 	HashableClass( void ) : NextHash( NULL ) {}
 	virtual	~HashableClass( void ) {}
 
-	virtual	const char * Get_Key( void )				= 0;
+	virtual	const TCHAR * Get_Key( void )				= 0;
 
 private:
 	HashableClass * NextHash;

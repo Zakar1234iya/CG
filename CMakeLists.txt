@@ -31,7 +31,7 @@ elseif(UNIX)
 endif()
 
 # Global Compile Definitions
-add_compile_definitions(UNICODE _UNICODE)
+# UNICODE/_UNICODE removed — this ANSI-era codebase is incompatible with Wide API variants
 add_compile_definitions(_CRT_SECURE_NO_WARNINGS) # Handled by CrossPlatform.h
 
 # Compiler Specific Flags

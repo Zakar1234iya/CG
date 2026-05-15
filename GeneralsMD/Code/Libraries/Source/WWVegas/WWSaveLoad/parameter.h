@@ -137,8 +137,8 @@ public:
 	virtual void				Set_Name (const char *new_name);
 
 	// Units display methods
-	virtual const char *		Get_Units_Name (void) const;
-	virtual void				Set_Units_Name (const char *units_name);
+	virtual const TCHAR *		Get_Units_Name (void) const;
+	virtual void				Set_Units_Name (const TCHAR *units_name);
 
 	// Copy methods
 	virtual void				Copy_Value (const ParameterClass &src) { };
@@ -236,7 +236,7 @@ ParameterClass::Set_Name (const char *new_name)
 //////////////////////////////////////////////////////////////////////////////////
 //	Get_Units_Name
 //////////////////////////////////////////////////////////////////////////////////
-inline const char *
+inline const TCHAR *
 ParameterClass::Get_Units_Name (void) const
 {
 	return m_UnitsName;
@@ -246,7 +246,7 @@ ParameterClass::Get_Units_Name (void) const
 //	Set_Units_Name
 //////////////////////////////////////////////////////////////////////////////////
 inline void
-ParameterClass::Set_Units_Name (const char *new_name)
+ParameterClass::Set_Units_Name (const TCHAR *new_name)
 {
 	m_UnitsName = new_name;
 	return ;
@@ -284,8 +284,8 @@ public:
 	virtual bool				Is_Type (Type type) const { return (type == TYPE_STRING) || ParameterClass::Is_Type (type); }
 
 	// Data manipulation
-	virtual const char *		Get_String (void) const;
-	virtual void				Set_String (const char *string);
+	virtual const TCHAR *		Get_String (void) const;
+	virtual void				Set_String (const TCHAR *string);
 
 	// Copy methods
 	virtual void				Copy_Value (const ParameterClass &src);
@@ -333,11 +333,11 @@ public:
 	// Copy methods
 	virtual void			Copy_Value (const ParameterClass &src);
 
-	virtual void			Set_Extension (const char *extension)	{ m_Extension = extension; }
-	virtual const char *	Get_Extension (void) const					{ return m_Extension; }
+	virtual void			Set_Extension (const TCHAR *extension)	{ m_Extension = extension; }
+	virtual const TCHAR *	Get_Extension (void) const					{ return m_Extension; }
 
-	virtual void			Set_Description (const char *desc)		{ m_Description = desc; }
-	virtual const char *	Get_Description (void) const				{ return m_Description; }
+	virtual void			Set_Description (const TCHAR *desc)		{ m_Description = desc; }
+	virtual const TCHAR *	Get_Description (void) const				{ return m_Description; }
 
 protected:
 
@@ -522,8 +522,8 @@ public:
 	// Data manipulation
 	virtual void				Set_Value (int id)						{ (*m_Value) = id; Set_Modified (); }
 	virtual int					Get_Value (void) const					{ return (*m_Value); }
-	virtual void				Set_Base_Class (const char *name)	{ m_BaseClass = name; }
-	virtual const char *		Get_Base_Class (void) const			{ return m_BaseClass; }
+	virtual void				Set_Base_Class (const TCHAR *name)	{ m_BaseClass = name; }
+	virtual const TCHAR *		Get_Base_Class (void) const			{ return m_BaseClass; }
 
 	// Copy methods
 	virtual void				Copy_Value (const ParameterClass &src);
@@ -572,8 +572,8 @@ public:
 	// Data manipulation
 	virtual void				Set_Value (int id)						{ (*m_Value) = id; Set_Modified (); }
 	virtual int					Get_Value (void) const					{ return (*m_Value); }
-	virtual void				Set_Base_Class (const char *name)	{ m_BaseClass = name; }
-	virtual const char *		Get_Base_Class (void) const			{ return m_BaseClass; }
+	virtual void				Set_Base_Class (const TCHAR *name)	{ m_BaseClass = name; }
+	virtual const TCHAR *		Get_Base_Class (void) const			{ return m_BaseClass; }
 
 	// Copy methods
 	virtual void				Copy_Value (const ParameterClass &src);
@@ -713,8 +713,8 @@ public:
 	virtual bool				Is_Type (Type type) const { return (type == TYPE_GAMEOBJDEFINITIONID) || ParameterClass::Is_Type (type); }
 
 	// Data manipulation
-	virtual void				Set_Base_Class (const char *name)	{ m_BaseClass = name; Set_Modified (); }
-	virtual const char *		Get_Base_Class (void) const			{ return m_BaseClass; }
+	virtual void				Set_Base_Class (const TCHAR *name)	{ m_BaseClass = name; Set_Modified (); }
+	virtual const TCHAR *		Get_Base_Class (void) const			{ return m_BaseClass; }
 
 	// Copy methods
 	virtual void				Copy_Value (const ParameterClass &src);
@@ -902,10 +902,10 @@ public:
 	virtual bool				Is_Type (Type type) const				{ return (type == TYPE_SCRIPT) || ParameterClass::Is_Type (type); }
 
 	// Data manipulation
-	virtual void				Set_Script_Name (const char *name)	{ (*m_ScriptName) = name; Set_Modified (); }
-	virtual const char *		Get_Script_Name (void) const			{ return (*m_ScriptName); }
-	virtual void				Set_Params (const char *params)		{ (*m_ScriptParams) = params; Set_Modified (); }
-	virtual const char *		Get_Params (void) const					{ return (*m_ScriptParams); }
+	virtual void				Set_Script_Name (const TCHAR *name)	{ (*m_ScriptName) = name; Set_Modified (); }
+	virtual const TCHAR *		Get_Script_Name (void) const			{ return (*m_ScriptName); }
+	virtual void				Set_Params (const TCHAR *params)		{ (*m_ScriptParams) = params; Set_Modified (); }
+	virtual const TCHAR *		Get_Params (void) const					{ return (*m_ScriptParams); }
 
 	// Copy methods
 	virtual void				Copy_Value (const ParameterClass &src);

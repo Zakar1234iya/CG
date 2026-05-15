@@ -213,7 +213,7 @@ void SimpleFileFactoryClass::Append_Sub_Directory( const char * sub_directory )
 **	Is_Full_Path
 */
 static bool
-Is_Full_Path (const char *path)
+Is_Full_Path (const TCHAR *path)
 {
 	bool retval = false;
 

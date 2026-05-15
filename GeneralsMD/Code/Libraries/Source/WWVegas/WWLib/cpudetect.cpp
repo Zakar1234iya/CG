@@ -17,6 +17,7 @@
 */
 
 #include "cpudetect.h"
+#include <intrin.h>
 #include "wwstring.h"
 #include "wwdebug.h"
 #include "thread.h"

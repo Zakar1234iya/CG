@@ -4,6 +4,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <new>
 #include <vector>
 #include <bitset>
 #include <mutex>
@@ -34,12 +35,12 @@ public:
             size_t idx = block->firstFree();
             if (idx < BlockSize) {
                 block->used.set(idx);
-                return reinterpret_cast<T*>(&block->storage[idx * sizeof(T)]);
+                return std::launder(reinterpret_cast<T*>(&block->storage[idx * sizeof(T)]));
             }
         }
         auto block = std::make_unique<Block>();
         block->used.set(0);
-        T* ptr = reinterpret_cast<T*>(&block->storage[0]);
+        T* ptr = std::launder(reinterpret_cast<T*>(&block->storage[0]));
         m_blocks.push_back(std::move(block));
         return ptr;
     }

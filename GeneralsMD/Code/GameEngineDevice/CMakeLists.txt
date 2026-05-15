@@ -38,8 +38,10 @@ add_library(GameEngineDevice STATIC ${GAMEENGINEDEVICE_SOURCES})
 
 target_include_directories(GameEngineDevice PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/Include
-  ${SDL2_INCLUDE_DIRS}
 )
+if(SDL2_FOUND)
+  target_include_directories(GameEngineDevice PUBLIC ${SDL2_INCLUDE_DIRS})
+endif()
 
 target_link_libraries(GameEngineDevice PUBLIC
   GameEngine

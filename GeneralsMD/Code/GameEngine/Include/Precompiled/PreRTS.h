@@ -1,9 +1,11 @@
 #ifndef __PRERTS_H__
 #define __PRERTS_H__
 
+#ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <atlbase.h>
+#endif
 
 #include <cassert>
 #include <cctype>
@@ -31,6 +33,7 @@
 #include <unordered_map>
 #include <vector>
 
+#ifdef _WIN32
 #include <direct.h>
 #include <io.h>
 #include <imagehlp.h>
@@ -40,6 +43,16 @@
 #include <shellapi.h>
 #include <shlobj.h>
 #include <wininet.h>
+#endif
+
+// On non-Windows, provide compatible alternatives
+#ifndef _WIN32
+#include <unistd.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#define _chdir chdir
+#define _getcwd getcwd
+#endif
 
 #include "Lib/Basetype.h"
 #include "Common/STLTypedefs.h"

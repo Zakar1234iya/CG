@@ -243,7 +243,7 @@ int RawFileClass::Transfer_Block_Size(void)
  * HISTORY:                                                                                    *
  *   10/17/1994 JLB : Created.                                                                 *
  *=============================================================================================*/
-RawFileClass::RawFileClass(char const * filename) :
+RawFileClass::RawFileClass(TCHAR const * filename) :
 	Rights(0),
 	BiasStart(0),
 	BiasLength(-1),
@@ -310,7 +310,7 @@ void RawFileClass::Reset(void)
  *	  11/25/2001 Jani : Changed the name storage from strdup to StringClass to benefit from our *
  *							  Fast memory allocation system.
  *=============================================================================================*/
-char const * RawFileClass::Set_Name(char const * filename)
+TCHAR const * RawFileClass::Set_Name(TCHAR const * filename)
 {
 	Bias(0);
 
@@ -353,7 +353,7 @@ char const * RawFileClass::Set_Name(char const * filename)
  * HISTORY:                                                                                    *
  *   10/17/1994 JLB : Created.                                                                 *
  *=============================================================================================*/
-int RawFileClass::Open(char const * filename, int rights)
+int RawFileClass::Open(TCHAR const * filename, int rights)
 {
 	Set_Name(filename);
 	return(Open(rights));
