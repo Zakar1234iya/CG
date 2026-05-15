@@ -1,3 +1,8 @@
+#ifndef SHADOWS_HLSL
+#define SHADOWS_HLSL
+
+#include "../Shared.hlsli"
+
 Texture2D DepthTexture : register(t0);
 Texture2D ShadowMap : register(t1);
 SamplerComparisonState ShadowSampler : register(s0);
@@ -14,3 +19,5 @@ float SampleShadow(float4 shadowPos) {
     float bias = 0.001f;
     return ShadowMap.SampleCmpLevelZero(ShadowSampler, uv, shadowPos.z - bias);
 }
+
+#endif // SHADOWS_HLSL

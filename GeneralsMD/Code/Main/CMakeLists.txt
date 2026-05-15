@@ -3,7 +3,12 @@ file(GLOB MAIN_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/*.h
 )
 
-add_executable(ZeroHour WIN32 ${MAIN_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/RTS.RC)
+if(MSVC)
+  set(RC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/RTS.RC)
+else()
+  set(RC_FILE "")
+endif()
+add_executable(ZeroHour WIN32 ${MAIN_SOURCES} ${RC_FILE})
 
 target_link_libraries(ZeroHour
   GameEngine
@@ -18,8 +23,7 @@ target_link_libraries(ZeroHour
   WWAudio
   WWDownload
   Compression
-  debug
-  profile
+  Threads::Threads
 )
 
 target_include_directories(ZeroHour PRIVATE

@@ -157,6 +157,46 @@
     #define MEM_RELEASE 0x8000
     #define PAGE_EXECUTE_READWRITE 0x40
 
+// COM/Windows compatibility
+typedef DWORD HRESULT;
+
+#ifndef STDMETHODCALLTYPE
+#define STDMETHODCALLTYPE
+#endif
+
+#ifndef MAKE_HRESULT
+#define MAKE_HRESULT(sev,fac,code) \
+    ((HRESULT)(((unsigned long)(sev)<<31)|((unsigned long)(fac)<<16)|((unsigned long)(code))))
+#endif
+
+#ifndef S_OK
+#define S_OK ((HRESULT)0L)
+#endif
+
+#ifndef E_FAIL
+#define E_FAIL ((HRESULT)0x80004005L)
+#endif
+
+#ifndef E_NOTIMPL
+#define E_NOTIMPL ((HRESULT)0x80004001L)
+#endif
+
+#ifndef E_INVALIDARG
+#define E_INVALIDARG ((HRESULT)0x80070057L)
+#endif
+
+#ifndef E_NOINTERFACE
+#define E_NOINTERFACE ((HRESULT)0x80004002L)
+#endif
+
+#ifndef E_POINTER
+#define E_POINTER ((HRESULT)0x80004003L)
+#endif
+
+#ifndef S_FALSE
+#define S_FALSE ((HRESULT)1L)
+#endif
+
 #endif // !PLATFORM_WINDOWS
 
 // Min/Max macros
@@ -274,12 +314,16 @@
     #define DLL_EXPORT __attribute__((visibility("default")))
     #define DLL_IMPORT __attribute__((visibility("default")))
     #define THREAD_LOCAL __thread
+    #if __cplusplus < 201103L
     #define thread_local _Thread_local
+    #endif
 #else
     #define DLL_EXPORT __declspec(dllexport)
     #define DLL_IMPORT __declspec(dllimport)
     #define THREAD_LOCAL __declspec(thread)
+    #if __cplusplus < 201103L
     #define thread_local __declspec(thread)
+    #endif
 #endif
 
 // Force inline

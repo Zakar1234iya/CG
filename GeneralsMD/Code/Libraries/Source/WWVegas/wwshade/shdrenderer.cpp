@@ -150,8 +150,7 @@ void RendererListContainerClass::Unregister_All()
 {
         while (!LinkedNodes.Is_Empty()) {
                 ShdRendererNodeClass* node=LinkedNodes.Remove_Head();
-//              REF_PTR_RELEASE(node);
-                delete node;
+                REF_PTR_RELEASE(node);
         }
 }
 

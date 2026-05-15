@@ -47,7 +47,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <tchar.h>
-#include "trim.h"
+// trim.h intentionally removed — ANSI-only; replaced by inline Trim() below
 #include "wwdebug.h"
 #ifdef _UNIX
 #include "osdep.h"
@@ -80,7 +80,9 @@ public:
 	StringClass (const StringClass &string, bool hint_temporary = false);
 	StringClass (const TCHAR *string, bool hint_temporary = false);
 	StringClass (TCHAR ch, bool hint_temporary = false);
+#ifndef _UNICODE
 	StringClass (const WCHAR *string, bool hint_temporary = false);
+#endif
 	~StringClass (void);
 
 	////////////////////////////////////////////////////////////
@@ -92,7 +94,9 @@ public:
 	inline const StringClass &operator= (const StringClass &string);
 	inline const StringClass &operator= (const TCHAR *string);
 	inline const StringClass &operator= (TCHAR ch);
+#ifndef _UNICODE
 	inline const StringClass &operator= (const WCHAR *string);
+#endif
 
 	const StringClass &operator+= (const StringClass &string);
 	const StringClass &operator+= (const TCHAR *string);
@@ -228,6 +232,7 @@ StringClass::operator= (const TCHAR *string)
 }
 
 
+#ifndef _UNICODE
 ///////////////////////////////////////////////////////////////////
 //	operator=
 ///////////////////////////////////////////////////////////////////
@@ -240,6 +245,7 @@ StringClass::operator= (const WCHAR *string)
 
 	return (*this);
 }
+#endif
 
 
 ///////////////////////////////////////////////////////////////////
@@ -326,6 +332,7 @@ StringClass::StringClass (const TCHAR *string, bool hint_temporary)
 	return ;
 }
 
+#ifndef _UNICODE
 ///////////////////////////////////////////////////////////////////
 //	StringClass
 ///////////////////////////////////////////////////////////////////
@@ -341,6 +348,7 @@ StringClass::StringClass (const WCHAR *string, bool hint_temporary)
 	(*this) = string;
 	return ;
 }
+#endif
 
 ///////////////////////////////////////////////////////////////////
 //	~StringClass
@@ -494,7 +502,22 @@ StringClass::Erase (int start_index, int char_count)
 ///////////////////////////////////////////////////////////////////
 inline void StringClass::Trim(void)
 {
-	strtrim(m_Buffer);
+	if (m_Buffer == nullptr || m_Buffer[0] == TEXT('\0'))
+		return;
+
+	TCHAR *start = m_Buffer;
+	while (*start != TEXT('\0') && *start <= TEXT(' '))
+		++start;
+
+	TCHAR *end = start + _tcslen(start);
+	while (end > start && *(end - 1) <= TEXT(' '))
+		--end;
+	*end = TEXT('\0');
+
+	if (start != m_Buffer) {
+		::memmove(m_Buffer, start, (end - start + 1) * sizeof(TCHAR));
+	}
+	Store_Length(static_cast<int>(end - start));
 }
 
 

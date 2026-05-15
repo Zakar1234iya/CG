@@ -127,13 +127,13 @@ HRESULT DownloadManagerMunkee::OnProgressUpdate( int bytesread, int totalsize, i
   {
     //DBGMSG("Bytes read: "<<bytesread<<".    Time left: "<<timeleft<<" seconds");
          LoadString(Global_instance, TXT_TIME_REMAIN, temp, sizeof(temp));
-    sprintf(g_DLTimeRem,temp,(timeleft/60),(timeleft%60));
+    snprintf(g_DLTimeRem, sizeof(g_DLTimeRem), "%d:%02d", (timeleft/60), (timeleft%60));
 
     LoadString(Global_instance, TXT_BPS, temp, sizeof(temp));
-    sprintf(g_DLBPS,temp,bytesread/timetaken);
+    snprintf(g_DLBPS, sizeof(g_DLBPS), "%d", bytesread/timetaken);
   }
   LoadString(Global_instance, TXT_BYTES_READ, temp, sizeof(temp));
-  sprintf(g_DLBytesLeft,temp,bytesread,totalsize);
+  snprintf(g_DLBytesLeft, sizeof(g_DLBytesLeft), "%d/%d", bytesread, totalsize);
         return ret;
 }
 HRESULT DownloadManagerMunkee::OnStatusUpdate( int status )
@@ -261,6 +261,7 @@ static std::string getNextLine(std::string in, std::string& remainder)
 
         remainder = trim(remainder, "\r\n\t ");
         out = trim(out, "\r\t\n ");
+        return out;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -1403,13 +1404,13 @@ STDMETHODIMP CDownloadEventSink::OnProgressUpdate(int bytesread, int totalsize,
   {
     //DBGMSG("Bytes read: "<<bytesread<<".    Time left: "<<timeleft<<" seconds");
          LoadString(Global_instance, TXT_TIME_REMAIN, temp, sizeof(temp));
-    sprintf(g_DLTimeRem,temp,(timeleft/60),(timeleft%60));
+    snprintf(g_DLTimeRem, sizeof(g_DLTimeRem), "%d:%02d", (timeleft/60), (timeleft%60));
 
     LoadString(Global_instance, TXT_BPS, temp, sizeof(temp));
-    sprintf(g_DLBPS,temp,bytesread/timetaken);
+    snprintf(g_DLBPS, sizeof(g_DLBPS), "%d", bytesread/timetaken);
   }
   LoadString(Global_instance, TXT_BYTES_READ, temp, sizeof(temp));
-  sprintf(g_DLBytesLeft,temp,bytesread,totalsize);
+  snprintf(g_DLBytesLeft, sizeof(g_DLBytesLeft), "%d/%d", bytesread, totalsize);
 
   return(S_OK);
 }

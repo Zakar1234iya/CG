@@ -2,10 +2,12 @@
 import subprocess
 import time
 import sys
+import platform
 
 def main():
+    exe = "ZeroHour.exe" if platform.system() == "Windows" else "ZeroHour"
     proc = subprocess.Popen(
-        ["ZeroHour.exe", "-map", "TestMap1000Units", "-nosound"],
+        [exe, "-map", "TestMap1000Units", "-nosound"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )

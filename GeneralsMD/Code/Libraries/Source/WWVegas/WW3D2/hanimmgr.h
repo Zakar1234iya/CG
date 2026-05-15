@@ -58,10 +58,10 @@ class W3DExclusionListClass;
 class MissingAnimClass : public HashableClass {
 
 public:
-	MissingAnimClass( const char * name ) : Name( name ) {}
+	MissingAnimClass( const TCHAR * name ) : Name( name ) {}
 	virtual	~MissingAnimClass( void ) {}
 
-	virtual	const char * Get_Key( void )	{ return Name;	}
+	virtual	const TCHAR * Get_Key( void )	{ return Name;	}
 
 private:
 	StringClass	Name;
@@ -82,15 +82,15 @@ public:
 	~HAnimManagerClass(void);
 
 	int			 		Load_Anim(ChunkLoadClass & cload);
-	HAnimClass *		Get_Anim(const char * name);
-	HAnimClass *		Peek_Anim(const char * name);
+	HAnimClass *		Get_Anim(const TCHAR * name);
+	HAnimClass *		Peek_Anim(const TCHAR * name);
 	bool					Add_Anim(HAnimClass *new_anim);
 	void			 		Free_All_Anims(void);
 	void			 		Free_All_Anims_With_Exclusion_List(const W3DExclusionListClass & exclusion_list);
 	void					Create_Asset_List(DynamicVectorClass<StringClass> & exclusion_list);
 
-	void					Register_Missing( const char * name );
-	bool					Is_Missing( const char * name );
+	void					Register_Missing( const TCHAR * name );
+	bool					Is_Missing( const TCHAR * name );
 	void					Reset_Missing( void );
 
 private:

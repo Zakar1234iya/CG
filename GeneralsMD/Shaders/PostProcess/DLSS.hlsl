@@ -1,3 +1,5 @@
+#include "../Shared.hlsli"
+
 // NOTE: This is a simple bilinear upscale, NOT actual DLSS
 Texture2D ColorInput : register(t0);
 Texture2D DepthInput : register(t1);

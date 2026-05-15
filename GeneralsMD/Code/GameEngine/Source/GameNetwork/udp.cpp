@@ -1,25 +1,25 @@
 /*
-**	Command & Conquer Generals Zero Hour(tm)
-**	Copyright 2025 Electronic Arts Inc.
+**      Command & Conquer Generals Zero Hour(tm)
+**      Copyright 2025 Electronic Arts Inc.
 **
-**	This program is free software: you can redistribute it and/or modify
-**	it under the terms of the GNU General Public License as published by
-**	the Free Software Foundation, either version 3 of the License, or
-**	(at your option) any later version.
+**      This program is free software: you can redistribute it and/or modify
+**      it under the terms of the GNU General Public License as published by
+**      the Free Software Foundation, either version 3 of the License, or
+**      (at your option) any later version.
 **
-**	This program is distributed in the hope that it will be useful,
-**	but WITHOUT ANY WARRANTY; without even the implied warranty of
-**	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**	GNU General Public License for more details.
+**      This program is distributed in the hope that it will be useful,
+**      but WITHOUT ANY WARRANTY; without even the implied warranty of
+**      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**      GNU General Public License for more details.
 **
-**	You should have received a copy of the GNU General Public License
-**	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**      You should have received a copy of the GNU General Public License
+**      along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 ////////////////////////////////////////////////////////////////////////////////
-//																																						//
-//  (c) 2001-2003 Electronic Arts Inc.																				//
-//																																						//
+//                                                                                                                                                                                                                                                                                                              //
+//  (c) 2001-2003 Electronic Arts Inc.                                                                                                                                                          //
+//                                                                                                                                                                                                                                                                                                              //
 ////////////////////////////////////////////////////////////////////////////////
 
 // FILE: Udp.cpp //////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // SYSTEM INCLUDES ////////////////////////////////////////////////////////////
-#include "PreRTS.h"	// This must go first in EVERY cpp file int the GameEngine
+#include "PreRTS.h"     // This must go first in EVERY cpp file int the GameEngine
 
 // USER INCLUDES //////////////////////////////////////////////////////////////
 #include "Common/GameEngine.h"
@@ -49,68 +49,68 @@
 
 AsciiString GetWSAErrorString( Int error )
 {
-	switch (error)
-	{
-		CASE(WSABASEERR)
-		CASE(WSAEINTR)
-		CASE(WSAEBADF)
-		CASE(WSAEACCES)
-		CASE(WSAEFAULT)
-		CASE(WSAEINVAL)
-		CASE(WSAEMFILE)
-		CASE(WSAEWOULDBLOCK)
-		CASE(WSAEINPROGRESS)
-		CASE(WSAEALREADY)
-		CASE(WSAENOTSOCK)
-		CASE(WSAEDESTADDRREQ)
-		CASE(WSAEMSGSIZE)
-		CASE(WSAEPROTOTYPE)
-		CASE(WSAENOPROTOOPT)
-		CASE(WSAEPROTONOSUPPORT)
-		CASE(WSAESOCKTNOSUPPORT)
-		CASE(WSAEOPNOTSUPP)
-		CASE(WSAEPFNOSUPPORT)
-		CASE(WSAEAFNOSUPPORT)
-		CASE(WSAEADDRINUSE)
-		CASE(WSAEADDRNOTAVAIL)
-		CASE(WSAENETDOWN)
-		CASE(WSAENETUNREACH)
-		CASE(WSAENETRESET)
-		CASE(WSAECONNABORTED)
-		CASE(WSAECONNRESET)
-		CASE(WSAENOBUFS)
-		CASE(WSAEISCONN)
-		CASE(WSAENOTCONN)
-		CASE(WSAESHUTDOWN)
-		CASE(WSAETOOMANYREFS)
-		CASE(WSAETIMEDOUT)
-		CASE(WSAECONNREFUSED)
-		CASE(WSAELOOP)
-		CASE(WSAENAMETOOLONG)
-		CASE(WSAEHOSTDOWN)
-		CASE(WSAEHOSTUNREACH)
-		CASE(WSAENOTEMPTY)
-		CASE(WSAEPROCLIM)
-		CASE(WSAEUSERS)
-		CASE(WSAEDQUOT)
-		CASE(WSAESTALE)
-		CASE(WSAEREMOTE)
-		CASE(WSAEDISCON)
-		CASE(WSASYSNOTREADY)
-		CASE(WSAVERNOTSUPPORTED)
-		CASE(WSANOTINITIALISED)
-		CASE(WSAHOST_NOT_FOUND)
-		CASE(WSATRY_AGAIN)
-		CASE(WSANO_RECOVERY)
-		CASE(WSANO_DATA)
-		default:
-		{
-			AsciiString ret;
-			ret.format("Not a Winsock error (%d)", error);
-			return ret;
-		}
-	}
-	return AsciiString::TheEmptyString; // will not be hit, ever.
+        switch (error)
+        {
+                CASE(WSABASEERR)
+                CASE(WSAEINTR)
+                CASE(WSAEBADF)
+                CASE(WSAEACCES)
+                CASE(WSAEFAULT)
+                CASE(WSAEINVAL)
+                CASE(WSAEMFILE)
+                CASE(WSAEWOULDBLOCK)
+                CASE(WSAEINPROGRESS)
+                CASE(WSAEALREADY)
+                CASE(WSAENOTSOCK)
+                CASE(WSAEDESTADDRREQ)
+                CASE(WSAEMSGSIZE)
+                CASE(WSAEPROTOTYPE)
+                CASE(WSAENOPROTOOPT)
+                CASE(WSAEPROTONOSUPPORT)
+                CASE(WSAESOCKTNOSUPPORT)
+                CASE(WSAEOPNOTSUPP)
+                CASE(WSAEPFNOSUPPORT)
+                CASE(WSAEAFNOSUPPORT)
+                CASE(WSAEADDRINUSE)
+                CASE(WSAEADDRNOTAVAIL)
+                CASE(WSAENETDOWN)
+                CASE(WSAENETUNREACH)
+                CASE(WSAENETRESET)
+                CASE(WSAECONNABORTED)
+                CASE(WSAECONNRESET)
+                CASE(WSAENOBUFS)
+                CASE(WSAEISCONN)
+                CASE(WSAENOTCONN)
+                CASE(WSAESHUTDOWN)
+                CASE(WSAETOOMANYREFS)
+                CASE(WSAETIMEDOUT)
+                CASE(WSAECONNREFUSED)
+                CASE(WSAELOOP)
+                CASE(WSAENAMETOOLONG)
+                CASE(WSAEHOSTDOWN)
+                CASE(WSAEHOSTUNREACH)
+                CASE(WSAENOTEMPTY)
+                CASE(WSAEPROCLIM)
+                CASE(WSAEUSERS)
+                CASE(WSAEDQUOT)
+                CASE(WSAESTALE)
+                CASE(WSAEREMOTE)
+                CASE(WSAEDISCON)
+                CASE(WSASYSNOTREADY)
+                CASE(WSAVERNOTSUPPORTED)
+                CASE(WSANOTINITIALISED)
+                CASE(WSAHOST_NOT_FOUND)
+                CASE(WSATRY_AGAIN)
+                CASE(WSANO_RECOVERY)
+                CASE(WSANO_DATA)
+                default:
+                {
+                        AsciiString ret;
+                        ret.format("Not a Winsock error (%d)", error);
+                        return ret;
+                }
+        }
+        return AsciiString::TheEmptyString; // will not be hit, ever.
 }
 
 #undef CASE
@@ -126,20 +126,21 @@ UDP::UDP()
 
 UDP::~UDP()
 {
-	if (fd)
-		closesocket(fd);
+        if (fd)
+                closesocket(fd);
 }
 
 Int UDP::Bind(const char *Host,UnsignedShort port)
 {
-  char hostName[100];
+  char hostName[128];
   struct hostent *hostStruct;
   struct in_addr *hostNode;
 
   if (isdigit(Host[0]))
     return ( Bind( ntohl(inet_addr(Host)), port) );
 
-  strcpy(hostName, Host);
+  strncpy(hostName, Host, sizeof(hostName) - 1);
+  hostName[sizeof(hostName) - 1] = '\0';
 
   hostStruct = gethostbyname(Host);
   if (hostStruct == NULL)
@@ -173,10 +174,10 @@ Int UDP::Bind(UnsignedInt IP,UnsignedShort Port)
 
   #ifdef _WINDOWS
   if (retval==SOCKET_ERROR)
-	{
+        {
     retval=-1;
-		m_lastError = WSAGetLastError();
-	}
+                m_lastError = WSAGetLastError();
+        }
   #endif
   if (retval==-1)
   {
@@ -254,14 +255,14 @@ Int UDP::Write(const unsigned char *msg,UnsignedInt len,UnsignedInt IP,UnsignedS
   retval=sendto(fd,(const char *)msg,len,0,(struct sockaddr *)&to,sizeof(to));
   #ifdef _WINDOWS
   if (retval==SOCKET_ERROR)
-	{
+        {
     retval=-1;
-		m_lastError = WSAGetLastError();
+                m_lastError = WSAGetLastError();
 #ifdef DEBUG_LOGGING
-		static Int errCount = 0;
+                static Int errCount = 0;
 #endif
-		DEBUG_ASSERTLOG(errCount++ > 100, ("UDP::Write() - WSA error is %s\n", GetWSAErrorString(WSAGetLastError()).str()));
-	}
+                DEBUG_ASSERTLOG(errCount++ > 100, ("UDP::Write() - WSA error is %s\n", GetWSAErrorString(WSAGetLastError()).str()));
+        }
   #endif
   
   return(retval);
@@ -277,20 +278,20 @@ Int UDP::Read(unsigned char *msg,UnsignedInt len,sockaddr_in *from)
     retval=recvfrom(fd,(char *)msg,len,0,(struct sockaddr *)from,&alen);
     #ifdef _WINDOWS
     if (retval == SOCKET_ERROR)
-		{
-			if (WSAGetLastError() != WSAEWOULDBLOCK)
-			{
-				// failing because of a blocking error isn't really such a bad thing.
-				m_lastError = WSAGetLastError();
+                {
+                        if (WSAGetLastError() != WSAEWOULDBLOCK)
+                        {
+                                // failing because of a blocking error isn't really such a bad thing.
+                                m_lastError = WSAGetLastError();
 #ifdef DEBUG_LOGGING
-				static Int errCount = 0;
+                                static Int errCount = 0;
 #endif
-				DEBUG_ASSERTLOG(errCount++ > 100, ("UDP::Read() - WSA error is %s\n", GetWSAErrorString(WSAGetLastError()).str()));
-				retval = -1;
-			} else {
-				retval = 0;
-			}
-		}
+                                DEBUG_ASSERTLOG(errCount++ > 100, ("UDP::Read() - WSA error is %s\n", GetWSAErrorString(WSAGetLastError()).str()));
+                                retval = -1;
+                        } else {
+                                retval = 0;
+                        }
+                }
     #endif
   }
   else
@@ -298,20 +299,20 @@ Int UDP::Read(unsigned char *msg,UnsignedInt len,sockaddr_in *from)
     retval=recvfrom(fd,(char *)msg,len,0,NULL,NULL);
     #ifdef _WINDOWS
     if (retval==SOCKET_ERROR)
-		{
-			if (WSAGetLastError() != WSAEWOULDBLOCK)
-			{
-				// failing because of a blocking error isn't really such a bad thing.
-				m_lastError = WSAGetLastError();
+                {
+                        if (WSAGetLastError() != WSAEWOULDBLOCK)
+                        {
+                                // failing because of a blocking error isn't really such a bad thing.
+                                m_lastError = WSAGetLastError();
 #ifdef DEBUG_LOGGING
-				static Int errCount = 0;
+                                static Int errCount = 0;
 #endif
-				DEBUG_ASSERTLOG(errCount++ > 100, ("UDP::Read() - WSA error is %s\n", GetWSAErrorString(WSAGetLastError()).str()));
-				retval = -1;
-			} else {
-				retval = 0;
-			}
-		}
+                                DEBUG_ASSERTLOG(errCount++ > 100, ("UDP::Read() - WSA error is %s\n", GetWSAErrorString(WSAGetLastError()).str()));
+                                retval = -1;
+                        } else {
+                                retval = 0;
+                        }
+                }
     #endif
   }
   return(retval);
@@ -324,12 +325,12 @@ void UDP::ClearStatus(void)
   errno=0;
   #endif
 
-	m_lastError = 0;
+        m_lastError = 0;
 }
 
 UDP::sockStat UDP::GetStatus(void)
 {
-	Int status = m_lastError;
+        Int status = m_lastError;
  #ifdef _WINDOWS
   //int status=WSAGetLastError();
   if (status==0) return(OK);
@@ -503,11 +504,11 @@ int UDP::GetOutputBuffer(void)
 
 Int UDP::AllowBroadcasts(Bool status)
 {
-	int retval;
-	BOOL val = status;
-	retval = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, (char *)&val, sizeof(BOOL));
-	if (retval == 0)
-		return TRUE;
-	else
-		return FALSE;
+        int retval;
+        BOOL val = status;
+        retval = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, (char *)&val, sizeof(BOOL));
+        if (retval == 0)
+                return TRUE;
+        else
+                return FALSE;
 }

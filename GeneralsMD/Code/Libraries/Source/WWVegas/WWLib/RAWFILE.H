@@ -89,19 +89,19 @@ class RawFileClass : public FileClass
 		*/
 		int Rights;
 
-		RawFileClass(char const *filename);
+		RawFileClass(TCHAR const *filename);
 		RawFileClass(void);
 		RawFileClass (RawFileClass const & f);
 		RawFileClass & operator = (RawFileClass const & f);
 		virtual ~RawFileClass(void);
 
-		virtual char const * File_Name(void) const;
-		virtual char const * Set_Name(char const *filename);
+		virtual TCHAR const * File_Name(void) const;
+		virtual TCHAR const * Set_Name(TCHAR const *filename);
 		virtual int Create(void);
 		virtual int Delete(void);
 		virtual bool Is_Available(int forced=false);
 		virtual bool Is_Open(void) const;
-		virtual int Open(char const *filename, int rights=READ);
+		virtual int Open(TCHAR const *filename, int rights=READ);
 		virtual int Open(int rights=READ);
 		virtual int Read(void *buffer, int size);
 		virtual int Seek(int pos, int dir=SEEK_CUR);
@@ -183,7 +183,7 @@ class RawFileClass : public FileClass
  *   11/25/2001 Jani: Note that this is virtual function and thus can't be inlined. Is there a *
  *					 reason for it to be virtual?																	  *
  *=============================================================================================*/
-inline char const * RawFileClass::File_Name(void) const
+inline TCHAR const * RawFileClass::File_Name(void) const
 {
 	return(Filename);
 }

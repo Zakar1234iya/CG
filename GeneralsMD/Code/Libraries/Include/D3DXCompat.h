@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef D3DXCOMPAT_H
+#define D3DXCOMPAT_H
+
 /**
  * D3DXCompat.h - Unified Cross-Platform DX8 Type Definitions
  * 
@@ -8,9 +12,18 @@
  * These are NOT functional implementations - they are type definitions
  * that allow compilation. Actual DX8 functionality requires Windows or
  * a compatibility layer like DXVK.
+ *
+ * NOTE: Core D3D types (D3DFORMAT, D3DLIGHT8, D3DMATERIAL8, etc.) are now
+ * defined in d3d8.h. D3DXCompat.h only provides D3DX math/compat types.
  */
 
 #include "CrossPlatform.h"
+
+// Ensure DWORD, FLOAT and other Windows types are available
+#ifdef _WIN32
+#include <windows.h>
+#include <DirectXMath.h>
+#endif
 
 // Forward declarations for COM interfaces (opaque pointers)
 #ifdef __cplusplus
@@ -47,6 +60,8 @@ typedef IDirect3DCubeTexture8* LPDIRECT3DCUBETEXTURE8;
 typedef IDirect3DVolumeTexture8* LPDIRECT3DVOLUMETEXTURE8;
 
 // D3D Vector types - layout compatible with original D3DXVECTOR3
+#ifndef D3DXVECTOR3_DEFINED
+#define D3DXVECTOR3_DEFINED
 typedef struct D3DXVECTOR3 {
     float x, y, z;
     
@@ -72,6 +87,7 @@ typedef struct D3DXVECTOR3 {
     const float* operator[](size_t i) const { return &x + i; }
 #endif
 } D3DXVECTOR3, *LPD3DXVECTOR3;
+#endif // D3DXVECTOR3_DEFINED
 
 // Ensure size compatibility
 #ifdef __cplusplus
@@ -133,42 +149,6 @@ typedef struct D3DXMATRIX {
 static_assert(sizeof(D3DXMATRIX) == 64, "D3DXMATRIX must be 64 bytes");
 #endif
 
-// D3D Viewport structure
-typedef struct D3DVIEWPORT8 {
-    DWORD X;
-    DWORD Y;
-    DWORD Width;
-    DWORD Height;
-    float MinZ;
-    float MaxZ;
-} D3DVIEWPORT8, *LPD3DVIEWPORT8;
-
-// D3D Light structures
-typedef struct D3DLIGHT8 {
-    DWORD Type;
-    D3DXVECTOR3 Diffuse;
-    D3DXVECTOR3 Specular;
-    D3DXVECTOR3 Ambient;
-    D3DXVECTOR3 Position;
-    D3DXVECTOR3 Direction;
-    float Range;
-    float Falloff;
-    float Attenuation0;
-    float Attenuation1;
-    float Attenuation2;
-    float Theta;
-    float Phi;
-} D3DLIGHT8, *LPD3DLIGHT8;
-
-// D3D Material structure
-typedef struct D3DMATERIAL8 {
-    D3DXCOLOR Diffuse;
-    D3DXCOLOR Ambient;
-    D3DXCOLOR Specular;
-    D3DXCOLOR Emissive;
-    float Power;
-} D3DMATERIAL8, *LPD3DMATERIAL8;
-
 // Common HRESULT values
 #ifndef D3D_OK
     #define D3D_OK 0
@@ -183,84 +163,6 @@ typedef struct D3DMATERIAL8 {
     #define D3DERR_DEVICENOTRESET 0x88760869
 #endif
 
-// D3D Format enum (subset used by the game)
-#ifndef _D3DFORMAT_DEFINED
-#define _D3DFORMAT_DEFINED
-typedef enum D3DFORMAT {
-    D3DFMT_UNKNOWN          =  0,
-    D3DFMT_R8G8B8           =  20,
-    D3DFMT_A8R8G8B8         =  21,
-    D3DFMT_X8R8G8B8         =  22,
-    D3DFMT_R5G6B5           =  23,
-    D3DFMT_X1R5G5B5         =  24,
-    D3DFMT_A1R5G5B5         =  25,
-    D3DFMT_A4R4G4B4         =  26,
-    D3DFMT_R3G3B2           =  27,
-    D3DFMT_A8               =  28,
-    D3DFMT_A8R3G3B2         =  29,
-    D3DFMT_X4R4G4B4         =  30,
-    D3DFMT_A2B10G10R10      =  31,
-    D3DFMT_A8B8G8R8         =  32,
-    D3DFMT_X8B8G8R8         =  33,
-    D3DFMT_G16R16           =  34,
-    D3DFMT_A2R10G10B10      =  35,
-    D3DFMT_A16B16G16R16     =  36,
-    D3DFMT_D16_LOCKABLE     =  70,
-    D3DFMT_D32              =  71,
-    D3DFMT_D15S1            =  73,
-    D3DFMT_D24S8            =  75,
-    D3DFMT_D24X8            =  77,
-    D3DFMT_D24X4S4          =  79,
-    D3DFMT_D16              =  80,
-    D3DFMT_D32F_LOCKABLE    =  82,
-    D3DFMT_D24FS8           =  83,
-    D3DFMT_L8               =  50,
-    D3DFMT_A8L8             =  51,
-    D3DFMT_A4L4             =  52,
-    D3DFMT_V8U8             =  60,
-    D3DFMT_L6V5U5           =  61,
-    D3DFMT_X8L8V8U8         =  62,
-    D3DFMT_Q8W8V8U8         =  63,
-    D3DFMT_V16U16           =  64,
-    D3DFMT_W11V11U10        =  65,
-    D3DFMT_UYVY             =  89,
-    D3DFMT_YUY2             =  82,
-    D3DFMT_DXT1             =  83,
-    D3DFMT_DXT2             =  84,
-    D3DFMT_DXT3             =  85,
-    D3DFMT_DXT4             =  86,
-    D3DFMT_DXT5             =  87,
-    D3DFMT_FORCE_DWORD      = 0x7fffffff
-} D3DFORMAT;
-#endif
-
-// D3D Resource types
-#ifndef _D3DRESOURCETYPE_DEFINED
-#define _D3DRESOURCETYPE_DEFINED
-typedef enum D3DRESOURCETYPE {
-    D3DRTYPE_SURFACE        =  1,
-    D3DRTYPE_VOLUME         =  2,
-    D3DRTYPE_TEXTURE        =  3,
-    D3DRTYPE_VOLUMETEXTURE  =  4,
-    D3DRTYPE_CUBETEXTURE    =  5,
-    D3DRTYPE_VERTEXBUFFER   =  6,
-    D3DRTYPE_INDEXBUFFER    =  7,
-    D3DRTYPE_FORCE_DWORD    = 0x7fffffff
-} D3DRESOURCETYPE;
-#endif
-
-// D3D Pool types
-#ifndef _D3DPOOL_DEFINED
-#define _D3DPOOL_DEFINED
-typedef enum D3DPOOL {
-    D3DPOOL_DEFAULT         =  0,
-    D3DPOOL_MANAGED         =  1,
-    D3DPOOL_SYSTEMMEM       =  2,
-    D3DPOOL_SCRATCH         =  3,
-    D3DPOOL_FORCE_DWORD     = 0x7fffffff
-} D3DPOOL;
-#endif
-
 // Helper macros for D3DCOLOR
 #ifndef D3DCOLOR_ARGB
     #define D3DCOLOR_ARGB(a,r,g,b) \
@@ -271,38 +173,249 @@ typedef enum D3DPOOL {
         D3DCOLOR_ARGB((DWORD)((a)*255),(DWORD)((r)*255),(DWORD)((g)*255),(DWORD)((b)*255))
 #endif
 
-// Inline helper functions (stubs - actual implementation requires DX8)
+// ─── D3DXVECTOR4 type ──────────────────────────────────────────────────────────
+#ifndef D3DXVECTOR4_DEFINED
+#define D3DXVECTOR4_DEFINED
+typedef struct D3DXVECTOR4 {
+    float x, y, z, w;
+
 #ifdef __cplusplus
-inline D3DXVECTOR3 D3DXVECTOR3Normalize(const D3DXVECTOR3* pOut, const D3DXVECTOR3* pV) {
+    D3DXVECTOR4() : x(0), y(0), z(0), w(0) {}
+    D3DXVECTOR4(float _x, float _y, float _z, float _w) : x(_x), y(_y), z(_z), w(_w) {}
+#endif
+} D3DXVECTOR4, *LPD3DXVECTOR4;
+#endif // D3DXVECTOR4_DEFINED
+
+#ifdef __cplusplus
+static_assert(sizeof(D3DXVECTOR4) == 16, "D3DXVECTOR4 must be 16 bytes");
+#endif
+
+// ─── Constants ─────────────────────────────────────────────────────────────────
+#ifndef D3DX_PI
+#define D3DX_PI 3.14159265358979323846f
+#endif
+#ifndef D3DX_1BYPI
+#define D3DX_1BYPI (1.0f / D3DX_PI)
+#endif
+
+// ─── D3DXToRadian / D3DXToDegree ──────────────────────────────────────────────
+#ifndef D3DXToRadian
+#define D3DXToRadian(degree) ((degree) * (D3DX_PI / 180.0f))
+#endif
+#ifndef D3DXToDegree
+#define D3DXToDegree(radian) ((radian) * (180.0f / D3DX_PI))
+#endif
+
+// Inline helper functions - cross-platform implementations
+#ifdef __cplusplus
+
+// ─── Vector functions ──────────────────────────────────────────────────────────
+inline D3DXVECTOR3* D3DXVec3Normalize(D3DXVECTOR3* pOut, const D3DXVECTOR3* pV) {
     float len = sqrtf(pV->x * pV->x + pV->y * pV->y + pV->z * pV->z);
     if (len > 0.0f) {
         float invLen = 1.0f / len;
         pOut->x = pV->x * invLen;
         pOut->y = pV->y * invLen;
         pOut->z = pV->z * invLen;
+    } else {
+        pOut->x = pOut->y = pOut->z = 0.0f;
     }
-    return *pOut;
+    return pOut;
 }
 
 inline float D3DXVec3Length(const D3DXVECTOR3* pV) {
     return sqrtf(pV->x * pV->x + pV->y * pV->y + pV->z * pV->z);
 }
 
+inline float D3DXVec3LengthSq(const D3DXVECTOR3* pV) {
+    return pV->x * pV->x + pV->y * pV->y + pV->z * pV->z;
+}
+
 inline float D3DXVec3Dot(const D3DXVECTOR3* pV1, const D3DXVECTOR3* pV2) {
     return pV1->x * pV2->x + pV1->y * pV2->y + pV1->z * pV2->z;
 }
 
-inline D3DXVECTOR3 D3DXVec3Cross(D3DXVECTOR3* pOut, const D3DXVECTOR3* pV1, const D3DXVECTOR3* pV2) {
-    pOut->x = pV1->y * pV2->z - pV1->z * pV2->y;
-    pOut->y = pV1->z * pV2->x - pV1->x * pV2->z;
-    pOut->z = pV1->x * pV2->y - pV1->y * pV2->x;
-    return *pOut;
+inline D3DXVECTOR3* D3DXVec3Cross(D3DXVECTOR3* pOut, const D3DXVECTOR3* pV1, const D3DXVECTOR3* pV2) {
+    D3DXVECTOR3 v;
+    v.x = pV1->y * pV2->z - pV1->z * pV2->y;
+    v.y = pV1->z * pV2->x - pV1->x * pV2->z;
+    v.z = pV1->x * pV2->y - pV1->y * pV2->x;
+    *pOut = v;
+    return pOut;
 }
 
-inline D3DXMATRIX D3DXMatrixIdentity() {
-    D3DXMATRIX m;
-    return m;
+inline D3DXVECTOR4* D3DXVec3Transform(D3DXVECTOR4* pOut, const D3DXVECTOR3* pV, const D3DXMATRIX* pM) {
+    D3DXVECTOR4 v;
+    v.x = pV->x * pM->m[0][0] + pV->y * pM->m[1][0] + pV->z * pM->m[2][0] + pM->m[3][0];
+    v.y = pV->x * pM->m[0][1] + pV->y * pM->m[1][1] + pV->z * pM->m[2][1] + pM->m[3][1];
+    v.z = pV->x * pM->m[0][2] + pV->y * pM->m[1][2] + pV->z * pM->m[2][2] + pM->m[3][2];
+    v.w = pV->x * pM->m[0][3] + pV->y * pM->m[1][3] + pV->z * pM->m[2][3] + pM->m[3][3];
+    *pOut = v;
+    return pOut;
 }
-#endif
+
+inline D3DXVECTOR4* D3DXVec4Transform(D3DXVECTOR4* pOut, const D3DXVECTOR4* pV, const D3DXMATRIX* pM) {
+    D3DXVECTOR4 v;
+    v.x = pV->x * pM->m[0][0] + pV->y * pM->m[1][0] + pV->z * pM->m[2][0] + pV->w * pM->m[3][0];
+    v.y = pV->x * pM->m[0][1] + pV->y * pM->m[1][1] + pV->z * pM->m[2][1] + pV->w * pM->m[3][1];
+    v.z = pV->x * pM->m[0][2] + pV->y * pM->m[1][2] + pV->z * pM->m[2][2] + pV->w * pM->m[3][2];
+    v.w = pV->x * pM->m[0][3] + pV->y * pM->m[1][3] + pV->z * pM->m[2][3] + pV->w * pM->m[3][3];
+    *pOut = v;
+    return pOut;
+}
+
+inline float D3DXVec4Dot(const D3DXVECTOR4* pV1, const D3DXVECTOR4* pV2) {
+    return pV1->x * pV2->x + pV1->y * pV2->y + pV1->z * pV2->z + pV1->w * pV2->w;
+}
+
+// ─── Matrix functions ──────────────────────────────────────────────────────────
+inline D3DXMATRIX* D3DXMatrixIdentity(D3DXMATRIX* pOut) {
+    if (pOut) {
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                pOut->m[i][j] = (i == j) ? 1.0f : 0.0f;
+    }
+    return pOut;
+}
+
+inline D3DXMATRIX* D3DXMatrixScaling(D3DXMATRIX* pOut, float sx, float sy, float sz) {
+    D3DXMatrixIdentity(pOut);
+    pOut->m[0][0] = sx;
+    pOut->m[1][1] = sy;
+    pOut->m[2][2] = sz;
+    return pOut;
+}
+
+inline D3DXMATRIX* D3DXMatrixTranslation(D3DXMATRIX* pOut, float x, float y, float z) {
+    D3DXMatrixIdentity(pOut);
+    pOut->m[3][0] = x;
+    pOut->m[3][1] = y;
+    pOut->m[3][2] = z;
+    return pOut;
+}
+
+inline D3DXMATRIX* D3DXMatrixRotationZ(D3DXMATRIX* pOut, float angle) {
+    D3DXMatrixIdentity(pOut);
+    float c = cosf(angle);
+    float s = sinf(angle);
+    pOut->m[0][0] = c;
+    pOut->m[0][1] = s;
+    pOut->m[1][0] = -s;
+    pOut->m[1][1] = c;
+    return pOut;
+}
+
+inline D3DXMATRIX* D3DXMatrixRotationX(D3DXMATRIX* pOut, float angle) {
+    D3DXMatrixIdentity(pOut);
+    float c = cosf(angle);
+    float s = sinf(angle);
+    pOut->m[1][1] = c;
+    pOut->m[1][2] = s;
+    pOut->m[2][1] = -s;
+    pOut->m[2][2] = c;
+    return pOut;
+}
+
+inline D3DXMATRIX* D3DXMatrixRotationY(D3DXMATRIX* pOut, float angle) {
+    D3DXMatrixIdentity(pOut);
+    float c = cosf(angle);
+    float s = sinf(angle);
+    pOut->m[0][0] = c;
+    pOut->m[0][2] = -s;
+    pOut->m[2][0] = s;
+    pOut->m[2][2] = c;
+    return pOut;
+}
+
+inline D3DXMATRIX* D3DXMatrixMultiply(D3DXMATRIX* pOut, const D3DXMATRIX* pM1, const D3DXMATRIX* pM2) {
+    D3DXMATRIX result;
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++) {
+            result.m[i][j] = 0;
+            for (int k = 0; k < 4; k++)
+                result.m[i][j] += pM1->m[i][k] * pM2->m[k][j];
+        }
+    *pOut = result;
+    return pOut;
+}
+
+inline D3DXMATRIX* D3DXMatrixTranspose(D3DXMATRIX* pOut, const D3DXMATRIX* pM) {
+    D3DXMATRIX result;
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
+            result.m[i][j] = pM->m[j][i];
+    *pOut = result;
+    return pOut;
+}
+
+// Cross-platform matrix inverse (no DirectXMath dependency)
+inline D3DXMATRIX* D3DXMatrixInverse(D3DXMATRIX* pOut, float* pDeterminant, const D3DXMATRIX* pM) {
+    // Cofactor expansion method - works on all platforms
+    const float* m = &pM->m[0][0];
+    float inv[16];
+
+    inv[0]  =  m[5]*m[10]*m[15] - m[5]*m[11]*m[14] - m[9]*m[6]*m[15] + m[9]*m[7]*m[14] + m[13]*m[6]*m[11] - m[13]*m[7]*m[10];
+    inv[4]  = -m[4]*m[10]*m[15] + m[4]*m[11]*m[14] + m[8]*m[6]*m[15] - m[8]*m[7]*m[14] - m[12]*m[6]*m[11] + m[12]*m[7]*m[10];
+    inv[8]  =  m[4]*m[9]*m[15]  - m[4]*m[11]*m[13] - m[8]*m[5]*m[15] + m[8]*m[7]*m[13] + m[12]*m[5]*m[11] - m[12]*m[7]*m[9];
+    inv[12] = -m[4]*m[9]*m[14]  + m[4]*m[10]*m[13] + m[8]*m[5]*m[14] - m[8]*m[6]*m[13] - m[12]*m[5]*m[10] + m[12]*m[6]*m[9];
+    inv[1]  = -m[1]*m[10]*m[15] + m[1]*m[11]*m[14] + m[9]*m[2]*m[15] - m[9]*m[3]*m[14] - m[13]*m[2]*m[11] + m[13]*m[3]*m[10];
+    inv[5]  =  m[0]*m[10]*m[15] - m[0]*m[11]*m[14] - m[8]*m[2]*m[15] + m[8]*m[3]*m[14] + m[12]*m[2]*m[11] - m[12]*m[3]*m[10];
+    inv[9]  = -m[0]*m[9]*m[15]  + m[0]*m[11]*m[13] + m[8]*m[1]*m[15] - m[8]*m[3]*m[13] - m[12]*m[1]*m[11] + m[12]*m[3]*m[9];
+    inv[13] =  m[0]*m[9]*m[14]  - m[0]*m[10]*m[13] - m[8]*m[1]*m[14] + m[8]*m[2]*m[13] + m[12]*m[1]*m[10] - m[12]*m[2]*m[9];
+    inv[2]  =  m[1]*m[6]*m[15]  - m[1]*m[7]*m[14]  - m[5]*m[2]*m[15] + m[5]*m[3]*m[14] + m[13]*m[2]*m[7]  - m[13]*m[3]*m[6];
+    inv[6]  = -m[0]*m[6]*m[15]  + m[0]*m[7]*m[14]  + m[4]*m[2]*m[15] - m[4]*m[3]*m[14] - m[12]*m[2]*m[7]  + m[12]*m[3]*m[6];
+    inv[10] =  m[0]*m[5]*m[15]  - m[0]*m[7]*m[13]  - m[4]*m[1]*m[15] + m[4]*m[3]*m[13] + m[12]*m[1]*m[7]  - m[12]*m[3]*m[5];
+    inv[14] = -m[0]*m[5]*m[14]  + m[0]*m[6]*m[13]  + m[4]*m[1]*m[14] - m[4]*m[2]*m[13] - m[12]*m[1]*m[6]  + m[12]*m[2]*m[5];
+    inv[3]  = -m[1]*m[6]*m[11]  + m[1]*m[7]*m[10]  + m[5]*m[2]*m[11] - m[5]*m[3]*m[10] - m[9]*m[2]*m[7]   + m[9]*m[3]*m[6];
+    inv[7]  =  m[0]*m[6]*m[11]  - m[0]*m[7]*m[10]  - m[4]*m[2]*m[11] + m[4]*m[3]*m[10] + m[8]*m[2]*m[7]   - m[8]*m[3]*m[6];
+    inv[11] = -m[0]*m[5]*m[11]  + m[0]*m[7]*m[9]   + m[4]*m[1]*m[11] - m[4]*m[3]*m[9]  - m[8]*m[1]*m[7]   + m[8]*m[3]*m[5];
+    inv[15] =  m[0]*m[5]*m[10]  - m[0]*m[6]*m[9]   - m[4]*m[1]*m[10] + m[4]*m[2]*m[9]  + m[8]*m[1]*m[6]   - m[8]*m[2]*m[5];
+
+    float det = m[0]*inv[0] + m[1]*inv[4] + m[2]*inv[8] + m[3]*inv[12];
+    if (pDeterminant) *pDeterminant = det;
+
+    if (fabsf(det) < 1e-10f) {
+        D3DXMatrixIdentity(pOut);
+        return nullptr;
+    }
+
+    float invDet = 1.0f / det;
+    for (int i = 0; i < 16; i++)
+        (&pOut->m[0][0])[i] = inv[i] * invDet;
+
+    return pOut;
+}
+
+// ─── FVF helper ───────────────────────────────────────────────────────────────
+inline unsigned int D3DXGetFVFVertexSize(DWORD FVF) {
+    unsigned int size = 0;
+    // Position
+    switch (FVF & D3DFVF_POSITION_MASK) {
+        case D3DFVF_XYZ:    size += 12; break;
+        case D3DFVF_XYZRHW: size += 16; break;
+        case D3DFVF_XYZB1:  size += 16; break;
+        case D3DFVF_XYZB2:  size += 20; break;
+        case D3DFVF_XYZB3:  size += 24; break;
+        case D3DFVF_XYZB4:  size += 28; break;
+        case D3DFVF_XYZB5:  size += 32; break;
+    }
+    if (FVF & D3DFVF_NORMAL)   size += 12;
+    if (FVF & D3DFVF_PSIZE)    size += 4;
+    if (FVF & D3DFVF_DIFFUSE)  size += 4;
+    if (FVF & D3DFVF_SPECULAR) size += 4;
+    // Texture coordinates
+    unsigned int numTex = (FVF & D3DFVF_TEXCOUNT_MASK) >> D3DFVF_TEXCOUNT_SHIFT;
+    for (unsigned int i = 0; i < numTex; i++) {
+        switch ((FVF >> (16 + i * 2)) & 0x3) {
+            case D3DFVF_TEXTUREFORMAT1: size += 4;  break; // 1 float
+            case D3DFVF_TEXTUREFORMAT2: size += 8;  break; // 2 floats
+            case D3DFVF_TEXTUREFORMAT3: size += 12; break; // 3 floats
+            case D3DFVF_TEXTUREFORMAT4: size += 16; break; // 4 floats
+        }
+    }
+    return size;
+}
+
+#endif // __cplusplus
 
 #endif // D3DXCOMPAT_H

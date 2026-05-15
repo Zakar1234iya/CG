@@ -102,8 +102,8 @@ public:
 	virtual ShdInterfaceClass *	Create (void) const = 0;
 
 	// Name methods
-	const char *						Get_Name (void) const;
-	void									Set_Name (const char *new_name);	
+	const TCHAR *						Get_Name (void) const;
+	void									Set_Name (const TCHAR *new_name);	
 
 	// Surface type, used for decal, sound, and emitter creation
 	int									Get_Surface_Type(void) const	{ return SurfaceType; }
