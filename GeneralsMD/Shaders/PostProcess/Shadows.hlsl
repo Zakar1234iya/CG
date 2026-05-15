@@ -11,5 +11,6 @@ float SampleShadow(float4 shadowPos) {
     shadowPos.xyz /= shadowPos.w;
     float2 uv = shadowPos.xy * 0.5f + 0.5f;
     uv.y = 1.0f - uv.y;
-    return ShadowMap.SampleCmpLevelZero(ShadowSampler, uv, shadowPos.z);
+    float bias = 0.001f;
+    return ShadowMap.SampleCmpLevelZero(ShadowSampler, uv, shadowPos.z - bias);
 }

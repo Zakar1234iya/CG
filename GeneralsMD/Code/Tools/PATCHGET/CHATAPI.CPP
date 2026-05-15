@@ -1,19 +1,19 @@
 /*
-**	Command & Conquer Generals Zero Hour(tm)
-**	Copyright 2025 Electronic Arts Inc.
+**      Command & Conquer Generals Zero Hour(tm)
+**      Copyright 2025 Electronic Arts Inc.
 **
-**	This program is free software: you can redistribute it and/or modify
-**	it under the terms of the GNU General Public License as published by
-**	the Free Software Foundation, either version 3 of the License, or
-**	(at your option) any later version.
+**      This program is free software: you can redistribute it and/or modify
+**      it under the terms of the GNU General Public License as published by
+**      the Free Software Foundation, either version 3 of the License, or
+**      (at your option) any later version.
 **
-**	This program is distributed in the hope that it will be useful,
-**	but WITHOUT ANY WARRANTY; without even the implied warranty of
-**	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**	GNU General Public License for more details.
+**      This program is distributed in the hope that it will be useful,
+**      but WITHOUT ANY WARRANTY; without even the implied warranty of
+**      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**      GNU General Public License for more details.
 **
-**	You should have received a copy of the GNU General Public License
-**	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**      You should have received a copy of the GNU General Public License
+**      along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 //
@@ -47,7 +47,7 @@ enum EVENT_TYPES
   NUM_EVENTS       // keep last
 };
 
-#define GAME_NAME	"Command & Conquer"
+#define GAME_NAME       "Command & Conquer"
 
 HANDLE       Events[NUM_EVENTS];
 
@@ -82,51 +82,51 @@ QueuedDownload TheDownload;
 class DownloadManagerMunkee : public DownloadManager
 {
 public:
-	DownloadManagerMunkee() { }
-	virtual HRESULT OnError( int error );
-	virtual HRESULT OnEnd();
-	virtual HRESULT OnProgressUpdate( int bytesread, int totalsize, int timetaken, int timeleft );
-	virtual HRESULT OnStatusUpdate( int status );
-	virtual HRESULT downloadFile( std::string server, std::string username, std::string password, std::string file, std::string localfile, std::string regkey, bool tryResume );
+        DownloadManagerMunkee() { }
+        virtual HRESULT OnError( int error );
+        virtual HRESULT OnEnd();
+        virtual HRESULT OnProgressUpdate( int bytesread, int totalsize, int timetaken, int timeleft );
+        virtual HRESULT OnStatusUpdate( int status );
+        virtual HRESULT downloadFile( std::string server, std::string username, std::string password, std::string file, std::string localfile, std::string regkey, bool tryResume );
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
 HRESULT DownloadManagerMunkee::downloadFile( std::string server, std::string username, std::string password, std::string file, std::string localfile, std::string regkey, bool tryResume )
 {
-	/*
-	if (staticTextFile)
-	{
-		UnicodeString fileString;
-		fileString.translate(file);
-		GadgetStaticTextSetText(staticTextFile, fileString);
-	}
-	*/
-	return DownloadManager::downloadFile( server, username, password, file, localfile, regkey, tryResume );
+        /*
+        if (staticTextFile)
+        {
+                UnicodeString fileString;
+                fileString.translate(file);
+                GadgetStaticTextSetText(staticTextFile, fileString);
+        }
+        */
+        return DownloadManager::downloadFile( server, username, password, file, localfile, regkey, tryResume );
 }
 HRESULT DownloadManagerMunkee::OnError( int error )
 {
-	HRESULT ret = DownloadManager::OnError( error );
+        HRESULT ret = DownloadManager::OnError( error );
   g_Finished = -1;
-	return ret;
+        return ret;
 }
 HRESULT DownloadManagerMunkee::OnEnd()
 {
-	HRESULT ret = DownloadManager::OnEnd();
+        HRESULT ret = DownloadManager::OnEnd();
   g_Finished = 1;
-	return ret;
+        return ret;
 }
 HRESULT DownloadManagerMunkee::OnProgressUpdate( int bytesread, int totalsize, int timetaken, int timeleft )
 {
-	HRESULT ret = DownloadManager::OnProgressUpdate( bytesread, totalsize, timetaken, timeleft );
+        HRESULT ret = DownloadManager::OnProgressUpdate( bytesread, totalsize, timetaken, timeleft );
 
-  SendDlgItemMessage( g_DownloadWindow, IDC_PROGRESS, PBM_SETPOS, (WPARAM)(bytesread * 100) / totalsize, 0 );
+  SendDlgItemMessage( g_DownloadWindow, IDC_PROGRESS, PBM_SETPOS, (WPARAM)(totalsize > 0 ? (bytesread * 100) / totalsize : 0), 0 );
   char temp[256];
 
   if( timeleft > 0 )
   {
     //DBGMSG("Bytes read: "<<bytesread<<".    Time left: "<<timeleft<<" seconds");
- 	 LoadString(Global_instance, TXT_TIME_REMAIN, temp, sizeof(temp));
+         LoadString(Global_instance, TXT_TIME_REMAIN, temp, sizeof(temp));
     sprintf(g_DLTimeRem,temp,(timeleft/60),(timeleft%60));
 
     LoadString(Global_instance, TXT_BPS, temp, sizeof(temp));
@@ -134,13 +134,13 @@ HRESULT DownloadManagerMunkee::OnProgressUpdate( int bytesread, int totalsize, i
   }
   LoadString(Global_instance, TXT_BYTES_READ, temp, sizeof(temp));
   sprintf(g_DLBytesLeft,temp,bytesread,totalsize);
-	return ret;
+        return ret;
 }
 HRESULT DownloadManagerMunkee::OnStatusUpdate( int status )
 {
-	HRESULT ret = DownloadManager::OnStatusUpdate( status );
-	SetWindowText(g_DownloadWindow, getStatusString().c_str());
-	return ret;
+        HRESULT ret = DownloadManager::OnStatusUpdate( status );
+        SetWindowText(g_DownloadWindow, getStatusString().c_str());
+        return ret;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -154,7 +154,7 @@ BOOL CALLBACK simpleDialogProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     case WM_CLOSE:
       DestroyWindow(hwnd);
       PostQuitMessage(0);
-      exit(0);
+      return 0;
     break;
   }
   return(FALSE);
@@ -162,105 +162,105 @@ BOOL CALLBACK simpleDialogProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 static void startOnline( void )
 {
-	checkingForPatch = false;
+        checkingForPatch = false;
 
   // Close that contacting window
   DestroyWindow(g_ContactWindow);
   g_ContactWindow=NULL;
 
-	if (cantConnect)
-	{
-		MessageBox(NULL, "Can't Connect", GAME_NAME, MB_OK);
-		exit(0);
-	}
-	else if (queuedDownloads.size())
-	{
-		if (MessageBox(NULL, "Patches Available.  Download?", GAME_NAME, MB_YESNO) == IDYES)
-		{
-			DEBUG_LOG(("Downloading patches\n"));
-			while (queuedDownloads.size())
-			{
-				TheDownload = queuedDownloads.front();
-				queuedDownloads.pop_front();
-				TheDownloadManager = new DownloadManagerMunkee;
-				/**/
-		    int retVal = DialogBox(Global_instance, MAKEINTRESOURCE(IDD_DOWNLOAD_DIALOG), g_PrimaryWindow, downloadDialogProc);
-				if (retVal)
-				{
-					DEBUG_LOG(("Error %d\n", GetLastError()));
-				}
-				/**/
-				/*
-				{
-					//char *res = MAKEINTRESOURCE(IDD_CONNECTING);
-					char *res = MAKEINTRESOURCE(IDD_DOWNLOAD_DIALOG1);
-					g_DownloadWindow=CreateDialog(Global_instance,res,g_PrimaryWindow,simpleDialogProc);
-					ShowWindow(g_DownloadWindow,SW_SHOWNORMAL);
-					SetForegroundWindow(g_DownloadWindow);
-				}
-				*/
-				delete TheDownloadManager;
-				TheDownloadManager = NULL;
+        if (cantConnect)
+        {
+                MessageBox(NULL, "Can't Connect", GAME_NAME, MB_OK);
+                exit(0);
+        }
+        else if (queuedDownloads.size())
+        {
+                if (MessageBox(NULL, "Patches Available.  Download?", GAME_NAME, MB_YESNO) == IDYES)
+                {
+                        DEBUG_LOG(("Downloading patches\n"));
+                        while (queuedDownloads.size())
+                        {
+                                TheDownload = queuedDownloads.front();
+                                queuedDownloads.pop_front();
+                                TheDownloadManager = new DownloadManagerMunkee;
+                                /**/
+                    int retVal = DialogBox(Global_instance, MAKEINTRESOURCE(IDD_DOWNLOAD_DIALOG), g_PrimaryWindow, downloadDialogProc);
+                                if (retVal)
+                                {
+                                        DEBUG_LOG(("Error %d\n", GetLastError()));
+                                }
+                                /**/
+                                /*
+                                {
+                                        //char *res = MAKEINTRESOURCE(IDD_CONNECTING);
+                                        char *res = MAKEINTRESOURCE(IDD_DOWNLOAD_DIALOG1);
+                                        g_DownloadWindow=CreateDialog(Global_instance,res,g_PrimaryWindow,simpleDialogProc);
+                                        ShowWindow(g_DownloadWindow,SW_SHOWNORMAL);
+                                        SetForegroundWindow(g_DownloadWindow);
+                                }
+                                */
+                                delete TheDownloadManager;
+                                TheDownloadManager = NULL;
 
-				if (g_Finished != 1)
-				{
-					// Download failed
-					//DBGMSG("Download failed: "<<retval);
-					SetEvent(Events[ABORT_EVENT]);
-					return;
-				}
-			}
-			exit(0);
-		}
-		else
-		{
-			exit(0);
-		}
-	}
-	else
-	{
-		MessageBox(NULL, "No Patches Available", GAME_NAME, MB_OK);
-		exit(0);
-	}
+                                if (g_Finished != 1)
+                                {
+                                        // Download failed
+                                        //DBGMSG("Download failed: "<<retval);
+                                        SetEvent(Events[ABORT_EVENT]);
+                                        return;
+                                }
+                        }
+                        exit(0);
+                }
+                else
+                {
+                        exit(0);
+                }
+        }
+        else
+        {
+                MessageBox(NULL, "No Patches Available", GAME_NAME, MB_OK);
+                exit(0);
+        }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
 static std::string trim(std::string s, const std::string& delim)
 {
-	unsigned int i;
-	i = s.find_first_not_of(delim);
-	if (i != s.npos)
-	{
-		s = s.substr(i);
-	}
+        unsigned int i;
+        i = s.find_first_not_of(delim);
+        if (i != s.npos)
+        {
+                s = s.substr(i);
+        }
 
-	i = s.find_last_not_of(delim);
-	if (i>=0 && i<s.npos)
-	{
-		s = s.substr(0, i+1);
-	}
+        i = s.find_last_not_of(delim);
+        if (i>=0 && i<s.npos)
+        {
+                s = s.substr(0, i+1);
+        }
 
-	return s;
+        return s;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
 static std::string getNextLine(std::string in, std::string& remainder)
 {
-	int lineEnd;
-	lineEnd = in.find_first_of("\n\r", 0);
-	if (lineEnd < 1)
-	{
-		remainder = "";
-		return in;
-	}
+        int lineEnd;
+        lineEnd = in.find_first_of("\n\r", 0);
+        if (lineEnd < 1)
+        {
+                remainder = "";
+                return in;
+        }
 
-	std::string out = in.substr(0, lineEnd);
-	remainder = in.substr(lineEnd+1);
+        std::string out = in.substr(0, lineEnd);
+        remainder = in.substr(lineEnd+1);
 
-	remainder = trim(remainder, "\r\n\t ");
-	out = trim(out, "\r\t\n ");
+        remainder = trim(remainder, "\r\n\t ");
+        out = trim(out, "\r\t\n ");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -268,195 +268,195 @@ static std::string getNextLine(std::string in, std::string& remainder)
 //-----------------------------------------------------------------------------
 inline const char* skipSeps(const char* p, const char* seps)
 {
-	while (*p && strchr(seps, *p) != NULL)
-		++p;
-	return p;
+        while (*p && strchr(seps, *p) != NULL)
+                ++p;
+        return p;
 }
 
 //-----------------------------------------------------------------------------
 inline const char* skipNonSeps(const char* p, const char* seps)
 {
-	while (*p && strchr(seps, *p) == NULL)
-		++p;
-	return p;
+        while (*p && strchr(seps, *p) == NULL)
+                ++p;
+        return p;
 }
 
 //-----------------------------------------------------------------------------
 bool nextToken(std::string& base, std::string& tok, const char* seps = NULL)
 {
-	if (base.empty())
-		return false;
+        if (base.empty())
+                return false;
 
-	if (seps == NULL)
-		seps = " \n\r\t";
+        if (seps == NULL)
+                seps = " \n\r\t";
 
-	const char* start = skipSeps(base.c_str(), seps);
-	const char* end = skipNonSeps(start, seps);
+        const char* start = skipSeps(base.c_str(), seps);
+        const char* end = skipNonSeps(start, seps);
 
-	if (end > start)
-	{
-		int len = end - start;
-		char* tmp = new char[len+1];
-		memcpy(tmp, start, len);
-		tmp[len] = 0;
+        if (end > start)
+        {
+                int len = end - start;
+                char* tmp = new char[len+1];
+                memcpy(tmp, start, len);
+                tmp[len] = 0;
 
-		tok = tmp;
-		delete[] tmp;
+                tok = tmp;
+                delete[] tmp;
 
-		base = end;
+                base = end;
 
-		return true;
-	}
-	else
-	{
-		base = tok = "";
-		return false;
-	}
+                return true;
+        }
+        else
+        {
+                base = tok = "";
+                return false;
+        }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
 static void queuePatch(bool mandatory, std::string downloadURL)
 {
-	// downloadURL is of the form "ftp://ftp.ea.com:user@pass/pub/munkee/bananna.rtp"
-	QueuedDownload q;
-	bool success = true;
+        // downloadURL is of the form "ftp://ftp.ea.com:user@pass/pub/munkee/bananna.rtp"
+        QueuedDownload q;
+        bool success = true;
 
-	std::string connectionType;
-	success = success && nextToken(downloadURL, connectionType, ":");
+        std::string connectionType;
+        success = success && nextToken(downloadURL, connectionType, ":");
 
-	std::string server;
-	success = success && nextToken(downloadURL, server, ":/");
+        std::string server;
+        success = success && nextToken(downloadURL, server, ":/");
 
-	std::string user;
-	success = success && nextToken(downloadURL, user, ":@");
+        std::string user;
+        success = success && nextToken(downloadURL, user, ":@");
 
-	std::string pass;
-	success = success && nextToken(downloadURL, pass, "@/");
+        std::string pass;
+        success = success && nextToken(downloadURL, pass, "@/");
 
-	std::string filePath;
-	success = success && nextToken(downloadURL, filePath, "");
+        std::string filePath;
+        success = success && nextToken(downloadURL, filePath, "");
 
-	if (!success && !user.empty())
-	{
-		// no user/pass combo - move the file into it's proper place
-		filePath = user;
-		user = ""; // LFeenanEA - Credentials removed as per Security requirements
-		pass = "";
-		success = true;
-	}
+        if (!success && !user.empty())
+        {
+                // no user/pass combo - move the file into it's proper place
+                filePath = user;
+                user = ""; // LFeenanEA - Credentials removed as per Security requirements
+                pass = "";
+                success = true;
+        }
 
-	std::string fileStr = filePath;
-	unsigned int slashPos = filePath.find_last_of('/');
-	std::string fileDir = "patches\\";
-	std::string fileName = "";
-	if (slashPos == filePath.npos)
-	{
-		fileName = filePath;
-	}
-	else
-	{
-		fileName = filePath.substr(slashPos+1);
-	}
-	fileDir.append(fileName);
+        std::string fileStr = filePath;
+        unsigned int slashPos = filePath.find_last_of('/');
+        std::string fileDir = "patches\\";
+        std::string fileName = "";
+        if (slashPos == filePath.npos)
+        {
+                fileName = filePath;
+        }
+        else
+        {
+                fileName = filePath.substr(slashPos+1);
+        }
+        fileDir.append(fileName);
 
-	DEBUG_LOG(("download URL split: %d [%s] [%s] [%s] [%s] [%s] [%s] [%s]\n",
-		success, connectionType.c_str(), server.c_str(), user.c_str(), pass.c_str(),
-		filePath.c_str(), fileName.c_str(), fileDir.c_str()));
+        DEBUG_LOG(("download URL split: %d [%s] [%s] [%s] [%s] [%s] [%s] [%s]\n",
+                success, connectionType.c_str(), server.c_str(), user.c_str(), pass.c_str(),
+                filePath.c_str(), fileName.c_str(), fileDir.c_str()));
 
-	if (!success)
-		return;
+        if (!success)
+                return;
 
-	q.file = filePath;
-	q.localFile = fileDir;
-	q.password = pass;
-	q.regKey = "";
-	q.server = server;
-	q.tryResume = true;
-	q.userName = user;
+        q.file = filePath;
+        q.localFile = fileDir;
+        q.password = pass;
+        q.regKey = "";
+        q.server = server;
+        q.tryResume = true;
+        q.userName = user;
 
-	std::list<QueuedDownload>::iterator it = queuedDownloads.begin();
-	while (it != queuedDownloads.end())
-	{
-		if (it->localFile == q.localFile)
-			return; // don't add it if it exists already (because we can check multiple times)
-		++it;
-	}
+        std::list<QueuedDownload>::iterator it = queuedDownloads.begin();
+        while (it != queuedDownloads.end())
+        {
+                if (it->localFile == q.localFile)
+                        return; // don't add it if it exists already (because we can check multiple times)
+                ++it;
+        }
 
-	queuedDownloads.push_back(q);
+        queuedDownloads.push_back(q);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
 static GHTTPBool patchCheckCallback( GHTTPRequest request, GHTTPResult result, char * buffer, int bufferLen, void * param )
 {
-	--checksLeft;
-	DEBUG_ASSERTCRASH(checksLeft>=0, ("Too many callbacks"));
+        --checksLeft;
+        DEBUG_ASSERTCRASH(checksLeft>=0, ("Too many callbacks"));
 
-	DEBUG_LOG(("Result=%d, buffer=[%s], len=%d\n", result, buffer, bufferLen));
-	if (result != GHTTPSuccess)
-	{
-		cantConnect = true;
-		if (!checksLeft)
-		{
-			startOnline();
-		}
-		return GHTTPTrue;
-	}
+        DEBUG_LOG(("Result=%d, buffer=[%s], len=%d\n", result, buffer, bufferLen));
+        if (result != GHTTPSuccess)
+        {
+                cantConnect = true;
+                if (!checksLeft)
+                {
+                        startOnline();
+                }
+                return GHTTPTrue;
+        }
 
-	std::string message = buffer;
-	std::string line;
-	while (nextToken(message, line, "\r\n"))
-	{
-		std::string type, req, url;
-		bool ok = true;
-		ok = ok && nextToken(line, type, " ");
-		ok = ok && nextToken(line, req, " ");
-		ok = ok && nextToken(line, url, " ");
-		if (ok && type == "patch")
-		{
-			DEBUG_LOG(("Saw a patch: %d/[%s]\n", atoi(req.c_str()), url.c_str()));
-			queuePatch( atoi(req.c_str()), url );
-		}
-		else if (ok && type == "server")
-		{
-		}
-	}
+        std::string message = buffer;
+        std::string line;
+        while (nextToken(message, line, "\r\n"))
+        {
+                std::string type, req, url;
+                bool ok = true;
+                ok = ok && nextToken(line, type, " ");
+                ok = ok && nextToken(line, req, " ");
+                ok = ok && nextToken(line, url, " ");
+                if (ok && type == "patch")
+                {
+                        DEBUG_LOG(("Saw a patch: %d/[%s]\n", atoi(req.c_str()), url.c_str()));
+                        queuePatch( atoi(req.c_str()), url );
+                }
+                else if (ok && type == "server")
+                {
+                }
+        }
 
-	if (!checksLeft)
-	{
-		startOnline();
-	}
+        if (!checksLeft)
+        {
+                startOnline();
+        }
 
-	return GHTTPTrue;
+        return GHTTPTrue;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
 static void StartPatchCheck( void )
 {
-	checkingForPatch = true;
-	std::string gameURL, mapURL;
-	std::string configURL, motdURL;
+        checkingForPatch = true;
+        std::string gameURL, mapURL;
+        std::string configURL, motdURL;
 
-	FormatURLFromRegistry(gameURL, mapURL, configURL, motdURL);
+        FormatURLFromRegistry(gameURL, mapURL, configURL, motdURL);
 
-	std::string proxy;
-	if (GetStringFromRegistry("", "Proxy", proxy))
-	{
-		if (!proxy.empty())
-		{
-			ghttpSetProxy(proxy.c_str());
-		}
-	}
+        std::string proxy;
+        if (GetStringFromRegistry("", "Proxy", proxy))
+        {
+                if (!proxy.empty())
+                {
+                        ghttpSetProxy(proxy.c_str());
+                }
+        }
 
-	// check for a patch first
-	checksLeft = 2;
-	cantConnect = false;
-	ghttpGet(gameURL.c_str(), GHTTPFalse, patchCheckCallback, NULL);
-	ghttpGet(mapURL.c_str(), GHTTPFalse, patchCheckCallback, NULL);
+        // check for a patch first
+        checksLeft = 2;
+        cantConnect = false;
+        ghttpGet(gameURL.c_str(), GHTTPFalse, patchCheckCallback, NULL);
+        ghttpGet(mapURL.c_str(), GHTTPFalse, patchCheckCallback, NULL);
 
-	DEBUG_LOG(("Started looking for patches at '%s' && '%s'\n", gameURL.c_str(), mapURL.c_str()));
+        DEBUG_LOG(("Started looking for patches at '%s' && '%s'\n", gameURL.c_str(), mapURL.c_str()));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -464,112 +464,112 @@ static void StartPatchCheck( void )
 
 BOOL CALLBACK downloadDialogProc( HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
-	//   HRESULT res;
-	
-	int cmd = LOWORD(wParam);
-	switch( uMsg )
-	{
-		case WM_COMMAND:
-			if ( cmd == IDC_DLABORT )
-			{
-				
-				char abort[128];
-				char abortdload[256];
-				LoadString(Global_instance, TXT_ABORT_DOWNLOAD, abortdload, sizeof(abortdload));
-				LoadString(Global_instance, TXT_ABORT, abort, sizeof(abort));
-				
-				if (MessageBox(g_PrimaryWindow,abortdload,abort,MB_YESNO)==IDYES)
-				{
-					TheDownloadManager->reset();
-					
-					EndDialog( hwndDlg, g_Finished );
-					DestroyWindow(hwndDlg);
-				}
-			}
-			else
-			{
-				return FALSE;
-			}
-			break;
-			
-		case WM_INITDIALOG:
-			//SetupDownload();
-			
-			SendMessage(hwndDlg, WM_SETICON,(WPARAM)ICON_SMALL,
-				(LPARAM)LoadIcon(Global_instance, MAKEINTRESOURCE(IDI_ICON1)));
-			
-			g_DLTimeRem[0]=0;
-			g_DLBytesLeft[0]=0;
-			g_DLBPS[0]=0;
-			
-			//SetDlgItemText( hwndDlg, IDC_DOWNLOADTITLE, g_UpdateString);
-			//SetWindowText(hwndDlg, g_UpdateString);
-			
-			SetDlgItemText( hwndDlg, IDC_TIMEREM, g_DLTimeRem);
-			SetDlgItemText( hwndDlg, IDC_BYTESLEFT, g_DLBytesLeft);
-			// SetDlgItemText( hwndDlg, IDC_BPS, g_DLBPS );
-			
-			// Work out the full file name
-			//char    fullpath[_MAX_PATH];
-			//char    localfile[_MAX_PATH];
-			//sprintf( fullpath, "%s/%s", g_Update->patchpath,g_Update->patchfile);
-			//sprintf(localfile,"%s\\%s",g_Update->localpath,g_Update->patchfile);
-			
-			// Create the directory
-			//CreateDirectory((char *)g_Update->localpath, NULL );
-			
-			TheDownloadManager->downloadFile(TheDownload.server, TheDownload.userName, TheDownload.password,
-				TheDownload.file, TheDownload.localFile, TheDownload.regKey, TheDownload.tryResume);
-				/*
-				res=pDownload->DownloadFile((char *)g_Update->server, (char *)g_Update->login, (char *)g_Update->password,
-				fullpath, localfile, APP_REG_KEY);
-				
-			*/
-			g_DownloadWindow = hwndDlg;
-			g_Finished = 0;
-			SetTimer( hwndDlg, 1, 200, NULL );    // was 50
-			
-			break;
-			
-		case WM_TIMER:
-			DEBUG_LOG(("TIMER\n"));
-			if( g_Finished == 0 )
-			{
-				DEBUG_LOG(("Entering PumpMsgs\n"));
-				TheDownloadManager->update();
-				/*
-				pDownload->PumpMessages();
-				*/
-				DEBUG_LOG(("Done with PumpMsgs\n"));
-				if (strlen(g_DLTimeRem))
-					SetDlgItemText( hwndDlg, IDC_TIMEREM, g_DLTimeRem );
-				if (strlen(g_DLBytesLeft))
-					SetDlgItemText( hwndDlg, IDC_BYTESLEFT, g_DLBytesLeft );
-				//if (strlen(g_DLBPS))
-				//  SetDlgItemText( hwndDlg, IDC_BPS, g_DLBPS );
-			}
-			else
-			{
-				DEBUG_LOG(("TIMER: Finished\n"));
-				EndDialog( hwndDlg, g_Finished );
-				DestroyWindow( hwndDlg );
-			}
-			break;
-			
-		case WM_DESTROY:
-			KillTimer( hwndDlg, 1 );
-			//ClosedownDownload();
-			
-			//DBGMSG("WM_DESTROY");
-			break;
-			
-		case WM_SETFONT:
-			return TRUE;
-			
-		default:
-			return FALSE;
-	}
-	return TRUE;
+        //   HRESULT res;
+        
+        int cmd = LOWORD(wParam);
+        switch( uMsg )
+        {
+                case WM_COMMAND:
+                        if ( cmd == IDC_DLABORT )
+                        {
+                                
+                                char abort[128];
+                                char abortdload[256];
+                                LoadString(Global_instance, TXT_ABORT_DOWNLOAD, abortdload, sizeof(abortdload));
+                                LoadString(Global_instance, TXT_ABORT, abort, sizeof(abort));
+                                
+                                if (MessageBox(g_PrimaryWindow,abortdload,abort,MB_YESNO)==IDYES)
+                                {
+                                        TheDownloadManager->reset();
+                                        
+                                        EndDialog( hwndDlg, g_Finished );
+                                        DestroyWindow(hwndDlg);
+                                }
+                        }
+                        else
+                        {
+                                return FALSE;
+                        }
+                        break;
+                        
+                case WM_INITDIALOG:
+                        //SetupDownload();
+                        
+                        SendMessage(hwndDlg, WM_SETICON,(WPARAM)ICON_SMALL,
+                                (LPARAM)LoadIcon(Global_instance, MAKEINTRESOURCE(IDI_ICON1)));
+                        
+                        g_DLTimeRem[0]=0;
+                        g_DLBytesLeft[0]=0;
+                        g_DLBPS[0]=0;
+                        
+                        //SetDlgItemText( hwndDlg, IDC_DOWNLOADTITLE, g_UpdateString);
+                        //SetWindowText(hwndDlg, g_UpdateString);
+                        
+                        SetDlgItemText( hwndDlg, IDC_TIMEREM, g_DLTimeRem);
+                        SetDlgItemText( hwndDlg, IDC_BYTESLEFT, g_DLBytesLeft);
+                        // SetDlgItemText( hwndDlg, IDC_BPS, g_DLBPS );
+                        
+                        // Work out the full file name
+                        //char    fullpath[_MAX_PATH];
+                        //char    localfile[_MAX_PATH];
+                        //sprintf( fullpath, "%s/%s", g_Update->patchpath,g_Update->patchfile);
+                        //sprintf(localfile,"%s\\%s",g_Update->localpath,g_Update->patchfile);
+                        
+                        // Create the directory
+                        //CreateDirectory((char *)g_Update->localpath, NULL );
+                        
+                        TheDownloadManager->downloadFile(TheDownload.server, TheDownload.userName, TheDownload.password,
+                                TheDownload.file, TheDownload.localFile, TheDownload.regKey, TheDownload.tryResume);
+                                /*
+                                res=pDownload->DownloadFile((char *)g_Update->server, (char *)g_Update->login, (char *)g_Update->password,
+                                fullpath, localfile, APP_REG_KEY);
+                                
+                        */
+                        g_DownloadWindow = hwndDlg;
+                        g_Finished = 0;
+                        SetTimer( hwndDlg, 1, 200, NULL );    // was 50
+                        
+                        break;
+                        
+                case WM_TIMER:
+                        DEBUG_LOG(("TIMER\n"));
+                        if( g_Finished == 0 )
+                        {
+                                DEBUG_LOG(("Entering PumpMsgs\n"));
+                                TheDownloadManager->update();
+                                /*
+                                pDownload->PumpMessages();
+                                */
+                                DEBUG_LOG(("Done with PumpMsgs\n"));
+                                if (strlen(g_DLTimeRem))
+                                        SetDlgItemText( hwndDlg, IDC_TIMEREM, g_DLTimeRem );
+                                if (strlen(g_DLBytesLeft))
+                                        SetDlgItemText( hwndDlg, IDC_BYTESLEFT, g_DLBytesLeft );
+                                //if (strlen(g_DLBPS))
+                                //  SetDlgItemText( hwndDlg, IDC_BPS, g_DLBPS );
+                        }
+                        else
+                        {
+                                DEBUG_LOG(("TIMER: Finished\n"));
+                                EndDialog( hwndDlg, g_Finished );
+                                DestroyWindow( hwndDlg );
+                        }
+                        break;
+                        
+                case WM_DESTROY:
+                        KillTimer( hwndDlg, 1 );
+                        //ClosedownDownload();
+                        
+                        //DBGMSG("WM_DESTROY");
+                        break;
+                        
+                case WM_SETFONT:
+                        return TRUE;
+                        
+                default:
+                        return FALSE;
+        }
+        return TRUE;
 }
 
 
@@ -602,7 +602,7 @@ HWND CreatePrimaryWin(void)
   WNDCLASS            wc;
   char                name[256];
 
-  sprintf(name,Fetch_String(TXT_TITLE));
+  sprintf(name, "%s", Fetch_String(TXT_TITLE));
 
   //DBGMSG("CreatePrimary: "<<name);
 
@@ -661,9 +661,9 @@ void DispatchEvents(void)
   {
     TranslateMessage(&msg);
     DispatchMessage(&msg);
-	 counter++;
-	 if (counter==256)  // just in case
-	   break;
+         counter++;
+         if (counter==256)  // just in case
+           break;
   }
 }
 
@@ -672,12 +672,12 @@ void DispatchEvents(void)
 //
 int main(int argc, char *argv[])
 {
-	InitCommonControls();
+        InitCommonControls();
 
-	/*
+        /*
   g_PrimaryWindow=CreatePrimaryWin();  // Create the main window
   DispatchEvents();  // process some win messages 
-	*/
+        */
 
 /*
   // Check if they've registered before, if not ask them if they want to
@@ -747,11 +747,11 @@ int main(int argc, char *argv[])
 
   // Find the game version
   g_AppVer = -1;
-	if (!GetUnsignedIntFromRegistry("", "Version", g_AppVer))
-	{
+        if (!GetUnsignedIntFromRegistry("", "Version", g_AppVer))
+        {
     MessageBox(g_PrimaryWindow,Fetch_String(TXT_INSTALL_PROBLEM),Fetch_String(TXT_ERROR),MB_OK);
     exit(0);
-	}
+        }
   // OK, have the current game version now
 
   g_PrimaryWindow=CreatePrimaryWin();  // Create the main window
@@ -776,11 +776,11 @@ int main(int argc, char *argv[])
 
 
 typedef struct SRecord {
-	int ID;						// ID number of the string resource.
-	int TimeStamp;				// 'Time' that this string was last requested.
-	char String[2048];			// Copy of string resource.
+        int ID;                                         // ID number of the string resource.
+        int TimeStamp;                          // 'Time' that this string was last requested.
+        char String[2048];                      // Copy of string resource.
 
-	SRecord(void) : ID(-1), TimeStamp(-1) {}
+        SRecord(void) : ID(-1), TimeStamp(-1) {}
 } SRecord;
 
 
@@ -800,57 +800,57 @@ typedef struct SRecord {
  *=============================================================================================*/
 char const * Fetch_String(int id)
 {
-	static SRecord _buffers[64];
-	static int _time = 0;
+        static SRecord _buffers[64];
+        static int _time = 0;
 
-	/*
-	**	Determine if the string ID requested is valid. If not then return an empty string pointer.
-	*/
-	if (id == -1 || id == TXT_NONE) return("");
+        /*
+        **      Determine if the string ID requested is valid. If not then return an empty string pointer.
+        */
+        if (id == -1 || id == TXT_NONE) return("");
 
-	/*
-	**	Adjust the 'time stamp' tracking value. This is an artificial value used merely to track
-	**	the relative age of the strings requested.
-	*/
-	_time = _time+1;
+        /*
+        **      Adjust the 'time stamp' tracking value. This is an artificial value used merely to track
+        **      the relative age of the strings requested.
+        */
+        _time = _time+1;
 
-	/*
-	**	Check to see if the requested string has already been fetched into a buffer. If so, then
-	**	return a pointer to that string (update the time stamp as well).
-	*/
-	for (int index = 0; index < ARRAY_SIZE(_buffers); index++) {
-		if (_buffers[index].ID == id) {
-			_buffers[index].TimeStamp = _time;
-			return(_buffers[index].String);
-		}
-	}
+        /*
+        **      Check to see if the requested string has already been fetched into a buffer. If so, then
+        **      return a pointer to that string (update the time stamp as well).
+        */
+        for (int index = 0; index < ARRAY_SIZE(_buffers); index++) {
+                if (_buffers[index].ID == id) {
+                        _buffers[index].TimeStamp = _time;
+                        return(_buffers[index].String);
+                }
+        }
 
-	/*
-	**	Find a suitable buffer to hold the string to be fetched. The buffer should either be
-	**	empty or have the oldest fetched string.
-	*/
-	int oldest = -1;
-	int oldtime = -1;
-	for (int text = 0; text < ARRAY_SIZE(_buffers); text++) {
-		if (oldest == -1 || oldtime > _buffers[text].TimeStamp) {
-			oldest = text;
-			oldtime = _buffers[text].TimeStamp;
-			if (oldtime == -1 || _buffers[text].ID == -1) break;
-		}
-	}
+        /*
+        **      Find a suitable buffer to hold the string to be fetched. The buffer should either be
+        **      empty or have the oldest fetched string.
+        */
+        int oldest = -1;
+        int oldtime = -1;
+        for (int text = 0; text < ARRAY_SIZE(_buffers); text++) {
+                if (oldest == -1 || oldtime > _buffers[text].TimeStamp) {
+                        oldest = text;
+                        oldtime = _buffers[text].TimeStamp;
+                        if (oldtime == -1 || _buffers[text].ID == -1) break;
+                }
+        }
 
-	/*
-	**	A suitable buffer has been found so fetch the string resource and then return a pointer
-	**	to the string.
-	*/
-	char * stringptr = _buffers[oldest].String;
-	_buffers[oldest].ID = id;
-	_buffers[oldest].TimeStamp = _time;
+        /*
+        **      A suitable buffer has been found so fetch the string resource and then return a pointer
+        **      to the string.
+        */
+        char * stringptr = _buffers[oldest].String;
+        _buffers[oldest].ID = id;
+        _buffers[oldest].TimeStamp = _time;
 
    
-	if (LoadString(Global_instance, id, stringptr, sizeof(_buffers[oldest].String)) == 0) {
-		return("");
-	}
+        if (LoadString(Global_instance, id, stringptr, sizeof(_buffers[oldest].String)) == 0) {
+                return("");
+        }
    
    /******
    char resname[32];
@@ -860,7 +860,7 @@ char const * Fetch_String(int id)
    if (hrsrc==0)
    {
      char message_buffer[256];
-	  FormatMessage( FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), &message_buffer[0], 256, NULL );
+          FormatMessage( FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), &message_buffer[0], 256, NULL );
      
    }
    HGLOBAL resdata=LoadResource(NULL,hrsrc);
@@ -868,8 +868,8 @@ char const * Fetch_String(int id)
    strcpy(stringptr,(char *)vdata);
    *********/
 
-	stringptr[sizeof(_buffers[oldest].String)-1] = '\0';
-	return(stringptr);
+        stringptr[sizeof(_buffers[oldest].String)-1] = '\0';
+        return(stringptr);
 }
 
 
@@ -890,7 +890,7 @@ void LogMsg(char *msg)
 
 void Startup_Chat(void)
 {
-	/*
+        /*
   //////CComObject<CChatEventSink>* g_pChatSink;
   HRESULT          hRes;
   g_pChatSink=NULL;
@@ -903,8 +903,8 @@ void Startup_Chat(void)
   {
     char error[128];
     char apimissing[256];
-  	 LoadString(Global_instance, TXT_API_MISSING, apimissing, sizeof(apimissing));
-	 LoadString(Global_instance, TXT_ERROR, error, sizeof(error));
+         LoadString(Global_instance, TXT_API_MISSING, apimissing, sizeof(apimissing));
+         LoadString(Global_instance, TXT_ERROR, error, sizeof(error));
     MessageBox(g_PrimaryWindow,apimissing,error,MB_OK);
     exit(-5);
   }
@@ -927,12 +927,12 @@ void Startup_Chat(void)
   pChat->SetAttributeValue("RegPath",APP_REG_KEY);
 
   // ADD pConnectionPoint->Release();
-	*/
+        */
 }
 
 void Shutdown_Chat(void)
 {
-	/*
+        /*
     /////AtlUnadvise(pChat, IID_IChatEvent, dwChatAdvise);
 
     IConnectionPoint           *pConnectionPoint=NULL;
@@ -951,7 +951,7 @@ void Shutdown_Chat(void)
     // ADD g_pChatSink->Release();
     // ADD pConnectionPoint->Release();
     // ADD pContainer->Release();
-		*/
+                */
 }
 
 
@@ -968,11 +968,11 @@ void Update_If_Required(void)
   for (i=0; i<NUM_EVENTS; i++)
     Events[i]=CreateEvent(NULL,FALSE,FALSE,NULL);
 
-	StartPatchCheck();
+        StartPatchCheck();
 
-	while (1)
-	{
-		ghttpThink();
+        while (1)
+        {
+                ghttpThink();
     MSG msg;
     while(PeekMessage(&msg,NULL,0,0, PM_REMOVE))
     {
@@ -1004,7 +1004,7 @@ void Update_If_Required(void)
   for (i=0; i<NUM_EVENTS; i++)
     CloseHandle(Events[i]);
 
-	/*
+        /*
   Startup_Chat();
   int   retval;
   int   i;
@@ -1055,7 +1055,7 @@ void Update_If_Required(void)
     CloseHandle(Events[i]);
 
   Shutdown_Chat();
-	*/
+        */
 }
 
 
@@ -1072,7 +1072,7 @@ CChatEventSink::CChatEventSink()
 
 ///////////////////////////////////////////////////////////
 //
-//			Interface IUnknown Methods
+//                      Interface IUnknown Methods
 //
 ///////////////////////////////////////////////////////////
 //
@@ -1081,17 +1081,17 @@ CChatEventSink::CChatEventSink()
 HRESULT __stdcall
 CChatEventSink::QueryInterface(const IID& iid, void** ppv)
 {
-	if ((iid == IID_IUnknown) ||(iid == IID_IChatEvent))
-	{
-		*ppv = static_cast<IChatEvent*>(this) ;
-	}
-	else
-	{
-		*ppv = NULL;
-		return E_NOINTERFACE;
-	}
-	(reinterpret_cast<IUnknown*>(*ppv))->AddRef() ;
-	return S_OK ;
+        if ((iid == IID_IUnknown) ||(iid == IID_IChatEvent))
+        {
+                *ppv = static_cast<IChatEvent*>(this) ;
+        }
+        else
+        {
+                *ppv = NULL;
+                return E_NOINTERFACE;
+        }
+        (reinterpret_cast<IUnknown*>(*ppv))->AddRef() ;
+        return S_OK ;
 }
 
 ///////////////////////////////////////////////////////////
@@ -1101,7 +1101,7 @@ CChatEventSink::QueryInterface(const IID& iid, void** ppv)
 ULONG __stdcall
 CChatEventSink::AddRef()
 {
-	return InterlockedIncrement(&m_cRef) ;
+        return InterlockedIncrement(&m_cRef) ;
 }
 
 ///////////////////////////////////////////////////////////
@@ -1112,11 +1112,11 @@ ULONG __stdcall
 CChatEventSink::Release()
 {
    if (InterlockedDecrement(&m_cRef) == 0)
-	{
-		delete this ;
+        {
+                delete this ;
       return 0 ;
-	}
-	return m_cRef;
+        }
+        return m_cRef;
 }
 
 
@@ -1132,7 +1132,7 @@ CDownloadEventSink::CDownloadEventSink()
 
 ///////////////////////////////////////////////////////////
 //
-//			Interface IUnknown Methods
+//                      Interface IUnknown Methods
 //
 ///////////////////////////////////////////////////////////
 //
@@ -1141,17 +1141,17 @@ CDownloadEventSink::CDownloadEventSink()
 HRESULT __stdcall
 CDownloadEventSink::QueryInterface(const IID& iid, void** ppv)
 {
-	if ((iid == IID_IUnknown) ||(iid == IID_IDownloadEvent))
-	{
-		*ppv = static_cast<IDownloadEvent*>(this) ;
-	}
-	else
-	{
-		*ppv = NULL;
-		return E_NOINTERFACE;
-	}
-	(reinterpret_cast<IUnknown*>(*ppv))->AddRef() ;
-	return S_OK ;
+        if ((iid == IID_IUnknown) ||(iid == IID_IDownloadEvent))
+        {
+                *ppv = static_cast<IDownloadEvent*>(this) ;
+        }
+        else
+        {
+                *ppv = NULL;
+                return E_NOINTERFACE;
+        }
+        (reinterpret_cast<IUnknown*>(*ppv))->AddRef() ;
+        return S_OK ;
 }
 
 ///////////////////////////////////////////////////////////
@@ -1161,7 +1161,7 @@ CDownloadEventSink::QueryInterface(const IID& iid, void** ppv)
 ULONG __stdcall
 CDownloadEventSink::AddRef()
 {
-	return InterlockedIncrement(&m_cRef) ;
+        return InterlockedIncrement(&m_cRef) ;
 }
 
 ///////////////////////////////////////////////////////////
@@ -1172,11 +1172,11 @@ ULONG __stdcall
 CDownloadEventSink::Release()
 {
    if (InterlockedDecrement(&m_cRef) == 0)
-	{
-		delete this ;
+        {
+                delete this ;
       return 0 ;
-	}
-	return m_cRef;
+        }
+        return m_cRef;
 }
 
 */
@@ -1191,7 +1191,7 @@ CDownloadEventSink::Release()
 
 void SetupDownload( void )
 {
-	/*
+        /*
   HRESULT              hRes;
 
   g_pDownloadSink=NULL;
@@ -1212,7 +1212,7 @@ void SetupDownload( void )
   _ASSERTE(SUCCEEDED(hRes));
   hRes=pConnectionPoint->Advise((IDownloadEvent *)g_pDownloadSink,&dwDownloadAdvise);
   _ASSERTE(SUCCEEDED(hRes));
-	*/
+        */
 }
 
 
@@ -1232,7 +1232,7 @@ void ClosedownDownload( void )
   _ASSERTE(SUCCEEDED(hRes));
   pConnectionPoint->Unadvise(dwDownloadAdvise);
 
-	pDownload->Release();
+        pDownload->Release();
 
    //////delete(g_pDownloadSink);  This appears to be bad....
 */
@@ -1242,41 +1242,41 @@ void ClosedownDownload( void )
 
 BOOL CALLBACK Download_Dialog_Proc( HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
-//	char    fullpath[ 256 ];
+//      char    fullpath[ 256 ];
 //   char    localfile[ 256];
 //   HRESULT res;
 
-	switch( uMsg )
-	{
-		case WM_COMMAND:
-			switch( LOWORD( wParam ) )
-			{
-				case IDC_DLABORT:
+        switch( uMsg )
+        {
+                case WM_COMMAND:
+                        switch( LOWORD( wParam ) )
+                        {
+                                case IDC_DLABORT:
             {
 
                char abort[128];
                char abortdload[256];
-  	            LoadString(Global_instance, TXT_ABORT_DOWNLOAD, abortdload, sizeof(abortdload));
+                    LoadString(Global_instance, TXT_ABORT_DOWNLOAD, abortdload, sizeof(abortdload));
                LoadString(Global_instance, TXT_ABORT, abort, sizeof(abort));
 
                if (MessageBox(g_PrimaryWindow,abortdload,abort,MB_YESNO)==IDYES)
                {
 /*
-					  pDownload->Abort();
+                                          pDownload->Abort();
 */
                  EndDialog( hwndDlg, g_Finished );
-					  DestroyWindow(hwndDlg);
+                                          DestroyWindow(hwndDlg);
                }
             }
             break;
 
-				default:
-					return FALSE;
-			}
-			break;
+                                default:
+                                        return FALSE;
+                        }
+                        break;
 
-		case WM_INITDIALOG:
-			SetupDownload();
+                case WM_INITDIALOG:
+                        SetupDownload();
 
          SendMessage(hwndDlg, WM_SETICON,(WPARAM)ICON_SMALL,
            (LPARAM)LoadIcon(Global_instance, MAKEINTRESOURCE(IDI_ICON1)));
@@ -1285,7 +1285,7 @@ BOOL CALLBACK Download_Dialog_Proc( HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
          g_DLBytesLeft[0]=0;
          g_DLBPS[0]=0;
 
-			//SetDlgItemText( hwndDlg, IDC_DOWNLOADTITLE, g_UpdateString);
+                        //SetDlgItemText( hwndDlg, IDC_DOWNLOADTITLE, g_UpdateString);
          //SetWindowText(hwndDlg, g_UpdateString);
 
          SetDlgItemText( hwndDlg, IDC_TIMEREM, g_DLTimeRem);
@@ -1304,19 +1304,19 @@ BOOL CALLBACK Download_Dialog_Proc( HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
             fullpath, localfile, APP_REG_KEY);
 
 */
-			g_DownloadWindow = hwndDlg;
-			g_Finished = 0;
-			SetTimer( hwndDlg, 1, 200, NULL );    // was 50
+                        g_DownloadWindow = hwndDlg;
+                        g_Finished = 0;
+                        SetTimer( hwndDlg, 1, 200, NULL );    // was 50
 
-			break;
+                        break;
 
-		case WM_TIMER:
+                case WM_TIMER:
       LogMsg("TIMER");
-			if( g_Finished == 0 )
-			{
+                        if( g_Finished == 0 )
+                        {
             LogMsg("Entering PumpMsgs");
 /*
-				pDownload->PumpMessages();
+                                pDownload->PumpMessages();
 */
             LogMsg("Done with PumpMsgs");
             if (strlen(g_DLTimeRem))
@@ -1325,29 +1325,29 @@ BOOL CALLBACK Download_Dialog_Proc( HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
               SetDlgItemText( hwndDlg, IDC_BYTESLEFT, g_DLBytesLeft );
             //if (strlen(g_DLBPS))
             //  SetDlgItemText( hwndDlg, IDC_BPS, g_DLBPS );
-			}
-			else
-			{
+                        }
+                        else
+                        {
             LogMsg("TIMER: Finished");
             EndDialog( hwndDlg, g_Finished );
-				DestroyWindow( hwndDlg );
-			}
-			break;
+                                DestroyWindow( hwndDlg );
+                        }
+                        break;
 
-		case WM_DESTROY:
-			KillTimer( hwndDlg, 1 );
-			ClosedownDownload();
+                case WM_DESTROY:
+                        KillTimer( hwndDlg, 1 );
+                        ClosedownDownload();
 
          //DBGMSG("WM_DESTROY");
-			break;
+                        break;
 
-		case WM_SETFONT:
-			return TRUE;
+                case WM_SETFONT:
+                        return TRUE;
 
-		default:
-			return FALSE;
-	}
-	return TRUE;
+                default:
+                        return FALSE;
+        }
+        return TRUE;
 }
 
 
@@ -1363,7 +1363,7 @@ BOOL CALLBACK Simple_Dialog_Proc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lP
     case WM_CLOSE:
       DestroyWindow(hwnd);
       PostQuitMessage(0);
-      exit(0);
+      return 0;
     break;
   }
   return(FALSE);
@@ -1396,13 +1396,13 @@ STDMETHODIMP CDownloadEventSink::OnError(int error)
 STDMETHODIMP CDownloadEventSink::OnProgressUpdate(int bytesread, int totalsize,
   int timetaken, int timeleft)
 {
-  SendDlgItemMessage( g_DownloadWindow, IDC_PROGRESS, PBM_SETPOS, (WPARAM)(bytesread * 100) / totalsize, 0 );
+  SendDlgItemMessage( g_DownloadWindow, IDC_PROGRESS, PBM_SETPOS, (WPARAM)(totalsize > 0 ? (bytesread * 100) / totalsize : 0), 0 );
   char temp[256];
 
   if( timeleft > 0 )
   {
     //DBGMSG("Bytes read: "<<bytesread<<".    Time left: "<<timeleft<<" seconds");
- 	 LoadString(Global_instance, TXT_TIME_REMAIN, temp, sizeof(temp));
+         LoadString(Global_instance, TXT_TIME_REMAIN, temp, sizeof(temp));
     sprintf(g_DLTimeRem,temp,(timeleft/60),(timeleft%60));
 
     LoadString(Global_instance, TXT_BPS, temp, sizeof(temp));
@@ -1421,18 +1421,18 @@ STDMETHODIMP CDownloadEventSink::OnStatusUpdate(int status)
   {
     case DOWNLOADSTATUS_CONNECTING:
     {
-	  //LogMsg( "Connecting..." );
+          //LogMsg( "Connecting..." );
      SetWindowText(g_DownloadWindow, Fetch_String(TXT_CONNECTING));
     }
     break;
 
     case DOWNLOADSTATUS_FINDINGFILE:
-	  //LogMsg( "Finding patch..." );
+          //LogMsg( "Finding patch..." );
      SetWindowText(g_DownloadWindow, g_UpdateString);
     break;
 
     case DOWNLOADSTATUS_DOWNLOADING:
-	  //LogMsg( "Downloading patch..." );
+          //LogMsg( "Downloading patch..." );
      SetWindowText(g_DownloadWindow, g_UpdateString);
     break;
 
@@ -1612,8 +1612,8 @@ STDMETHODIMP CChatEventSink::OnNetStatus(HRESULT hr)
   {
     char error[128];
     char cantconn[256];
-  	 LoadString(Global_instance, TXT_CANT_CONTACT, cantconn, sizeof(cantconn));
-	 LoadString(Global_instance, TXT_ERROR, error, sizeof(error));
+         LoadString(Global_instance, TXT_CANT_CONTACT, cantconn, sizeof(cantconn));
+         LoadString(Global_instance, TXT_ERROR, error, sizeof(error));
     MessageBox(g_PrimaryWindow,cantconn,error,MB_OK);
     exit(-1);
   }
@@ -1660,7 +1660,7 @@ STDMETHODIMP CChatEventSink::OnUpdateList(HRESULT r, Update * updates)
   }
 
   if( updates == NULL )  // shouldn't happen
-	return S_OK;
+        return S_OK;
 
 
   if (alreadyGotOne)  // Should only get one update list
@@ -1706,7 +1706,7 @@ STDMETHODIMP CChatEventSink::OnUpdateList(HRESULT r, Update * updates)
     g_Update = tmp;
 
     char dloading[256];
-  	 LoadString(Global_instance, TXT_DOWNLOADING_FILE, dloading, sizeof(dloading));
+         LoadString(Global_instance, TXT_DOWNLOADING_FILE, dloading, sizeof(dloading));
     sprintf( g_UpdateString, dloading, ++i, numupdates );
 
     LogMsg("Creating Download dialog box");

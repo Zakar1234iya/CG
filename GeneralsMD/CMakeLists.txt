@@ -3,14 +3,7 @@ cmake_minimum_required(VERSION 3.28)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Safe Floating Point Defaults (Critical for Lockstep Simulation)
-# Do NOT use /fp:fast or -ffast-math globally.
-# Renderer can override locally if needed, but GameEngine must be precise.
-if(MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:precise")
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-fast-math")
-endif()
+# Floating point flags are set in root CMakeLists.txt - do not duplicate here
 
 # Cross-platform compiler settings
 if(MSVC)
@@ -58,6 +51,7 @@ else()
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
 endif()
 
+# TODO: Replace include_directories with target_include_directories for better scoping
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/Code/Libraries/Include
   ${CMAKE_CURRENT_SOURCE_DIR}/Code/GameEngine/Include

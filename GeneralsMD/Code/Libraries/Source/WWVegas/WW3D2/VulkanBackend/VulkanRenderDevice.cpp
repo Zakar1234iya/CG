@@ -197,6 +197,8 @@ bool VulkanRenderDevice::Initialize(void* windowHandle, int width, int height, b
 
 void VulkanRenderDevice::Shutdown()
 {
+    if (m_device == VK_NULL_HANDLE) return;  // Already shut down or never initialized
+
     vkDeviceWaitIdle(m_device);
 
     // Cleanup sync objects
@@ -272,7 +274,9 @@ void VulkanRenderDevice::BeginFrame()
         RecreateSwapChain(m_windowWidth, m_windowHeight);
         return;
     } else if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to acquire swap chain image!");
+        // Log error instead of throwing in game engine frame loop
+        WWDEBUG_SAY(("Failed to acquire swap chain image! Result: %d\n", result));
+        return;
     }
 
     // Begin command buffer
@@ -1015,6 +1019,10 @@ bool VulkanRenderDevice::CheckDeviceExtensionSupport(VkPhysicalDevice device)
 
 VkSurfaceFormatKHR VulkanRenderDevice::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& formats)
 {
+    if (formats.empty()) {
+        return {VK_FORMAT_B8G8R8A8_SRGB, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR};
+    }
+
     for (const auto& availableFormat : formats) {
         if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && 
             availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {

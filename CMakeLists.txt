@@ -13,7 +13,7 @@ endif()
 # Do NOT use /fp:fast or -ffast-math globally.
 # Renderer can override locally if needed, but GameEngine must be precise.
 if(MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:precise")
+    add_compile_options(/fp:precise)
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-fast-math")
 endif()
@@ -23,7 +23,7 @@ option(ENABLE_UPSCALER "Enable DLSS/XeSS/FSR upscaler support" OFF)
 
 # Platform Detection
 if(WIN32)
-    add_definitions(-D_WIN32)
+    add_compile_definitions(_WIN32)
 elseif(APPLE)
     add_definitions(-DAPPLE)
 elseif(UNIX)
@@ -31,8 +31,8 @@ elseif(UNIX)
 endif()
 
 # Global Compile Definitions
-add_definitions(-DUNICODE -D_UNICODE)
-add_definitions(-D_CRT_SECURE_NO_WARNINGS) # Handled by CrossPlatform.h
+add_compile_definitions(UNICODE _UNICODE)
+add_compile_definitions(_CRT_SECURE_NO_WARNINGS) # Handled by CrossPlatform.h
 
 # Compiler Specific Flags
 if(MSVC)

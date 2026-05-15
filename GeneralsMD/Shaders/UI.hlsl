@@ -1,5 +1,5 @@
 Texture2D UITexture : register(t0);
-SamplerState UI Sampler : register(s0);
+SamplerState UISampler : register(s0);
 
 struct VSInputUI {
     float2 Position : POSITION;

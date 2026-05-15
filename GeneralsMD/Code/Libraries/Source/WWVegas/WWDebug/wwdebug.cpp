@@ -1,19 +1,19 @@
 /*
-**	Command & Conquer Generals Zero Hour(tm)
-**	Copyright 2025 Electronic Arts Inc.
+**      Command & Conquer Generals Zero Hour(tm)
+**      Copyright 2025 Electronic Arts Inc.
 **
-**	This program is free software: you can redistribute it and/or modify
-**	it under the terms of the GNU General Public License as published by
-**	the Free Software Foundation, either version 3 of the License, or
-**	(at your option) any later version.
+**      This program is free software: you can redistribute it and/or modify
+**      it under the terms of the GNU General Public License as published by
+**      the Free Software Foundation, either version 3 of the License, or
+**      (at your option) any later version.
 **
-**	This program is distributed in the hope that it will be useful,
-**	but WITHOUT ANY WARRANTY; without even the implied warranty of
-**	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**	GNU General Public License for more details.
+**      This program is distributed in the hope that it will be useful,
+**      but WITHOUT ANY WARRANTY; without even the implied warranty of
+**      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**      GNU General Public License for more details.
 **
-**	You should have received a copy of the GNU General Public License
-**	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**      You should have received a copy of the GNU General Public License
+**      along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /***********************************************************************************************
@@ -54,11 +54,11 @@
 #include "except.h"
 
 
-static PrintFunc			_CurMessageHandler = NULL;
-static AssertPrintFunc	_CurAssertHandler = NULL;
-static TriggerFunc		_CurTriggerHandler = NULL;
-static ProfileFunc		_CurProfileStartHandler = NULL;
-static ProfileFunc		_CurProfileStopHandler = NULL;
+static PrintFunc                        _CurMessageHandler = NULL;
+static AssertPrintFunc  _CurAssertHandler = NULL;
+static TriggerFunc              _CurTriggerHandler = NULL;
+static ProfileFunc              _CurProfileStartHandler = NULL;
+static ProfileFunc              _CurProfileStopHandler = NULL;
 
 // Convert the latest system error into a string and return a pointer to
 // a static buffer containing the error string.
@@ -66,20 +66,20 @@ static ProfileFunc		_CurProfileStopHandler = NULL;
 void Convert_System_Error_To_String(int id, char* buffer, int buf_len)
 {
 #ifndef _UNIX
-	FormatMessage(
-		FORMAT_MESSAGE_FROM_SYSTEM,
-		NULL,
-		id,
-		0,
-		buffer,
-		buf_len,
-		NULL);
+        FormatMessage(
+                FORMAT_MESSAGE_FROM_SYSTEM,
+                NULL,
+                id,
+                0,
+                buffer,
+                buf_len,
+                NULL);
 #endif
 }
 
 int Get_Last_System_Error()
 {
-	return GetLastError();
+        return GetLastError();
 }
 
 /***********************************************************************************************
@@ -96,9 +96,9 @@ int Get_Last_System_Error()
  *=============================================================================================*/
 PrintFunc WWDebug_Install_Message_Handler(PrintFunc func)
 {
-	PrintFunc tmp = _CurMessageHandler;
-	_CurMessageHandler = func;
-	return tmp;
+        PrintFunc tmp = _CurMessageHandler;
+        _CurMessageHandler = func;
+        return tmp;
 }
 
 
@@ -116,9 +116,9 @@ PrintFunc WWDebug_Install_Message_Handler(PrintFunc func)
  *=============================================================================================*/
 AssertPrintFunc WWDebug_Install_Assert_Handler(AssertPrintFunc func)
 {
-	AssertPrintFunc tmp = _CurAssertHandler;
-	_CurAssertHandler = func;
-	return tmp;
+        AssertPrintFunc tmp = _CurAssertHandler;
+        _CurAssertHandler = func;
+        return tmp;
 }
 
 
@@ -134,11 +134,11 @@ AssertPrintFunc WWDebug_Install_Assert_Handler(AssertPrintFunc func)
  * HISTORY:                                                                                    *
  *   2/24/98    GTH : Created.                                                                 *
  *=============================================================================================*/
-TriggerFunc	WWDebug_Install_Trigger_Handler(TriggerFunc func)
+TriggerFunc     WWDebug_Install_Trigger_Handler(TriggerFunc func)
 {
-	TriggerFunc tmp = _CurTriggerHandler;
-	_CurTriggerHandler = func;
-	return tmp;
+        TriggerFunc tmp = _CurTriggerHandler;
+        _CurTriggerHandler = func;
+        return tmp;
 }
 
 
@@ -154,11 +154,11 @@ TriggerFunc	WWDebug_Install_Trigger_Handler(TriggerFunc func)
  * HISTORY:                                                                                    *
  *   2/24/98    GTH : Created.                                                                 *
  *=============================================================================================*/
-ProfileFunc	WWDebug_Install_Profile_Start_Handler(ProfileFunc func)
+ProfileFunc     WWDebug_Install_Profile_Start_Handler(ProfileFunc func)
 {
-	ProfileFunc tmp = _CurProfileStartHandler;
-	_CurProfileStartHandler = func;
-	return tmp;
+        ProfileFunc tmp = _CurProfileStartHandler;
+        _CurProfileStartHandler = func;
+        return tmp;
 }
 
 
@@ -174,11 +174,11 @@ ProfileFunc	WWDebug_Install_Profile_Start_Handler(ProfileFunc func)
  * HISTORY:                                                                                    *
  *   2/24/98    GTH : Created.                                                                 *
  *=============================================================================================*/
-ProfileFunc	WWDebug_Install_Profile_Stop_Handler(ProfileFunc func)
+ProfileFunc     WWDebug_Install_Profile_Stop_Handler(ProfileFunc func)
 {
-	ProfileFunc tmp = _CurProfileStopHandler;
-	_CurProfileStopHandler = func;
-	return tmp;
+        ProfileFunc tmp = _CurProfileStopHandler;
+        _CurProfileStopHandler = func;
+        return tmp;
 }
 
 
@@ -197,19 +197,19 @@ ProfileFunc	WWDebug_Install_Profile_Stop_Handler(ProfileFunc func)
 
 void WWDebug_Printf(const char * format,...)
 {
-	if (_CurMessageHandler != NULL) {
+        if (_CurMessageHandler != NULL) {
 
-		va_list	va;
-		char buffer[4096];
+                va_list va;
+                char buffer[4096];
 
-		va_start(va, format);
-		vsprintf(buffer, format, va);
-		WWASSERT((strlen(buffer) < sizeof(buffer)));
+                va_start(va, format);
+                vsnprintf(buffer, sizeof(buffer), format, va);
+                buffer[sizeof(buffer) - 1] = '\0';  // Ensure null termination
 
-		_CurMessageHandler(WWDEBUG_TYPE_INFORMATION, buffer);
-		va_end(va);
+                _CurMessageHandler(WWDEBUG_TYPE_INFORMATION, buffer);
+                va_end(va);
 
-	}
+        }
 }
 
 /***********************************************************************************************
@@ -227,19 +227,19 @@ void WWDebug_Printf(const char * format,...)
 
 void WWDebug_Printf_Warning(const char * format,...)
 {
-	if (_CurMessageHandler != NULL) {
+        if (_CurMessageHandler != NULL) {
 
-		va_list	va;
-		char buffer[4096];
+                va_list va;
+                char buffer[4096];
 
-		va_start(va, format);
-		vsprintf(buffer, format, va);
-		WWASSERT((strlen(buffer) < sizeof(buffer)));
+                va_start(va, format);
+                vsnprintf(buffer, sizeof(buffer), format, va);
+                buffer[sizeof(buffer) - 1] = '\0';  // Ensure null termination
 
-		_CurMessageHandler(WWDEBUG_TYPE_WARNING, buffer);
-		va_end(va);
+                _CurMessageHandler(WWDEBUG_TYPE_WARNING, buffer);
+                va_end(va);
 
-	}
+        }
 }
 
 /***********************************************************************************************
@@ -257,19 +257,19 @@ void WWDebug_Printf_Warning(const char * format,...)
 
 void WWDebug_Printf_Error(const char * format,...)
 {
-	if (_CurMessageHandler != NULL) {
+        if (_CurMessageHandler != NULL) {
 
-		va_list	va;
-		char buffer[4096];
+                va_list va;
+                char buffer[4096];
 
-		va_start(va, format);
-		vsprintf(buffer, format, va);
-		WWASSERT((strlen(buffer) < sizeof(buffer)));
+                va_start(va, format);
+                vsnprintf(buffer, sizeof(buffer), format, va);
+                buffer[sizeof(buffer) - 1] = '\0';  // Ensure null termination
 
-		_CurMessageHandler(WWDEBUG_TYPE_ERROR, buffer);
-		va_end(va);
+                _CurMessageHandler(WWDEBUG_TYPE_ERROR, buffer);
+                va_end(va);
 
-	}
+        }
 }
 
 /***********************************************************************************************
@@ -287,35 +287,35 @@ void WWDebug_Printf_Error(const char * format,...)
 #ifdef WWDEBUG
 void WWDebug_Assert_Fail(const char * expr,const char * file, int line)
 {
-	if (_CurAssertHandler != NULL) {
+        if (_CurAssertHandler != NULL) {
 
-		char buffer[4096];
-		sprintf(buffer,"%s (%d) Assert: %s\n",file,line,expr);
-		_CurAssertHandler(buffer);
+                char buffer[4096];
+                sprintf(buffer,"%s (%d) Assert: %s\n",file,line,expr);
+                _CurAssertHandler(buffer);
 
-	} else {
+        } else {
 
-		/*
-		// If the exception handler is try to quit the game then don't show an assert.
-		*/
-		if (Is_Trying_To_Exit()) {
-			ExitProcess(0);
-		}
+                /*
+                // If the exception handler is try to quit the game then don't show an assert.
+                */
+                if (Is_Trying_To_Exit()) {
+                        ExitProcess(0);
+                }
 
       char assertbuf[4096];
-		sprintf(assertbuf, "Assert failed\n\n. File %s Line %d", file, line);
+                sprintf(assertbuf, "Assert failed\n\n. File %s Line %d", file, line);
 
       int code = MessageBoxA(NULL, assertbuf, "WWDebug_Assert_Fail", MB_ABORTRETRYIGNORE|MB_ICONHAND|MB_SETFOREGROUND|MB_TASKMODAL);
 
       if (code == IDABORT) {
-      	raise(SIGABRT);
-      	_exit(3);
+        raise(SIGABRT);
+        _exit(3);
       }
 
-		if (code == IDRETRY) {
-			_asm int 3;
-      	return;
-		}
+                if (code == IDRETRY) {
+                        _asm int 3;
+        return;
+                }
    }
 }
 #endif
@@ -343,7 +343,7 @@ void WWDebug_Assert_Fail(const char * expr,const char * file, int line)
 #ifdef WWDEBUG
 void __cdecl _assert(void *expr, void *filename, unsigned lineno)
 {
-	WWDebug_Assert_Fail((const char*)expr, (const char*)filename, lineno);
+        WWDebug_Assert_Fail((const char*)expr, (const char*)filename, lineno);
 }
 #endif //WWDEBUG
 #endif
@@ -367,17 +367,17 @@ void __cdecl _assert(void *expr, void *filename, unsigned lineno)
 #ifdef WWDEBUG
 void WWDebug_Assert_Fail_Print(const char * expr,const char * file, int line,const char * string)
 {
-	if (_CurAssertHandler != NULL) {
+        if (_CurAssertHandler != NULL) {
 
-		char buffer[4096];
-		sprintf(buffer,"%s (%d) Assert: %s %s\n",file,line,expr, string);
-		_CurAssertHandler(buffer);
+                char buffer[4096];
+                sprintf(buffer,"%s (%d) Assert: %s %s\n",file,line,expr, string);
+                _CurAssertHandler(buffer);
 
-	} else {
+        } else {
 
-		assert(0);
+                assert(0);
 
-	}
+        }
 }
 #endif
 
@@ -396,11 +396,11 @@ void WWDebug_Assert_Fail_Print(const char * expr,const char * file, int line,con
  *=============================================================================================*/
 bool WWDebug_Check_Trigger(int trigger_num)
 {
-	if (_CurTriggerHandler != NULL) {
-		return _CurTriggerHandler(trigger_num);
-	} else {
-		return false;
-	}
+        if (_CurTriggerHandler != NULL) {
+                return _CurTriggerHandler(trigger_num);
+        } else {
+                return false;
+        }
 }
 
 
@@ -418,9 +418,9 @@ bool WWDebug_Check_Trigger(int trigger_num)
  *=============================================================================================*/
 void WWDebug_Profile_Start( const char * title)
 {
-	if (_CurProfileStartHandler != NULL) {
-		_CurProfileStartHandler( title );
-	}
+        if (_CurProfileStartHandler != NULL) {
+                _CurProfileStartHandler( title );
+        }
 }
 
 
@@ -438,9 +438,9 @@ void WWDebug_Profile_Start( const char * title)
  *=============================================================================================*/
 void WWDebug_Profile_Stop( const char * title)
 {
-	if (_CurProfileStopHandler != NULL) {
-		_CurProfileStopHandler( title );
-	}
+        if (_CurProfileStopHandler != NULL) {
+                _CurProfileStopHandler( title );
+        }
 }
 
 
