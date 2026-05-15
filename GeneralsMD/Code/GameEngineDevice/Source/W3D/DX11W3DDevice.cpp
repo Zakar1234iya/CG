@@ -45,7 +45,7 @@ public:
         ComPtr<IDXGIFactory2> dxgiFactory;
         m_device.As(&dxgiDevice);
         dxgiDevice->GetAdapter(&dxgiAdapter);
-        DXGIGetDebugInterface1(0, IID_PPV_ARGS(&dxgiFactory));
+        CreateDXGIFactory2(0, IID_PPV_ARGS(&dxgiFactory));
         dxgiFactory->CreateSwapChainForHwnd(m_device.Get(), hwnd, &m_sd, nullptr, nullptr, &m_swapChain);
 
         CreateRenderTargets();
