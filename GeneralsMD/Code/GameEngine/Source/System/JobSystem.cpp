@@ -23,7 +23,11 @@ JobHandle JobSystem::Submit(std::function<void()> fn, JobHandle dependency) {
     JobHandle handle;
     {
         std::lock_guard<std::mutex> lock(s_mutex);
-        s_queue.push({ std::move(fn), dependency.m_done });
+        Job job;
+        job.fn = std::move(fn);
+        job.dependencyDone = dependency.m_done;
+        job.done = handle.m_done;  // Use the same done flag as the returned handle
+        s_queue.push(std::move(job));
     }
     s_cv.notify_one();
     return handle;
@@ -63,5 +67,9 @@ void JobSystem::WorkerLoop() {
             continue;
         }
         if (job.fn) job.fn();
+        // Mark job as done after execution
+        if (job.done) {
+            job.done->store(true);
+        }
     }
 }

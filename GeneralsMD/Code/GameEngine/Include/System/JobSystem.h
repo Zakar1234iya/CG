@@ -30,6 +30,7 @@ private:
     struct Job {
         std::function<void()> fn;
         std::shared_ptr<std::atomic<bool>> dependencyDone;
+        std::shared_ptr<std::atomic<bool>> done;  // Track completion status for this job
     };
 
     static std::vector<std::thread> s_workers;
