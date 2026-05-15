@@ -2,44 +2,59 @@
 #ifndef __JOBSYSTEM_H__
 #define __JOBSYSTEM_H__
 
-#include <functional>
-#include <thread>
 #include <vector>
 #include <queue>
+#include <thread>
 #include <mutex>
 #include <condition_variable>
-#include <atomic>
+#include <functional>
 #include <memory>
+#include <atomic>
 
-class JobHandle {
-    friend class JobSystem;
+/**
+ * Job Handle - Returned from Submit() to track job completion
+ */
+struct JobHandle
+{
     std::shared_ptr<std::atomic<bool>> m_done;
-public:
+
     JobHandle() : m_done(std::make_shared<std::atomic<bool>>(false)) {}
-    bool IsDone() const { return m_done->load(); }
+
+    bool IsDone() const { return m_done && m_done->load(); }
 };
 
-class JobSystem {
+/**
+ * JobSystem - Multi-threaded job dispatch (Phase 6)
+ *
+ * Submit work to be executed on worker threads.
+ * Workers pull from a shared queue and execute jobs.
+ * Use JobHandle to wait for completion.
+ */
+class JobSystem
+{
 public:
-    static void Initialize(int workerCount = 0);
-    static JobHandle Submit(std::function<void()> fn, JobHandle dependency = {});
-    static void WaitFor(JobHandle h);
-    static void Shutdown();
-
-private:
-    struct Job {
+    struct Job
+    {
         std::function<void()> fn;
-        std::shared_ptr<std::atomic<bool>> dependencyDone;  // must be true before this job runs
-        std::shared_ptr<std::atomic<bool>> completionFlag;  // set to true after this job runs (unblocks WaitFor)
+        std::shared_ptr<std::atomic<bool>> dependencyDone;
+        std::shared_ptr<std::atomic<bool>> done;  // Track completion status for this job
     };
 
     static std::vector<std::thread> s_workers;
     static std::queue<Job> s_queue;
     static std::mutex s_mutex;
     static std::condition_variable s_cv;
-    static std::atomic<bool> s_running;
+    static bool s_running;
 
+public:
+    static void Init(int workerCount = 0);
+    static void Shutdown();
+    static JobHandle Submit(std::function<void()> fn, JobHandle dependency = {});
+    static void WaitFor(JobHandle handle);
+    static void Flush();
+
+private:
     static void WorkerLoop();
 };
 
-#endif
+#endif // __JOBSYSTEM_H__
